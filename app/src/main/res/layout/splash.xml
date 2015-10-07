@@ -1,0 +1,35 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center_horizontal"
+    android:background="@color/safaron"
+    android:orientation="vertical"
+    tools:context=".MainActivity$PlaceholderFragment">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal|center"
+
+    android:orientation="vertical">
+      <com.mahaperivaya.component.CircularImageView
+        android:id="@+id/circular_image_view"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:src="@drawable/perivaya1"
+
+        android:layout_marginBottom="70dp"/>
+
+    <TextView
+        android:id="@+id/section_label"
+       style="@style/white_text_12"
+        android:gravity="center"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:text="@string/lbl_hara_hara"
+        android:textColor="@color/white" />
+
+</LinearLayout>
+
+</LinearLayout>

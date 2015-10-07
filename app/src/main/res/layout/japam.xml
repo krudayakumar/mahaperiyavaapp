@@ -1,0 +1,221 @@
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
+
+  <!-- Toolbar instead of ActionBar so the drawer can slide on top -->
+  <android.support.v7.widget.Toolbar
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/abc_action_bar_default_height_material"
+    android:background="?attr/colorPrimary"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+      android:id="@+id/viewB"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_weight="0.1"
+      android:background="@android:color/white"
+      android:orientation="vertical">
+
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvTitleHelp"
+        android:orientation="vertical"
+        android:padding="5dp">
+
+        <android.support.v7.widget.CardView
+          android:layout_width="fill_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="20dp">
+
+          <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvTitleHelp"
+            android:orientation="vertical">
+
+            <TextView
+              android:id="@+id/edOverallTitle"
+              android:layout_width="match_parent"
+              android:layout_height="40dp"
+              android:background="@color/safaron"
+              android:gravity="center_horizontal|center"
+              android:text="@string/lbl_statical_information"
+              android:textColor="@color/white" />
+
+            <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="30dp"
+              android:layout_below="@+id/tvTitleHelp"
+              android:layout_gravity="center_horizontal|center"
+              android:orientation="horizontal">
+
+              <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|center"
+                android:layout_weight="1"
+                android:text="Overall Count:" />
+
+              <TextView
+                android:id="@+id/japam_count_over_all"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|center"
+                android:layout_weight="1"
+                android:text="100101001" />
+            </LinearLayout>
+
+            <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="30dp"
+              android:layout_below="@+id/tvTitleHelp"
+              android:layout_gravity="center_horizontal|center"
+              android:orientation="horizontal">
+
+              <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|center"
+                android:layout_weight="1"
+                android:text="Satsang Count:" />
+
+              <TextView
+                android:id="@+id/japam_count_satsang"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|center"
+                android:layout_weight="1"
+                android:text="1000" />
+            </LinearLayout>
+
+            <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="30dp"
+              android:layout_below="@+id/tvTitleHelp"
+              android:layout_gravity="center_horizontal|center"
+              android:orientation="horizontal">
+
+              <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|center"
+                android:layout_weight="1"
+                android:text="Your Japam Count:" />
+
+              <TextView
+                android:id="@+id/japam_count"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|center"
+                android:layout_weight="1"
+                android:text="500" />
+            </LinearLayout>
+
+            <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="30dp"
+              android:layout_below="@+id/tvTitleHelp"
+              android:layout_gravity="center_horizontal|center"
+              android:orientation="horizontal">
+
+              <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|center"
+                android:layout_weight="1"
+                android:text="Last Updated Date:" />
+
+              <TextView
+                android:id="@+id/japam_last_updated_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|center"
+                android:layout_weight="1"
+                android:text="10-Sep-2015" />
+            </LinearLayout>
+          </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+
+        <android.support.v7.widget.CardView
+          android:layout_width="fill_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="20dp">
+
+          <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvTitleHelp"
+            android:orientation="vertical">
+
+            <TextView
+              android:id="@+id/edTitle"
+              android:layout_width="match_parent"
+              android:layout_height="40dp"
+              android:background="@color/safaron"
+              android:gravity="center_horizontal|center"
+              android:text="@string/lbl_submit_week_count"
+              android:textColor="@color/white" />
+
+            <android.support.design.widget.TextInputLayout
+              android:id="@+id/layoutCount"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content">
+
+              <EditText
+                android:id="@+id/edCount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/lbl_counts"
+
+                android:inputType="number" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+              android:id="@+id/layoutDate"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content">
+
+              <EditText
+                android:id="@+id/edDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="false"
+                android:hint="@string/lbl_date"
+                android:inputType="date" />
+            </android.support.design.widget.TextInputLayout>
+
+
+          </LinearLayout>
+        </android.support.v7.widget.CardView>
+      </LinearLayout>
+
+    </LinearLayout>
+
+  </LinearLayout>
+
+
+  <android.support.design.widget.FloatingActionButton
+    android:id="@+id/next"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp"
+    android:clickable="true"
+    android:rotation="180"
+    android:src="@drawable/ic_save"
+    app:layout_anchor="@id/viewB"
+    app:layout_anchorGravity="bottom|right|end" />
+
+</android.support.design.widget.CoordinatorLayout>

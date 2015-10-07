@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <color name="secondary">#ff752c5e</color>
+  <color name="secondaryDark">#ff611c4b</color>
+  <color name="primary">@color/safaron</color>
+  <color name="primaryDark">@color/safaron_dark</color>
+  <color name="ternary">@color/white</color>
+  <color name="accent">@color/safaron</color>
+
+  <color name="primaryText">#de000000</color>
+  <color name="secondaryText">#8a000000</color>
+
+  <color name="drawer_header_bg">@color/safaron</color>
+  <color name="drawer_item_text_default">@color/safaron</color>
+  <color name="drawer_item_text_checked">@color/primary</color>
+
+  <color name="safaron_dark">#662900</color>
+  <color name="safaron">#B24700</color>
+  <color name="safaron_light">#fee0cc</color>
+  <color name="black">#000000</color>
+  <color name="white">#FFFFFF</color>
+
+</resources>

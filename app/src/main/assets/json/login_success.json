@@ -1,0 +1,16 @@
+{
+  "status": "success",
+  "code": 2000,
+  "data": {
+    "username": "Suresh Kumar",
+    "profileid:": 12134234,
+    "ispasswordreset": false,
+    "isjoinedsatsang": false,
+    "isjoinedjapam": false,
+    "satsang_id": 21123123,
+    "japam_count": 1000,
+    "japam_last_updated_date": "2015-12-12",
+    "japam_count_over_all": 121212121,
+    "japam_count_satsanga": 121231233
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "status": "failed",
+  "code": 2000,
+  "data": {
+    "message": "Already Registered",
+    "profileid:": 12134234
+  }
+}

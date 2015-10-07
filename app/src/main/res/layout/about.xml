@@ -1,0 +1,28 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:orientation="vertical"
+    android:layout_gravity="center_vertical|center_horizontal"
+    android:padding="5dp"
+    tools:context=".MainActivity$PlaceholderFragment">
+
+
+    <TextView
+        android:id="@+id/title"
+        style="@style/black_large_text"
+        android:text="@string/lbl_about_title"
+        android:layout_marginBottom="20dp"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/section_label"
+            style="@style/black_small_text"
+            android:text="@string/lbl_about_content" />
+
+    </ScrollView>
+
+</LinearLayout>

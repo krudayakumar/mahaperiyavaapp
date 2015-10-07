@@ -1,0 +1,89 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+
+  android:gravity="center_horizontal"
+  android:orientation="vertical">
+
+
+
+  <ScrollView
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/rlBlockTop">
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_below="@+id/tvTitleHelp"
+      android:orientation="vertical"
+      android:padding="10dp">
+
+      <android.support.design.widget.TextInputLayout
+        android:id="@+id/layoutEmailId"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+          android:id="@+id/edEmailId"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:ems="10"
+          android:hint="@string/lbl_help_email"
+
+          android:inputType="textEmailAddress" />
+      </android.support.design.widget.TextInputLayout>
+
+      <android.support.design.widget.TextInputLayout
+        android:id="@+id/layoutPassword"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+          android:id="@+id/edPassword"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:ems="10"
+          android:hint="@string/lbl_password"
+          android:inputType="textPassword" />
+      </android.support.design.widget.TextInputLayout>
+
+      <Button
+        android:id="@+id/login"
+        style="@style/button"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+
+        android:text="@string/action_login" />
+
+      <Switch
+        android:id="@+id/remberid"
+        style="@style/text_general_normal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/lbl_rember_email_id" />
+
+      <TextView
+        android:id="@+id/register"
+        style="@style/text_general_normal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:gravity="center"
+        android:text="@string/lbl_do_you_want_register" />
+
+      <TextView
+        android:id="@+id/forgotpassword"
+        style="@style/text_general_normal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:gravity="center"
+        android:text="@string/lbl_forgot_password" />
+
+
+    </LinearLayout>
+
+  </ScrollView>
+</RelativeLayout>

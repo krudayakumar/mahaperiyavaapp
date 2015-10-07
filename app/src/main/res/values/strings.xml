@@ -1,0 +1,161 @@
+<resources>
+
+  <string name="app_name">Maha Perivaya</string>
+  <string name="item_1">First Item</string>
+  <string name="item_2">Second Item</string>
+  <string name="cd_logo">logo</string>
+  <string name="open">open navigation drawer</string>
+  <string name="close">close navigation drawer</string>
+  <string name="action_settings">Settings</string>
+  <string name="lbl_hara_hara">Jaya Jaya Shankara Hara Hara Shankara \nHara Hara Shankara Jaya Jaya Shankara\n</string>
+  <string name="lbl_message">Jaya Jaya Shankara Hara Hara Shankara \nHara Hara Shankara Jaya Jaya Shankara</string>
+
+  <!--Registration -->
+  <string name="lbl_create_a_account">Create a Account</string>
+  <string name="registration">Registration</string>
+  <string name="lbl_help_name">Full Name</string>
+  <string name="lbl_help_email">Email ID</string>
+  <string name="lbl_help_contactno">Contact No</string>
+  <string name="lbl_help_city">City</string>
+  <string name="lbl_help_state">State</string>
+  <string name="lbl_help_country">Country</string>
+  <string name="lbl_help_dob">Date of Birth</string>
+  <string name="lbl_help_satsang_name">Satsang Name</string>
+  <string name="lbl_help_satsang_description">Satsang Description</string>
+  <string name="lbl_help_contact_person_name">Contact Person</string>
+  <string name="lbl_help_contact_person_no">Contact Number</string>
+  <string name="next">Next</string>
+
+  <!--Password -->
+  <string name="lbl_continue">Continue</string>
+  <string name="lbl_set_password">Set Password</string>
+  <string name="lbl_password">Password</string>
+  <string name="lbl_confirm_password">Confirm Password</string>
+    <string name="lbl_password_title">Must not contain significant portions of the users account name or full name.
+\nMust be at least eight (8) characters in length.
+\nMust be memorized. (Note: do not write down your password).
+\nMust contain at least one character from three of the following four categories:
+\n\t Uppercase letters (A-Z).
+\n\t Lowercase letters (a-z).
+\n\t Numbers (base 10 digits 0 – 9).
+\n\t Non-alphabetic characters (` ~ ! @ # $ % ^ &amp; * - + = | \ { }
+ \n\t\t[ ] : ; " \\' &gt; &lt; , . ? /)..</string>
+
+
+  <string name="logout">Logout</string>
+  <string name="loginText">Please login with your Google Account</string>
+
+  <string name="lbl_sign_title">Sign in to get the most out of this app.</string>
+
+  <string name="lbl_googleplus">Google+</string>
+  <string name="lbl_facebook">Facebook</string>
+  <string name="lbl_registration">Registration</string>
+  <string name="lbl_register_with">Register With:</string>
+  <string name="lbl_login_with">Login With:</string>
+  <string name="lbl_message_title">Maha Perivaya Message</string>
+    <string name="lbl_message_content">
+\n1. One of our duties as human beings is to avail ourselves of every opportunity to do good to others. The poor can serve others by their loyal work to the country and the rich by their wealth to help the poor. Those who are influential can use their influence to better the condition of the lowly. That way we can keep alive in our hearts a sense of social service.
+\n\n2. Man by himself cannot create even a blade of grass. We will be guilty of gross ingratitude if we do not offer first to God what we eat or wear – only the best and choicest should be offered to Him.
+\n\n3. Life without love is a waste. Everyone should cultivate “Prema” or love towards all human beings, bird and beast.
+\n\n4. Wealth amassed by a person whose heart is closed to charity, is generally dissipated by the inheritors: but the family of philanthropists will always be blessed with happiness.
+\n\n5. A person who has done a meritorious deed will lose the resulting merit if he listens to the praise of others or himself boasts of his deeds.
+\n\n6. It will do no good to grieve over what has happened. If we learn to discriminate between good and evil, that will guard us from falling into the evil again.
+\n\n7. We should utilize to good purpose, the days of our life-time. We should engage ourselves in acts, which will contribute to the welfare of others rather than to our selfish desires.
+\n\n8. We should perform duties that have been prescribed for our daily life and also be filled with devotion to God.
+\n\n9. One attains one’s goal by performance of one’s duties.
+\n\n10. Jnana is the only solvent of our troubles and sufferings.  </string>
+  <string name="lbl_about_title">About</string>
+    <string name="lbl_about_content">The goal of this blog is to consolidate any unique information about HH Sri Mahaperiyava under one place. The other benefit of this blog is to help our next generation(s) to know about mahans like Him and learn. It is not my intention to violate any copyrights. If it had happened accidentally, please bring it to my notice and I will take those articles down. Needless to say, about 90% of the articles are not authored by me.
+
+About me, not a lot to share….just another devotee of Sri Kanchi Madam, who hails from Dalmiapuram, Trichy Dist. By profession, I am a senior IT guy currently employed with Cognizant Technology Solutions, based out of Chicagoland….I am truly fortunate to have (1) an amazing sets of vedic friends in Chicagoland (2) great devotees of Mahaperiyava in Chennai (3) all the readers from this blog  who have been motivating me to bring this blog to this level (4) above all, HH Sri Mahaperiyava without His blessings, we couldn’t have achieved anything.
+
+I truly believe that living in the same time period of HH Sri Mahaperiyava, Bagawan Ramana and other mahans as a true blessing. Let His grace be on us at all times to guide us and elevate us to next level in the spiritual journey.
+
+I sincerely hope that we as individuals not only read and enjoy these articles but also to follow Him in whatever extent possible. It is equally or more important to pass on these knowledge to our next generation and insist them to follow the direction laid out by our Mahaswami.
+
+I can be reached at mk.netid@gmail.com
+
+Jaya Jaya Shankara Hara Hara Shankara
+
+Mahesh</string>
+
+  <string name="hello_world">Hello world!</string>
+
+  <string name="drawer_open">Open navigation drawer</string>
+  <string name="drawer_close">Close navigation drawer</string>
+
+
+  <!--Features  -->
+  <string name="ic_signin">&#xf090;</string>
+  <string name="ic_register">&#xf090;</string>
+  <string name="ic_signout">&#xf08b;</string>
+  <string name="ic_dashboard">&#xf0e4;</string>
+  <string name="ic_books">&#xf02d;</string>
+  <string name="ic_satsang">&#xf007;</string>
+  <string name="ic_events">&#xf073;</string>
+  <string name="ic_settings">&#xf013;</string>
+  <string name="ic_help_feedback">&#xf059;</string>
+  <string name="ic_about">&#xf05a;</string>
+
+
+  <string name="lbl_new_satsang">New Satsang</string>
+  <string name="lbl_signin">Sign in </string>
+  <string name="lbl_register">Register</string>
+  <string name="lbl_signout">Sign Out</string>
+  <string name="lbl_dashboard">Dashboard</string>
+  <string name="lbl_devithin_kural">Devithin Kural</string>
+  <string name="lbl_books">Books</string>
+  <string name="lbl_satsang">Satsang</string>
+  <string name="lbl_japam">Japam</string>
+  <string name="lbl_events">Events</string>
+  <string name="lbl_online_radio">Online Radio</string>
+  <string name="lbl_settings">Setting</string>
+  <string name="lbl_feedback">Feedback</string>
+  <string name="lbl_about">About</string>
+  <string name="lbl_already_login">Already have an account? &lt;u&gt;&lt;b&gt;Log in&lt;/b&gt;&lt;/u&gt;</string>
+  <string name="lbl_do_you_want_register">Do you want to &lt;u&gt;&lt;b&gt;Register&lt;/b&gt;&lt;/u&gt; ?</string>
+  <string name="lbl_forgot_password">&lt;u&gt;&lt;b&gt;Forgot Password&lt;/b&gt;&lt;/u&gt;</string>
+  <string name="lbl_rember_email_id">Remember my email id.</string>
+  <string name="lbl_later">Later</string>
+  <string name="lbl_statical_information">Japam Information</string>
+  <string name="lbl_submit_week_count">Submit Your Weekly Japam Count </string>
+  <string name="lbl_counts">Week Count </string>
+  <string name="lbl_date">Date </string>
+  <string name="action_continue">Continue</string>
+  <string name="action_register">Register</string>
+  <string name="action_next">Next</string>
+  <string name="action_save">Save</string>
+  <string name="action_done">Done</string>
+  <string name="action_ok">Ok</string>
+  <string name="action_cancel">Cancel</string>
+  <string name="action_exit">Exit</string>
+  <string name="action_close">Close</string>
+  <string name="action_login">Login</string>
+  <string name="action_more">More</string>
+  <string name="action_join">Join</string>
+
+  <!-- Message-->
+  <string name="msg_already_registred">Account already registered</string>
+  <string name="msg_successfully_password_saved">Successfully password saved.</string>
+
+  <string name="msg_successfully_registred">Successfully registered with Mahaperivaya App. </string>
+  <string name="msg_successfully_satsang">Successfully Satsang created. </string>
+  <string name="msg_do_you_want_exit">Do you want to exit. </string>
+  <string name="msg_password_mail_email">Password mailed to your email id.</string>
+
+  <!-- Error-->
+  <string name="err_default">Currently we are unable to service your request. Please try after some time.</string>
+  <string name="err_invalid_email_id">Invalid Email Id.</string>
+  <string name="err_field_should_not_be_empty">Field should not be empty.</string>
+  <string name="err_enter_right_count">Enter right count.</string>
+  <string name="err_connect_to_internet">Connect to network</string>
+  <string name="err_password_not_same">Password and Confirm Password are not same.</string>
+
+  <!-- Links-->
+
+  <!--  <string name="link_devithinkural">https://mahaperiyavaa.wordpress.com/2013/09/10/deivathin-kural-corrected-version/</string> -->
+  <string name="link_devithinkural">https://mahaperiyavaal.wordpress.com/</string>
+  <string name="link_radio">http://1651.live.streamtheworld.com/SAM09AAC202_SC</string>
+  <string name="feedback_emailid">krudayakumar@gmail.com</string>
+
+</resources>

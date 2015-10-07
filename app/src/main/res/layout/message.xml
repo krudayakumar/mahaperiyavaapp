@@ -1,0 +1,38 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/safaron"
+    android:padding="5dp"
+    android:orientation="vertical"
+    android:layout_gravity="center_vertical|center_horizontal"
+
+    tools:context=".MainActivity$PlaceholderFragment">
+
+
+    <com.devotional.mahaperivaya.component.CircularImageView
+        android:id="@+id/circular_image_view"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/periyava"
+        android:layout_marginBottom="10dp"/>
+
+    <TextView
+        android:id="@+id/title"
+        style="@style/bottom_block_text"
+        android:layout_marginBottom="10dp"
+        android:text="@string/lbl_message_title" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/section_label"
+            style="@style/white_text_12"
+
+            android:text="@string/lbl_message_content" />
+
+    </ScrollView>
+
+</LinearLayout>

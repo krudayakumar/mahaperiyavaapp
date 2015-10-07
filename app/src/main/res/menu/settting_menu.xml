@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto">
+
+  <item
+    android:id="@+id/nextaction"
+    android:title="@string/action_save"
+    android:visible="false"
+    app:showAsAction="always" />
+  <item
+    android:id="@+id/radio"
+    android:icon="@drawable/ic_play"
+    android:visible="false"
+    android:title="@string/lbl_online_radio"
+    app:showAsAction="always" />
+
+  <item
+    android:id="@+id/feedback"
+    android:title="@string/lbl_feedback" />
+
+</menu>

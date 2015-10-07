@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <!-- group with single selected item so only one item is highlighted in the nav menu -->
+  <item
+    android:id="@+id/signin"
+    android:title="@string/lbl_signin" />
+  <item
+    android:id="@+id/signout"
+    android:title="@string/lbl_signout" />
+  <group
+    android:id="@+id/features"
+    android:checkableBehavior="single">
+    <item
+      android:id="@+id/dashboard"
+      android:title="@string/lbl_dashboard" />
+    <item
+      android:id="@+id/devithinkural"
+      android:title="@string/lbl_devithin_kural" />
+    <item
+      android:id="@+id/satsang"
+      android:title="@string/lbl_satsang" />
+    <item
+      android:id="@+id/japam"
+      android:title="@string/lbl_japam" />
+
+    <item
+      android:id="@+id/radio"
+      android:title="@string/lbl_online_radio" />
+  </group>
+  <group
+    android:id="@+id/miscellaneous"
+    android:checkableBehavior="single">
+    <item
+      android:id="@+id/setting"
+      android:title="@string/lbl_settings" />
+
+    <item
+      android:id="@+id/about"
+      android:title="@string/lbl_about" />
+  </group>
+
+
+</menu>
