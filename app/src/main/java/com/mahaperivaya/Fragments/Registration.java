@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.mahaperivaya.Activity.MainActivity;
 import com.mahaperivaya.Model.ConstValues;
 import com.mahaperivaya.R;
 import com.mahaperivaya.SendRequest.SendRegister;
@@ -43,14 +44,15 @@ public class Registration extends AppBaseFragement {
   @Override
   public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
     super.onCreateOptionsMenu(menu, inflater);
-    getBaseActivity().getGlobalMenu().getItem(0).setVisible(true);
-    getBaseActivity().getGlobalMenu().getItem(0).setTitle(getResources().getString(R.string.action_join));
+    getBaseActivity().setMenuOption(menu);
+    getBaseActivity().getMenuVisible(MainActivity.MenuOptions.FEEDBACK);
+    getBaseActivity().getMenuVisible(MainActivity.MenuOptions.SAVE);
   }
 
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
     switch (item.getItemId()) {
-      case R.id.nextaction: {
+      case R.id.save: {
         TextInputLayout textInputLayout;
         //email id
         textInputLayout = (TextInputLayout) rootView.findViewById(R.id.layoutEmailId);

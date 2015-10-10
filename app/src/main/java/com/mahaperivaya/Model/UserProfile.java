@@ -29,7 +29,7 @@ public class UserProfile {
 	private Bundle arguments;
 	private Bitmap image;
 
-	public boolean isLoggedIn;
+	public boolean isLoggedIn = true;
 
 	private static UserProfile userProfile;
 

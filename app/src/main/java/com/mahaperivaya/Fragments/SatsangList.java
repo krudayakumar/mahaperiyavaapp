@@ -1,73 +1,124 @@
 package com.mahaperivaya.Fragments;
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
-import com.mahaperivaya.Model.SatsangDetails;
+import com.android.volley.VolleyError;
+import com.google.gson.Gson;
+import com.mahaperivaya.Activity.MainActivity;
+import com.mahaperivaya.Adapters.SatsangListAdapter;
+import com.mahaperivaya.Interface.ServerCallback;
+import com.mahaperivaya.Model.ConstValues;
+import com.mahaperivaya.Model.UserProfile;
 import com.mahaperivaya.R;
+import com.mahaperivaya.ReceiveRequest.ReceiveSatsangList;
+
+import org.json.JSONObject;
 
 /**
  * Created by m84098 on 9/14/15.
  */
-public class SatsangList extends Fragment {
-	public static String TAG = "ReceiveSatsangList";
-	// RecyclerView
-	private RecyclerView mRecyclerView;
-	private RecyclerView.Adapter mAdapter;
-	private RecyclerView.LayoutManager mLayoutManager;
+public class SatsangList extends AppBaseFragement {
+    public static String TAG = "ReceiveSatsangList";
+    private RecyclerView recyclerView;
+    private SatsangListAdapter satsangListAdapter;
+    View rootView;
 
-	@Nullable
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		Bundle bundle = getArguments();
-		View rootView = inflater.inflate(R.layout.satsanglist, container, false);
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        Bundle bundle = getArguments();
+        getActivity().setTitle(getResources().getString(R.string.lbl_satsang));
+        rootView = inflater.inflate(R.layout.satsanglist, container, false);
+        recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getBaseActivity());
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getBaseActivity()));
+        recyclerView.setLayoutManager(layoutManager);
+        setHasOptionsMenu(true);
+        ServerCallback serverCallback = new ServerCallback() {
+            @Override
+            public void onSuccess(JSONObject response) {
+                ReceiveSatsangList generalReceiveRequest = new Gson().fromJson(response.toString(),
+                        ReceiveSatsangList.class);
 
-		ListView listView = (ListView) rootView.findViewById(R.id.listview);
+                if (generalReceiveRequest.isSuccess()) {
+                    satsangListAdapter = new SatsangListAdapter(getBaseActivity(), generalReceiveRequest.data);
 
-		SatsangDetails[] values = new SatsangDetails[5];
-		for (int i = 0; i < 5; i++) {
-      values[i] = new SatsangDetails();
-			values[i].setName("Maha Perivaya" + i);
-			values[i].setDescription("Maha Perivaya Description" + i);
-      values[i].setCity("Hartford" + i);
-      values[i].setState("CT" + i);
-      values[i].setCountry("US" + i);
-		}
 
-		ArrayAdapter<SatsangDetails> satsangListAdapter;
-		satsangListAdapter = new ArrayAdapter<SatsangDetails>(getActivity(),
-				R.layout.satsanglistitem, values);
+                    recyclerView.setAdapter(satsangListAdapter);
 
-		listView.setAdapter(satsangListAdapter);
 
-		return rootView;
+                } else {
+                    android.os.Message msg = android.os.Message.obtain();
+                    msg.what = ConstValues.ERROR_DEFAULT;
+                    getBaseActivity().getFlowHandler().sendMessage(msg);
+                }
 
-	}
 
-	@Override
-	public void onViewCreated(View view, Bundle savedInstanceState) {
-		/*
-		 * mRecyclerView = (RecyclerView)
-		 * getView().findViewById(R.id.my_recycler_view);
-		 *
-		 * // use this setting to improve performance if you know that changes
-		 * // in content do not change the layout size of the RecyclerView
-		 * mRecyclerView.setHasFixedSize(true);
-		 *
-		 * // use a linear layout manager mLayoutManager = new
-		 * LinearLayoutManager(getActivity());
-		 * mRecyclerView.setLayoutManager(mLayoutManager);
-		 *
-		 * // specify an adapter (see also next example) mAdapter = new
-		 * MyAdapter(myDataset); mRecyclerView.setAdapter(mAdapter);
-		 */
-	}
+            }
+
+            @Override
+            public void onError(VolleyError error) {
+                error.printStackTrace();
+                android.os.Message msg = android.os.Message.obtain();
+                msg.what = ConstValues.ERROR_DEFAULT;
+                getBaseActivity().getFlowHandler().sendMessage(msg);
+            }
+        };
+
+        //Sending the Message
+        android.os.Message msg = android.os.Message.obtain();
+        msg.what = ConstValues.SATSANG_LIST_SERVER_REQUEST;
+        msg.obj = (Object) serverCallback;
+        getBaseActivity().getFlowHandler().sendMessage(msg);
+
+        return rootView;
+
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        // Do something that differs the Activity's menu here
+        super.onCreateOptionsMenu(menu, inflater);
+        if (UserProfile.getUserProfile().isLoggedIn) {
+            getBaseActivity().getMenuOption(MainActivity.MenuOptions.ADD_NEW).setVisible(true);
+            getBaseActivity().getMenuOption(MainActivity.MenuOptions.ADD_NEW).setTitle(getResources().getString(R.string.lbl_new_satsang));
+        }
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.save: {
+                //Sending the Message
+                android.os.Message msg = android.os.Message.obtain();
+                msg.what = ConstValues.NEW_SATSANG;
+                getBaseActivity().getFlowHandler().sendMessage(msg);
+            }
+            break;
+            default:
+                break;
+        }
+
+        return false;
+    }
+
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+
+    }
 }

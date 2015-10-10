@@ -15,9 +15,7 @@
  */
 package com.mahaperivaya.Fragments;
 
-import android.app.Fragment;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -25,7 +23,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.mahaperivaya.Activity.*;
+import com.mahaperivaya.Activity.MainActivity;
 import com.mahaperivaya.R;
 
 public class Dashboard extends AppBaseFragement {
@@ -44,13 +42,14 @@ public class Dashboard extends AppBaseFragement {
   public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
     // Do something that differs the Activity's menu here
     super.onCreateOptionsMenu(menu, inflater);
-    //getBaseActivity().setMenuVisibile();
+    getBaseActivity().setMenuOption(menu);
+    getBaseActivity().getMenuOption(MainActivity.MenuOptions.FEEDBACK);
   }
 
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
     switch (item.getItemId()) {
-      case R.id.nextaction:
+      case R.id.save:
         //saveClick();
         break;
       default:

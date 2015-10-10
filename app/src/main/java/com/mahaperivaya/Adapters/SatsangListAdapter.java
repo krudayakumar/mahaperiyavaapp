@@ -4,58 +4,50 @@ package com.mahaperivaya.Adapters;
  * Created by m84098 on 9/24/15.
  */
 
-import android.app.Activity;
+import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.TextView;
 
-import com.mahaperivaya.Model.SatsangDetails;
 import com.mahaperivaya.R;
+import com.mahaperivaya.ReceiveRequest.ReceiveSatsangList;
 
-public class SatsangListAdapter extends ArrayAdapter<SatsangDetails> {
+import java.util.ArrayList;
 
-	private final Activity context;
-	private final SatsangDetails[] satsangDetails;
+public class SatsangListAdapter extends RecyclerView.Adapter<SatsangViewHolder> {
 
-	static class ViewHolder {
-		public TextView satsangtitle, satsangcontent, satsanglocation;
-		public Button satsangjoin;
-	}
+    private Context context;
+    private ArrayList<ReceiveSatsangList.Data> items;
 
-	public SatsangListAdapter(Activity context, SatsangDetails[] satsangDetails) {
-		super(context, R.layout.satsanglistitem);
-		this.context = context;
-		this.satsangDetails = satsangDetails;
-	}
+    public SatsangListAdapter(Context context, ArrayList<ReceiveSatsangList.Data> items) {
+        this.context = context;
+        this.items = items;
+    }
 
-	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
-		View rowView = convertView;
-		// reuse views
-		if (rowView == null) {
-			LayoutInflater inflater = context.getLayoutInflater();
-			rowView = inflater.inflate(R.layout.satsanglistitem, null);
-			// configure view holder
-			ViewHolder viewHolder = new ViewHolder();
-			viewHolder.satsangtitle = (TextView) rowView.findViewById(R.id.satsangtitle);
-			viewHolder.satsangcontent = (TextView) rowView.findViewById(R.id.satsangcontent);
-			viewHolder.satsanglocation = (TextView) rowView.findViewById(R.id.satsanglocation);
-			viewHolder.satsangjoin = (Button) rowView.findViewById(R.id.satsangjoin);
-			rowView.setTag(viewHolder);
-		}
+    // Create new views (invoked by the layout manager)
+    @Override
+    public SatsangViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(context).inflate(R.layout.satsanglistitem, parent, false);
+        SatsangViewHolder viewHolder = new SatsangViewHolder(context, view);
+        return viewHolder;
+    }
 
-		// fill data
-		ViewHolder holder = (ViewHolder) rowView.getTag();
-		SatsangDetails satsangdet = satsangDetails[position];
-		holder.satsangtitle.setText(satsangdet.getName());
-		holder.satsangcontent.setText(satsangdet.getDescription());
-		holder.satsanglocation.setText(
-				satsangdet.getCity() + "," + satsangdet.getState() + "," + satsangdet.getCountry());
+    // Replace the contents of a view (invoked by the layout manager)
+    @Override
+    public void onBindViewHolder(SatsangViewHolder viewHolder, int position) {
+        ReceiveSatsangList.Data data = items.get(position);
+        viewHolder.satsangtitle.setText(data.name);
+        viewHolder.satsangcontent.setText(data.description);
+        viewHolder.satsanglocation.setText(
+                data.city + "," + data.state + "," + data.country);
+        viewHolder.Data = data;
+    }
 
-		return rowView;
-	}
+    @Override
+    public int getItemCount() {
+        return items.size();
+    }
+
 
 }

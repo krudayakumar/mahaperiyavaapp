@@ -2,10 +2,14 @@ package com.mahaperivaya.ReceiveRequest;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+
 /**
  * Created by m84098 on 9/27/15.
  */
-public class ReceiveSatsangList {
+
+public class ReceiveSatsangList  {
 
 	@SerializedName("status")
 	public String status;
@@ -14,9 +18,10 @@ public class ReceiveSatsangList {
 	public int code;
 
 	@SerializedName("data")
-	public Data[] data;
+	public ArrayList<Data> data;
 
-	public class Data {
+	@SuppressWarnings("serial")
+	public class Data implements Serializable{
 		@SerializedName("satsangid")
 		public int satsangid;
 
@@ -46,6 +51,9 @@ public class ReceiveSatsangList {
 
 		@SerializedName("country")
 		public String country;
+	}
+	public boolean isSuccess() {
+		return status.equalsIgnoreCase("success") ? true : false;
 	}
 
 }

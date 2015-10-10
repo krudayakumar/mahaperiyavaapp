@@ -37,6 +37,114 @@
       "city": "Hartford",
       "state": "CT",
       "country": "US"
+    },
+    {
+      "satsangid": 10,
+      "profileid": 12134234,
+      "name": "Chicago Group 1",
+      "description": "Chicago Group : Do japam  other activities",
+      "contactpersonname": "Udayakumar, Suresh Kumar",
+      "contactno": "860.202.7847, 860.202.7849",
+      "emailid": "krudayakumar@gmail.com, test@gmail.com",
+      "city": "Hartford",
+      "state": "CT",
+      "country": "US"
+    },
+    {
+      "satsangid": 20,
+      "profileid": 12134234,
+      "name": "Chicago Group 2",
+      "description": "Chicago Group : Do japam  other activities",
+      "contactpersonname": "Udayakumar, Suresh Kumar",
+      "contactno": "860.202.7847, 860.202.7849",
+      "emailid": "krudayakumar@gmail.com, test@gmail.com",
+      "city": "Hartford",
+      "state": "CT",
+      "country": "US"
+    },
+    {
+      "satsangid": 30,
+      "profileid": 12134234,
+      "name": "Chicago Group 3",
+      "description": "Chicago Group : Do japam  other activities",
+      "contactpersonname": "Udayakumar, Suresh Kumar",
+      "contactno": "860.202.7847, 860.202.7849",
+      "emailid": "krudayakumar@gmail.com, test@gmail.com",
+      "city": "Hartford",
+      "state": "CT",
+      "country": "US"
+    },
+    {
+      "satsangid": 10,
+      "profileid": 12134234,
+      "name": "Chicago Group 1",
+      "description": "Chicago Group : Do japam  other activities",
+      "contactpersonname": "Udayakumar, Suresh Kumar",
+      "contactno": "860.202.7847, 860.202.7849",
+      "emailid": "krudayakumar@gmail.com, test@gmail.com",
+      "city": "Hartford",
+      "state": "CT",
+      "country": "US"
+    },
+    {
+      "satsangid": 20,
+      "profileid": 12134234,
+      "name": "Chicago Group 2",
+      "description": "Chicago Group : Do japam  other activities",
+      "contactpersonname": "Udayakumar, Suresh Kumar",
+      "contactno": "860.202.7847, 860.202.7849",
+      "emailid": "krudayakumar@gmail.com, test@gmail.com",
+      "city": "Hartford",
+      "state": "CT",
+      "country": "US"
+    },
+    {
+      "satsangid": 30,
+      "profileid": 12134234,
+      "name": "Chicago Group 3",
+      "description": "Chicago Group : Do japam  other activities",
+      "contactpersonname": "Udayakumar, Suresh Kumar",
+      "contactno": "860.202.7847, 860.202.7849",
+      "emailid": "krudayakumar@gmail.com, test@gmail.com",
+      "city": "Hartford",
+      "state": "CT",
+      "country": "US"
+    },
+    {
+      "satsangid": 10,
+      "profileid": 12134234,
+      "name": "Chicago Group 1",
+      "description": "Chicago Group : Do japam  other activities",
+      "contactpersonname": "Udayakumar, Suresh Kumar",
+      "contactno": "860.202.7847, 860.202.7849",
+      "emailid": "krudayakumar@gmail.com, test@gmail.com",
+      "city": "Hartford",
+      "state": "CT",
+      "country": "US"
+    },
+    {
+      "satsangid": 20,
+      "profileid": 12134234,
+      "name": "Chicago Group 2",
+      "description": "Chicago Group : Do japam  other activities",
+      "contactpersonname": "Udayakumar, Suresh Kumar",
+      "contactno": "860.202.7847, 860.202.7849",
+      "emailid": "krudayakumar@gmail.com, test@gmail.com",
+      "city": "Hartford",
+      "state": "CT",
+      "country": "US"
+    },
+    {
+      "satsangid": 30,
+      "profileid": 12134234,
+      "name": "Chicago Group 3",
+      "description": "The CardView UI component shows information inside cards. We can customise its corners, the elevation and so on. We want to use this component to show contact information. These cards will be the rows of RecyclerView and we will see later how to integrate these two components. By now, we can define our card layout:",
+      "contactpersonname": "Udayakumar, Suresh Kumar",
+      "contactno": "860.202.7847, 860.202.7849",
+      "emailid": "krudayakumar@gmail.com, test@gmail.com",
+      "city": "Hartford",
+      "state": "CT",
+      "country": "US"
     }
   ]
 }

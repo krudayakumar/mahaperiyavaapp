@@ -16,14 +16,12 @@ import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import com.mahaperivaya.Activity.MBaseActivity;
+import com.mahaperivaya.Activity.MainActivity;
 import com.mahaperivaya.Model.ConstValues;
 import com.mahaperivaya.Model.PreferenceData;
 import com.mahaperivaya.R;
 import com.mahaperivaya.SendRequest.SendForgotPassword;
 import com.mahaperivaya.SendRequest.SendLogin;
-
-import java.util.Objects;
 
 /**
  * Created by m84098 on 9/3/15.
@@ -53,7 +51,8 @@ public class Login extends AppBaseFragement {
   public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
     // Do something that differs the Activity's menu here
     super.onCreateOptionsMenu(menu, inflater);
-    getBaseActivity().setGlobalMenu(menu);
+    getBaseActivity().setMenuOption(menu);
+    getBaseActivity().getMenuOption(MainActivity.MenuOptions.FEEDBACK);
 
   }
 

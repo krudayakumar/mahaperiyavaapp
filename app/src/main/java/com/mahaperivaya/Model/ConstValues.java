@@ -57,12 +57,20 @@ public class ConstValues {
   public final static int NEW_SATSANG_SERVER_REQUEST = NEW_SATSANG + 1;
   public final static int NEW_SATSANG_SUCCESS= NEW_SATSANG+ 2;
   public final static int NEW_SATSANG_ERROR = NEW_SATSANG+ 3;
+  public final static int NEW_SATSANG_SAVE = NEW_SATSANG+ 4;
+  public final static int NEW_SATSANG_SAVE_SUCCESS = NEW_SATSANG+ 5;
+  public final static int NEW_SATSANG_SAVE_ERROR = NEW_SATSANG+ 6;
 
-
+  public final static int EDIT_SATSANG = 180;
+  public final static int EDIT_SATSANG_SERVER_REQUEST = NEW_SATSANG + 1;
+  public final static int EDIT_SATSANG_SUCCESS= NEW_SATSANG+ 2;
+  public final static int EDIT_SATSANG_ERROR = NEW_SATSANG+ 3;
 
 
   public final static int ERROR = 500;
   public final static int ERROR_DEFAULT = ERROR+ 1;
+
+  public final static String DATA_SATSANG="DATA_SATSANG";
 
 
 }

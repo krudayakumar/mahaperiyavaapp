@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.mahaperivaya.Activity.MainActivity;
 import com.mahaperivaya.Model.ConstValues;
 import com.mahaperivaya.Model.UserProfile;
 import com.mahaperivaya.R;
@@ -51,14 +52,14 @@ public class SetPassword extends AppBaseFragement {
   public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
     // Do something that differs the Activity's menu here
     super.onCreateOptionsMenu(menu, inflater);
-    getBaseActivity().setGlobalMenu(menu);
-    getBaseActivity().getGlobalMenu().getItem(0).setVisible(true);
+    getBaseActivity().setMenuOption(menu);
+    getBaseActivity().getMenuVisible(MainActivity.MenuOptions.SAVE);
   }
 
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
     switch (item.getItemId()) {
-      case R.id.nextaction:
+      case R.id.save:
         saveClick();
         break;
       default:

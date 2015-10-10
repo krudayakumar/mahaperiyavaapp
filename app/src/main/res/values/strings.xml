@@ -121,6 +121,7 @@ Mahesh</string>
   <string name="lbl_submit_week_count">Submit Your Weekly Japam Count </string>
   <string name="lbl_counts">Week Count </string>
   <string name="lbl_date">Date </string>
+  <string name="action_general">General</string>
   <string name="action_continue">Continue</string>
   <string name="action_register">Register</string>
   <string name="action_next">Next</string>

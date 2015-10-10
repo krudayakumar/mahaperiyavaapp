@@ -2,6 +2,7 @@ package com.mahaperivaya.Service;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
@@ -26,9 +27,10 @@ import org.json.JSONObject;
  * Created by m84098 on 9/26/15.
  */
 public class ServerRequest<T> {
-
+  String TAG="ServerRequest";
   private static RequestQueue queue;
   private static Context context;
+  //String baseurl = "http://kgpfoundation.org/SahasraJapam/";
   String baseurl = "http://192.168.1.6:8001/";
   private boolean isMocked = false;
   // Progress dialog
@@ -36,16 +38,16 @@ public class ServerRequest<T> {
   private static View view;
 
   public enum SendServerRequest {
-    LOGIN("login", "login.json", Request.Method.POST),
+    LOGIN("Login.php", "login.json", Request.Method.POST),
     LOGOUT("logout", "logut.json", Request.Method.POST),
-    REGISTER("register", "register.json", Request.Method.POST),
-    PASSWORD_RESET("password_reset", "password_rest.json", Request.Method.POST),
+    REGISTER("Register.php", "register.json", Request.Method.POST),
+    PASSWORD_RESET("Password_Reset.php", "password_rest.json", Request.Method.POST),
     FORGOT_PASSWORD("forgot_password", "forgot_password.json", Request.Method.POST),
     SET_PASSWORD("set_password", "set_password.json", Request.Method.POST),
-    NEW_SATSANG("new_satsang", "new_satsang.json", Request.Method.POST),
-    GET_SATSANG_LIST("get_satsang_list", "get_satsang_list.json", Request.Method.POST),
-    JOIN_SATSANG("join_satsang", "join_satsang.json", Request.Method.POST),
-    UPDATE_JAPAN_COUNT("update_japam_count", "update_japam_count.json", Request.Method.POST);
+    NEW_SATSANG("new_satsang.php", "new_satsang.json", Request.Method.POST),
+    GET_SATSANG_LIST("get_satsang_list.php", "get_satsang_list.json", Request.Method.POST),
+    JOIN_SATSANG("Join_Satsang.php", "join_satsang.json", Request.Method.POST),
+    UPDATE_JAPAN_COUNT("update_japam_count.php", "update_japam_count.json", Request.Method.POST);
 
     private String functionname = null;
     private int requesttype;
@@ -60,6 +62,9 @@ public class ServerRequest<T> {
     public String getFunctionName() {
       return this.mockfilename;
     }
+  /* public String getFunctionName() {
+      return this.functionname;
+    }*/
 
     public int getRequestType() {
       return this.requesttype;
@@ -120,6 +125,7 @@ public class ServerRequest<T> {
         strURL = baseurl + SendServerRequest.UPDATE_JAPAN_COUNT.getFunctionName();
         break;
     }
+    Log.d(TAG,"URL:" + strURL);
     return strURL;
   }
 
@@ -142,10 +148,13 @@ public class ServerRequest<T> {
     try {
       if (data != null) {
         jsondata = new JSONObject(new Gson().toJson(data));
+        Log.d(TAG,"Data Send:" + jsondata.toString());
       }
     } catch (JSONException e) {
       e.printStackTrace();
     }
+
+    //Mockup
     jsondata = null;
     JsonObjectRequest jsObjRequest = new JsonObjectRequest(sendServerRequest.getRequestType(),
         getURL(sendServerRequest), jsondata, new Response.Listener<JSONObject>() {
@@ -159,7 +168,7 @@ public class ServerRequest<T> {
       @Override
       public void onErrorResponse(VolleyError error) {
         // TODO Auto-generated method stub
-
+        error.printStackTrace();
         if (error instanceof NoConnectionError) {
           ((MainActivity) context).ShowSnackBar(context, view, context.getResources().getString(R.string.err_default), null, null);
         }
