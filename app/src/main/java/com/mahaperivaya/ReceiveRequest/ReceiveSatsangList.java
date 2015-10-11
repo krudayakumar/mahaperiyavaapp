@@ -21,7 +21,8 @@ public class ReceiveSatsangList  {
 	public ArrayList<Data> data;
 
 	@SuppressWarnings("serial")
-	public class Data implements Serializable{
+	public static class Data implements Serializable{
+
 		@SerializedName("satsangid")
 		public int satsangid;
 

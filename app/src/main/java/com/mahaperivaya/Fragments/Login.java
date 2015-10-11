@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.text.Html;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -95,12 +96,12 @@ public class Login extends AppBaseFragement {
         textInputLayout = (TextInputLayout) rootView.findViewById(R.id.layoutEmailId);
         if (TextUtils.isEmpty(email.getText())) {
           textInputLayout.setError(
-              getResources().getString(R.string.err_field_should_not_be_empty));
+                  getResources().getString(R.string.err_field_should_not_be_empty));
           return;
         }
         if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email.getText()).matches()) {
           textInputLayout
-              .setError(getResources().getString(R.string.err_invalid_email_id));
+                  .setError(getResources().getString(R.string.err_invalid_email_id));
           return;
         }
         textInputLayout.setError(null);
@@ -108,15 +109,15 @@ public class Login extends AppBaseFragement {
         if (TextUtils.isEmpty(password.getText())) {
 
           textInputLayout.setError(
-              getResources().getString(R.string.err_field_should_not_be_empty));
+                  getResources().getString(R.string.err_field_should_not_be_empty));
           return;
         }
         textInputLayout.setError(null);
         boolean ischecked = ((Switch) rootView.findViewById(R.id.remberid)).isChecked();
         if (ischecked) {
           PreferenceData.getInstance(context).setValue(
-              PreferenceData.PREFVALUES.EMAILID.toString(),
-              email.getText().toString());
+                  PreferenceData.PREFVALUES.EMAILID.toString(),
+                  email.getText().toString());
         }
 
         SendLogin loginsendrequest = new SendLogin();
@@ -134,6 +135,28 @@ public class Login extends AppBaseFragement {
     });
   }
 
+  @Override
+  public void onResume() {
+    super.onResume();
+
+    getView().setFocusableInTouchMode(true);
+    getView().requestFocus();
+    getView().setOnKeyListener(new View.OnKeyListener() {
+      @Override
+      public boolean onKey(View v, int keyCode, KeyEvent event) {
+        if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
+          // handle back button's click listener
+          android.os.Message msg = android.os.Message.obtain();
+          msg.what = ConstValues.WELCOME;
+          getBaseActivity().getFlowHandler().sendMessage(msg);
+          return true;
+        }
+        return false;
+      }
+
+
+    });
+  }
 
   private void setRegistrationClick(View v) {
     android.os.Message msg = android.os.Message.obtain();

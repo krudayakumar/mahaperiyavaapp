@@ -1,0 +1,8 @@
+{
+  "status": "success",
+  "code": 2000,
+  "data": {
+    "message": "Satsang Successfully Created",
+    "profileid:": 12134234
+  }
+}

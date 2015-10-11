@@ -42,16 +42,21 @@ public class SatsangViewHolder extends RecyclerView.ViewHolder implements View.O
 
     @Override
     public void onClick(View v) {
-        Toast.makeText(context,"Joining this satsang group", Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, "Joining this satsang group", Toast.LENGTH_SHORT).show();
 
         switch (v.getId()) {
-            case R.id.satsangjoin:
+            case R.id.satsangjoin: {
+                android.os.Message msg = android.os.Message.obtain();
+                msg.what = ConstValues.EDIT_SATSANG;
+                msg.obj = (Object) Data;
+                ((MainActivity) ((Activity) context)).getFlowHandler().sendMessage(msg);
+                break;
+            }
+            default:
                 android.os.Message msg = android.os.Message.obtain();
                 msg.what = ConstValues.EDIT_SATSANG;
                 msg.obj = (Object) Data;
                 ((MainActivity)((Activity)context)).getFlowHandler().sendMessage(msg);
-                break;
-            default:
                 break;
         }
 

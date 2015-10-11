@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -89,10 +90,38 @@ public class SatsangList extends AppBaseFragement {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+
+        getView().setFocusableInTouchMode(true);
+        getView().requestFocus();
+        getView().setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
+                    // handle back button's click listener
+                    android.os.Message msg = android.os.Message.obtain();
+                    if (UserProfile.getUserProfile().isLoggedIn) {
+                        msg.what = ConstValues.DASHBOARD_LOGIN;
+                    }else {
+                        msg.what = ConstValues.DASHBOARD_WITHOUT_LOGIN;
+                    }
+                    getBaseActivity().getFlowHandler().sendMessage(msg);
+                    return true;
+                }
+                return false;
+            }
+
+
+        });
+    }
+
+    @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         // Do something that differs the Activity's menu here
         super.onCreateOptionsMenu(menu, inflater);
-        if (UserProfile.getUserProfile().isLoggedIn) {
+        if (UserProfile.getUserProfile().isLoggedIn)
+        {
             getBaseActivity().getMenuOption(MainActivity.MenuOptions.ADD_NEW).setVisible(true);
             getBaseActivity().getMenuOption(MainActivity.MenuOptions.ADD_NEW).setTitle(getResources().getString(R.string.lbl_new_satsang));
         }
@@ -102,7 +131,7 @@ public class SatsangList extends AppBaseFragement {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.save: {
+            case R.id.addnew: {
                 //Sending the Message
                 android.os.Message msg = android.os.Message.obtain();
                 msg.what = ConstValues.NEW_SATSANG;

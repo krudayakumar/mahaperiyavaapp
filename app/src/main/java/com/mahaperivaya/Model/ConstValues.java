@@ -70,7 +70,8 @@ public class ConstValues {
   public final static int ERROR = 500;
   public final static int ERROR_DEFAULT = ERROR+ 1;
 
-  public final static String DATA_SATSANG="DATA_SATSANG";
+  public final static String SATSANG_DATA ="SATSANG_DATA";
+  public final static String SATSANG_OPTION="SATSANG_OPTION";
 
 
 }

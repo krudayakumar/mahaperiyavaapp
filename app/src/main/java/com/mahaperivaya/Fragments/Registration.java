@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputLayout;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -16,6 +17,7 @@ import android.widget.ImageView;
 
 import com.mahaperivaya.Activity.MainActivity;
 import com.mahaperivaya.Model.ConstValues;
+import com.mahaperivaya.Model.UserProfile;
 import com.mahaperivaya.R;
 import com.mahaperivaya.SendRequest.SendRegister;
 
@@ -48,6 +50,30 @@ public class Registration extends AppBaseFragement {
     getBaseActivity().getMenuVisible(MainActivity.MenuOptions.FEEDBACK);
     getBaseActivity().getMenuVisible(MainActivity.MenuOptions.SAVE);
   }
+
+  @Override
+  public void onResume() {
+    super.onResume();
+
+    getView().setFocusableInTouchMode(true);
+    getView().requestFocus();
+    getView().setOnKeyListener(new View.OnKeyListener() {
+      @Override
+      public boolean onKey(View v, int keyCode, KeyEvent event) {
+        if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
+          // handle back button's click listener
+          android.os.Message msg = android.os.Message.obtain();
+          msg.what = ConstValues.LOGIN;
+          getBaseActivity().getFlowHandler().sendMessage(msg);
+          return true;
+        }
+        return false;
+      }
+
+
+    });
+  }
+
 
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {

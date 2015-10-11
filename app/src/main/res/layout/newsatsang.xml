@@ -21,6 +21,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+
             <LinearLayout
                 android:id="@+id/viewB"
                 android:layout_width="match_parent"
@@ -52,7 +53,7 @@
                     <EditText
                         android:id="@+id/edSatsangDescription"
                         android:layout_width="match_parent"
-                        android:layout_height="100dp"
+                        android:layout_height="60dp"
                         android:ems="10"
                         android:hint="@string/lbl_help_satsang_description"
                         android:inputType="textMultiLine" />
@@ -143,7 +144,8 @@
                 </android.support.design.widget.TextInputLayout>
 
 
-            </LinearLayout>
+
+        </LinearLayout>
 
         </LinearLayout>
     </ScrollView>

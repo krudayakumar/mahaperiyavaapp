@@ -63,6 +63,7 @@ import com.mahaperivaya.ReceiveRequest.ReceiveLogin;
 import com.mahaperivaya.ReceiveRequest.ReceiveSatsangList;
 import com.mahaperivaya.SendRequest.SendForgotPassword;
 import com.mahaperivaya.SendRequest.SendLogin;
+import com.mahaperivaya.SendRequest.SendNewSatsang;
 import com.mahaperivaya.SendRequest.SendPasswordReset;
 import com.mahaperivaya.SendRequest.SendRegister;
 import com.mahaperivaya.Service.ServerRequest;
@@ -193,6 +194,7 @@ public class MainActivity extends MBaseActivity
             userimage.setVisibility(View.GONE);
             navigationView.getMenu().findItem(R.id.signin).setVisible(false);
             navigationView.getMenu().findItem(R.id.signout).setVisible(true);
+            navigationView.getMenu().findItem(R.id.setting).setVisible(true);
         } else {
             username.setVisibility(View.GONE);
             emailid.setVisibility(View.GONE);
@@ -200,6 +202,7 @@ public class MainActivity extends MBaseActivity
             navigationView.getMenu().findItem(R.id.signin).setVisible(true);
             navigationView.getMenu().findItem(R.id.signout).setVisible(false);
             navigationView.getMenu().findItem(R.id.japam).setVisible(false);
+            navigationView.getMenu().findItem(R.id.setting).setVisible(false);
         }
 
     }
@@ -257,7 +260,7 @@ public class MainActivity extends MBaseActivity
                         break;
                     case ConstValues.LOGIN_SERVE_REQUEST: {
                         final SendLogin loginsendrequest = (SendLogin) msg.obj;
-                        getServerRequestSend().executeRequest(ServerRequest.SendServerRequest.LOGIN, (SendLogin) msg.obj, new ServerCallback() {
+                        getServerRequestSend().executeRequest(ServerRequest.SendServerRequest.LOGIN,  msg.obj, new ServerCallback() {
                             @Override
                             public void onSuccess(JSONObject response) {
                                 ReceiveLogin receiveLogin = new Gson().fromJson(response.toString(), ReceiveLogin.class);
@@ -332,7 +335,7 @@ public class MainActivity extends MBaseActivity
                         break;
                     case ConstValues.SET_PASSWORD_SERVER_REQUEST: {
                         getServerRequestSend().executeRequest(
-                                ServerRequest.SendServerRequest.SET_PASSWORD, (SendPasswordReset) msg.obj, new ServerCallback() {
+                                ServerRequest.SendServerRequest.SET_PASSWORD,  msg.obj, new ServerCallback() {
                                     @Override
                                     public void onSuccess(JSONObject response) {
                                         GeneralReceiveRequest generalReceiveRequest = new Gson().fromJson(response.toString(),
@@ -378,7 +381,7 @@ public class MainActivity extends MBaseActivity
 
                     case ConstValues.REGISTER_SERVER_REQUEST: {
                         getServerRequestSend().executeRequest(
-                                ServerRequest.SendServerRequest.REGISTER, (SendRegister) msg.obj, new ServerCallback() {
+                                ServerRequest.SendServerRequest.REGISTER,  msg.obj, new ServerCallback() {
                                     @Override
                                     public void onSuccess(JSONObject response) {
                                         GeneralReceiveRequest generalReceiveRequest = new Gson().fromJson(response.toString(),
@@ -421,7 +424,7 @@ public class MainActivity extends MBaseActivity
 
                     case ConstValues.FORGOT_PASSWORD: {
                         getServerRequestSend().executeRequest(
-                                ServerRequest.SendServerRequest.FORGOT_PASSWORD, (SendForgotPassword) msg.obj, new ServerCallback() {
+                                ServerRequest.SendServerRequest.FORGOT_PASSWORD, msg.obj, new ServerCallback() {
                                     @Override
                                     public void onSuccess(JSONObject response) {
                                         GeneralReceiveRequest generalReceiveRequest = new Gson().fromJson(response.toString(),
@@ -479,30 +482,58 @@ public class MainActivity extends MBaseActivity
                     }
                     break;
                     case ConstValues.NEW_SATSANG: {
-                        showFragment(new NewSatsang(), null, R.id.content, true, NewSatsang.TAG);
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable(ConstValues.SATSANG_OPTION, "NEW");
+                        showFragment(new NewSatsang(), bundle, R.id.content, true, NewSatsang.TAG);
                     }
                     break;
                     case ConstValues.NEW_SATSANG_SAVE: {
-                        showFragment(new NewSatsang(), null, R.id.content, true, NewSatsang.TAG);
-                    }
-                    break;
+                        getServerRequestSend().executeRequest(
+                                ServerRequest.SendServerRequest.NEW_SATSANG, msg.obj, new ServerCallback() {
+                                    @Override
+                                    public void onSuccess(JSONObject response) {
+                                        GeneralReceiveRequest generalReceiveRequest = new Gson().fromJson(response.toString(),
+                                                GeneralReceiveRequest.class);
+                                        Message msgtmp = Message.obtain();
+                                        msgtmp.obj = (Object) response;
+                                        if (generalReceiveRequest.isSuccess()) {
+                                            msgtmp.what = ConstValues.NEW_SATSANG_SAVE_SUCCESS;
+                                        } else {
+                                            msgtmp.what = ConstValues.NEW_SATSANG_SAVE_ERROR;
+                                        }
+                                        getFlowHandler().sendMessage(msgtmp);
 
+                                    }
+
+                                    @Override
+                                    public void onError(VolleyError error) {
+                                        error.printStackTrace();
+                                        Message msg = Message.obtain();
+                                        msg.what = ConstValues.ERROR_DEFAULT;
+                                        getFlowHandler().sendMessage(msg);
+                                    }
+                                });
+                    }
+
+                    break;
                     case ConstValues.NEW_SATSANG_SAVE_SUCCESS: {
                         Message msgtmp = Message.obtain();
                         msgtmp.what = ConstValues.SATSANG_LIST_LOGIN;
                         getFlowHandler().sendMessage(msgtmp);
+                        ShowSnackBar(context, getWindow().getDecorView(), getResources().getString(R.string.msg_successfully_satsang_saved), null, null);
+                        break;
                     }
-                    break;
                     case ConstValues.NEW_SATSANG_SAVE_ERROR: {
-                        Message msgtmp = Message.obtain();
-                        msgtmp.what = ConstValues.SATSANG_LIST_LOGIN;
-                        getFlowHandler().sendMessage(msgtmp);
+                        GeneralReceiveRequest generalReceiveRequest = new Gson().fromJson(((JSONObject) msg.obj).toString(), GeneralReceiveRequest.class);
+                        ShowSnackBar(context, getWindow().getDecorView(), generalReceiveRequest.data.message, null, null);
                     }
+
                     break;
 
                     case ConstValues.EDIT_SATSANG: {
                         Bundle bundle = new Bundle();
-                        bundle.putSerializable(ConstValues.DATA_SATSANG, (ReceiveSatsangList.Data) msg.obj);
+                        bundle.putSerializable(ConstValues.SATSANG_OPTION, "EDIT");
+                        bundle.putSerializable(ConstValues.SATSANG_DATA, (ReceiveSatsangList.Data) msg.obj);
                         showFragment(new NewSatsang(), bundle, R.id.content, true, NewSatsang.TAG);
                     }
                     break;

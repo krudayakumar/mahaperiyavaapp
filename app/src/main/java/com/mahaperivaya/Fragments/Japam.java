@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputLayout;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,13 +18,14 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.mahaperivaya.Model.ConstValues;
 import com.mahaperivaya.Model.UserProfile;
 import com.mahaperivaya.R;
 
 /**
  * Created by m84098 on 9/3/15.
  */
-public class Japam extends Fragment {
+public class Japam extends AppBaseFragement {
 	public static String TAG = "Japam";
 
 	TextView japam_count_over_all, japam_count_satsang, japam_count, japam_last_updated_date;
@@ -58,6 +60,33 @@ public class Japam extends Fragment {
 		getActivity().setTitle(getResources().getString(R.string.lbl_japam));
 		init();
 		return rootView;
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+
+		getView().setFocusableInTouchMode(true);
+		getView().requestFocus();
+		getView().setOnKeyListener(new View.OnKeyListener() {
+			@Override
+			public boolean onKey(View v, int keyCode, KeyEvent event) {
+				if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
+					// handle back button's click listener
+					android.os.Message msg = android.os.Message.obtain();
+					if (UserProfile.getUserProfile().isLoggedIn) {
+						msg.what = ConstValues.DASHBOARD_LOGIN;
+					} else {
+						msg.what = ConstValues.DASHBOARD_WITHOUT_LOGIN;
+					}
+					getBaseActivity().getFlowHandler().sendMessage(msg);
+					return true;
+				}
+				return false;
+			}
+
+
+		});
 	}
 
 	private void init() {
