@@ -61,11 +61,7 @@ import com.mahaperivaya.R;
 import com.mahaperivaya.ReceiveRequest.GeneralReceiveRequest;
 import com.mahaperivaya.ReceiveRequest.ReceiveLogin;
 import com.mahaperivaya.ReceiveRequest.ReceiveSatsangList;
-import com.mahaperivaya.SendRequest.SendForgotPassword;
 import com.mahaperivaya.SendRequest.SendLogin;
-import com.mahaperivaya.SendRequest.SendNewSatsang;
-import com.mahaperivaya.SendRequest.SendPasswordReset;
-import com.mahaperivaya.SendRequest.SendRegister;
 import com.mahaperivaya.Service.ServerRequest;
 
 import org.json.JSONObject;
@@ -110,17 +106,22 @@ public class MainActivity extends MBaseActivity
         RADIO(5),
         FEEDBACK(6);
         int option;
-        private MenuOptions(int _option){
+
+        private MenuOptions(int _option) {
             option = _option;
         }
+
         public int getOption() {
             return option;
         }
-    };
+    }
+
+    ;
 
     public static void getMenuVisible(MenuOptions options) {
         getMenuOption(options).setVisible(true);
     }
+
     public static MenuItem getMenuOption(MenuOptions options) {
         return globalmenu.getItem(options.getOption());
     }
@@ -224,8 +225,6 @@ public class MainActivity extends MBaseActivity
     }
 
 
-
-
     private static Handler flowHandler;
     private static int currentState;
 
@@ -260,7 +259,7 @@ public class MainActivity extends MBaseActivity
                         break;
                     case ConstValues.LOGIN_SERVE_REQUEST: {
                         final SendLogin loginsendrequest = (SendLogin) msg.obj;
-                        getServerRequestSend().executeRequest(ServerRequest.SendServerRequest.LOGIN,  msg.obj, new ServerCallback() {
+                        getServerRequestSend().executeRequest(ServerRequest.SendServerRequest.LOGIN, (SendLogin) msg.obj, new ServerCallback() {
                             @Override
                             public void onSuccess(JSONObject response) {
                                 ReceiveLogin receiveLogin = new Gson().fromJson(response.toString(), ReceiveLogin.class);
@@ -335,7 +334,7 @@ public class MainActivity extends MBaseActivity
                         break;
                     case ConstValues.SET_PASSWORD_SERVER_REQUEST: {
                         getServerRequestSend().executeRequest(
-                                ServerRequest.SendServerRequest.SET_PASSWORD,  msg.obj, new ServerCallback() {
+                                ServerRequest.SendServerRequest.SET_PASSWORD, msg.obj, new ServerCallback() {
                                     @Override
                                     public void onSuccess(JSONObject response) {
                                         GeneralReceiveRequest generalReceiveRequest = new Gson().fromJson(response.toString(),
@@ -381,7 +380,7 @@ public class MainActivity extends MBaseActivity
 
                     case ConstValues.REGISTER_SERVER_REQUEST: {
                         getServerRequestSend().executeRequest(
-                                ServerRequest.SendServerRequest.REGISTER,  msg.obj, new ServerCallback() {
+                                ServerRequest.SendServerRequest.REGISTER, msg.obj, new ServerCallback() {
                                     @Override
                                     public void onSuccess(JSONObject response) {
                                         GeneralReceiveRequest generalReceiveRequest = new Gson().fromJson(response.toString(),
@@ -537,6 +536,15 @@ public class MainActivity extends MBaseActivity
                         showFragment(new NewSatsang(), bundle, R.id.content, true, NewSatsang.TAG);
                     }
                     break;
+                    case ConstValues.COUNTRY_LIST: {
+                        getServerRequestSend().executeRequest(
+                                ServerRequest.SendServerRequest.COUNTRY_LIST, null, (ServerCallback) msg.obj);
+
+
+                    }
+                    break;
+
+
                     //Default Error
                     case ConstValues.ERROR_DEFAULT:
                         ShowSnackBar(context, getWindow().getDecorView(), getResources().getString(R.string.err_default), null, null);

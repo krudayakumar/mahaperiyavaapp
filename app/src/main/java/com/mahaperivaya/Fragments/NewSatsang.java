@@ -1,9 +1,13 @@
 package com.mahaperivaya.Fragments;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputLayout;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -14,13 +18,21 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
+import com.android.volley.VolleyError;
+import com.google.gson.Gson;
 import com.mahaperivaya.Activity.MainActivity;
+import com.mahaperivaya.Interface.ServerCallback;
 import com.mahaperivaya.Model.ConstValues;
 import com.mahaperivaya.Model.UserProfile;
 import com.mahaperivaya.R;
+import com.mahaperivaya.ReceiveRequest.ReceiveCountryList;
 import com.mahaperivaya.ReceiveRequest.ReceiveSatsangList;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
 
 /**
  * Created by m84098 on 9/3/15.
@@ -28,22 +40,70 @@ import java.util.ArrayList;
 public class NewSatsang extends AppBaseFragement {
     public static String TAG = "NewSatsang";
     LinearLayout llMainLayout;
-    EditText name, description, personname, contactno, emailid, city, state, country;
+    EditText name, description, personname, contactno, emailid, city, country, state;
     ArrayList<EditText> allControls = new ArrayList<>();
     View rootView;
     String satsangoption = "";
+    LinkedHashMap<String, ReceiveCountryList.Country> countryNameMap = new LinkedHashMap<String, ReceiveCountryList.Country>();
+    LinkedHashMap<String, ReceiveCountryList.Country> countryCodeMap = new LinkedHashMap<String, ReceiveCountryList.Country>();
+    List<String> countries = new ArrayList<String>();
+    LinkedHashMap<String, ReceiveCountryList.Country.State> stateNameMap = new LinkedHashMap<String, ReceiveCountryList.Country.State>();
+    LinkedHashMap<String, ReceiveCountryList.Country.State> stateCodeMap = new LinkedHashMap<String, ReceiveCountryList.Country.State>();
+    List<String> states = new ArrayList<String>();
 
     FloatingActionButton next;
     ReceiveSatsangList.Data data = new ReceiveSatsangList.Data();
+    Context context;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.newsatsang, container, false);
+        context = container.getContext();
         setHasOptionsMenu(true);
-
-
         init();
+
+        ServerCallback serverCallback = new ServerCallback() {
+            @Override
+            public void onSuccess(JSONObject response) {
+                ReceiveCountryList receiveCountryList = new Gson().fromJson(response.toString(),
+                        ReceiveCountryList.class);
+
+                if (receiveCountryList.isSuccess()) {
+                    for (ReceiveCountryList.Country country : receiveCountryList.data) {
+                        countryNameMap.put(country.name, country);
+                        countryCodeMap.put(country.code,country);
+                        Log.d(TAG, country.name);
+                        if(country.name.equalsIgnoreCase("india")) {
+                            Log.d(TAG,  new Gson().toJson(country.states).toString());
+                        }
+                        countries.add(country.name);
+                    }
+                } else {
+                    android.os.Message msg = android.os.Message.obtain();
+                    msg.what = ConstValues.ERROR_DEFAULT;
+                    getBaseActivity().getFlowHandler().sendMessage(msg);
+                }
+
+
+            }
+
+            @Override
+            public void onError(VolleyError error) {
+                error.printStackTrace();
+                android.os.Message msg = android.os.Message.obtain();
+                msg.what = ConstValues.ERROR_DEFAULT;
+                getBaseActivity().getFlowHandler().sendMessage(msg);
+            }
+        };
+
+        //Sending the Message
+        android.os.Message msg = android.os.Message.obtain();
+        msg.what = ConstValues.COUNTRY_LIST;
+        msg.obj = (Object) serverCallback;
+        getBaseActivity().getFlowHandler().sendMessage(msg);
+
+
         Bundle bundle = getArguments();
         if (bundle != null) {
             satsangoption = (String) bundle.getString(ConstValues.SATSANG_OPTION);
@@ -57,8 +117,34 @@ public class NewSatsang extends AppBaseFragement {
                     contactno.setText(data.contactno);
                     emailid.setText(data.emailid);
                     city.setText(data.city);
-                    state.setText(data.state);
-                    country.setText(data.country);
+
+                    if(countryCodeMap.get(data.country)!=null) {
+                        country.setTag(countryCodeMap.get(data.country));
+
+                        ReceiveCountryList.Country tempCountry = (ReceiveCountryList.Country) country.getTag();
+                        if (tempCountry != null) {
+                            country.setText(tempCountry.name);
+                            for (ReceiveCountryList.Country.State state : tempCountry.states) {
+                                stateNameMap.put(state.name, state);
+                                stateCodeMap.put(state.code, state);
+                                states.add(state.name);
+                            }
+                        }
+
+                        if(tempCountry.states.size()!=0) {
+                            ReceiveCountryList.Country.State tempstate = stateCodeMap.get(data.state);
+                            if(tempstate!=null) {
+                                state.setTag(tempstate);
+                                state.setText(tempstate.name);
+                            }
+
+                        }else {
+                            state.setText(data.state);
+                        }
+
+                    }
+
+
                 }
                 setEnableAllControls(false);
                 getActivity().setTitle(getResources().getString(R.string.lbl_satsang) + "(" + data.name + ")");
@@ -73,6 +159,16 @@ public class NewSatsang extends AppBaseFragement {
         }
         return rootView;
     }
+
+
+
+   /* private AdapterView.OnItemClickListener countryClickListener = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            String selectedItem = parent.getItemAtPosition(position).toString();
+
+        }
+    };*/
 
     void setEnableAllControls(boolean isEnable) {
         for (int i = 0; i < allControls.size(); i++) {
@@ -93,7 +189,7 @@ public class NewSatsang extends AppBaseFragement {
         super.onCreateOptionsMenu(menu, inflater);
         getBaseActivity().setMenuOption(menu);
         getBaseActivity().getMenuOption(MainActivity.MenuOptions.FEEDBACK);
-        if(UserProfile.getUserProfile().isLoggedIn) {
+        if (UserProfile.getUserProfile().isLoggedIn) {
             if (satsangoption.equalsIgnoreCase("EDIT") && UserProfile.getUserProfile().profileid == data.profileid) {
                 getBaseActivity().getMenuVisible(MainActivity.MenuOptions.EDIT);
             }
@@ -247,16 +343,113 @@ public class NewSatsang extends AppBaseFragement {
         country = (EditText) rootView.findViewById(R.id.edSatsangCountry);
         state = (EditText) rootView.findViewById(R.id.edSatsangState);
         city = (EditText) rootView.findViewById(R.id.edSatsangCity);
+
+
+        country.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                state.setFocusable(false);
+                displayCountryStateDialog(SelectionType.COUNTRY);
+
+            }
+        });
+        state.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                displayCountryStateDialog(SelectionType.STATE);
+            }
+        });
+
+
         allControls.add(name);
         allControls.add(description);
         allControls.add(personname);
         allControls.add(contactno);
         allControls.add(emailid);
-        allControls.add(country);
-        allControls.add(state);
+        //allControls.add(country);
+        //allControls.add(state);
         allControls.add(city);
 
     }
 
+    private enum SelectionType {
+        COUNTRY,
+        STATE,
+    }
+
+    ;
+
+    private void countryDialog() {
+
+
+    }
+
+
+    private void displayCountryStateDialog(final SelectionType selectionType) {
+
+        //final String[] storeNameArray = new String[countryNameMap.keySet().toArray().length];
+        AlertDialog.Builder builder = new AlertDialog.Builder(getBaseActivity());
+        //final String[] storeNames;
+
+
+        switch (selectionType) {
+            case COUNTRY:
+                builder.setTitle(getBaseActivity().getResources().getString(R.string.lbl_help_country));
+                builder.setItems(countryNameMap.keySet().toArray(new String[0]), new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        country.setText(countries.get(which ));
+                        country.setTag(countryNameMap.get(country.getText().toString()));
+                        state.setText("");
+                    }
+                });
+
+                break;
+            case STATE:
+                builder.setTitle(getBaseActivity().getResources().getString(R.string.lbl_help_state));
+
+                if (TextUtils.isEmpty(country.getText().toString())) {
+                    getBaseActivity().ShowSnackBar(context, getBaseActivity().getWindow().getDecorView(), getResources().getString(R.string.msg_select_country), null, null);
+                    return;
+                }
+                ReceiveCountryList.Country selectedcountry = (ReceiveCountryList.Country)country.getTag();
+                //ReceiveCountryList.Country selectedcountry = countryNameMap.get(country.getText().toString());
+                if (selectedcountry.states != null) {
+                    if (selectedcountry.states.size() != 0) {
+                        stateCodeMap.clear();
+                        stateNameMap.clear();
+                        for (ReceiveCountryList.Country.State state : selectedcountry.states) {
+                            stateNameMap.put(state.name, state);
+                            stateCodeMap.put(state.code,state);
+                            states.add(state.name);
+                        }
+                        builder.setItems(stateNameMap.keySet().toArray(new String[0]), new DialogInterface.OnClickListener() {
+
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                state.setText(states.get(which));
+                                state.setTag(states.get(which ));
+
+                            }
+                        });
+                    }
+                } else {
+                    state.setFocusable(true);
+                    state.setFocusableInTouchMode(true);
+                    return;
+                }
+
+
+                break;
+        }
+
+
+        AlertDialog alert = builder.create();
+        //storeNames.clear();
+        alert.setCancelable(false);
+        alert.show();
+    }
 
 }

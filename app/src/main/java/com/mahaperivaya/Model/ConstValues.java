@@ -67,6 +67,13 @@ public class ConstValues {
   public final static int EDIT_SATSANG_ERROR = NEW_SATSANG+ 3;
 
 
+
+
+  public final static int COUNTRY_LIST = 190;
+  public final static int COUNTRY_LIST_SERVER_REQUEST = COUNTRY_LIST + 1;
+  public final static int COUNTRY_LIST_SUCCESS= COUNTRY_LIST+ 2;
+  public final static int COUNTRY_LIST_ERROR = COUNTRY_LIST+ 3;
+
   public final static int ERROR = 500;
   public final static int ERROR_DEFAULT = ERROR+ 1;
 

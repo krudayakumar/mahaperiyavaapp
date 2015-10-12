@@ -144,6 +144,7 @@ Mahesh</string>
   <string name="msg_do_you_want_exit">Do you want to exit. </string>
   <string name="msg_password_mail_email">Password mailed to your email id.</string>
   <string name="msg_successfully_satsang_saved">Successfully satsang saved.</string>
+  <string name="msg_select_country">Select Country.</string>
 
   <!-- Error-->
   <string name="err_default">Currently we are unable to service your request. Please try after some time.</string>

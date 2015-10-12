@@ -1,5 +1,7 @@
 {
-  "countries": [
+  "status": "success",
+  "code": 2000,
+  "data": [
     {
       "name": "Afghanistan",
       "code": "AF"

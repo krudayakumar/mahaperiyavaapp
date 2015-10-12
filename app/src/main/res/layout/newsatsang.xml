@@ -1,5 +1,4 @@
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -20,7 +19,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-
 
             <LinearLayout
                 android:id="@+id/viewB"
@@ -106,13 +104,14 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content">
 
+
                     <EditText
                         android:id="@+id/edSatsangCountry"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:ems="10"
-                        android:hint="@string/lbl_help_country"
-                        android:inputType="textAutoComplete" />
+                        android:editable="false"
+                        android:focusable="false"
+                        android:hint="@string/lbl_help_country" />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
@@ -124,9 +123,8 @@
                         android:id="@+id/edSatsangState"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:ems="10"
-                        android:hint="@string/lbl_help_state"
-                        android:inputType="textAutoComplete" />
+                        android:focusable="false"
+                        android:hint="@string/lbl_help_state" />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
@@ -138,18 +136,15 @@
                         android:id="@+id/edSatsangCity"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:ems="10"
-                        android:hint="@string/lbl_help_city"
-                        android:inputType="textAutoComplete" />
+                        android:focusable="false"
+                        android:hint="@string/lbl_help_city" />
                 </android.support.design.widget.TextInputLayout>
 
 
-
-        </LinearLayout>
+            </LinearLayout>
 
         </LinearLayout>
     </ScrollView>
-
 
 
 </android.support.design.widget.CoordinatorLayout>
