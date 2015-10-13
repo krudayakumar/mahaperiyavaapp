@@ -17,7 +17,7 @@ public class Setting extends  AppBaseFragement{
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.setting, container, false);
 
-            
+
             getActivity().setTitle(getResources().getString(R.string.lbl_settings));
             return rootView;
         }
