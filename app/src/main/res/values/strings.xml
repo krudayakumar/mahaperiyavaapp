@@ -121,6 +121,9 @@ Mahesh</string>
   <string name="lbl_submit_week_count">Submit Your Weekly Japam Count </string>
   <string name="lbl_counts">Week Count </string>
   <string name="lbl_date">Date </string>
+  <string name="lbl_unscribe_satsang">Satsang </string>
+  <string name="lbl_unscribe_japam">Japam </string>
+
   <string name="action_general">General</string>
   <string name="action_continue">Continue</string>
   <string name="action_register">Register</string>
@@ -144,6 +147,7 @@ Mahesh</string>
   <string name="msg_do_you_want_exit">Do you want to exit. </string>
   <string name="msg_password_mail_email">Password mailed to your email id.</string>
   <string name="msg_successfully_satsang_saved">Successfully satsang saved.</string>
+  <string name="msg_successfully_japam_updated">Count is updated.</string>
   <string name="msg_select_country">Select Country.</string>
 
   <!-- Error-->

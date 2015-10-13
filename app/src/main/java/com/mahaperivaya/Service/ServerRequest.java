@@ -35,7 +35,7 @@ public class ServerRequest<T> {
     private static RequestQueue queue;
     private static Context context;
     //String baseurl = "http://kgpfoundation.org/Satsang1/";
-    String baseurl = "http://192.168.1.6:8001/";
+    String baseurl = "http://192.168.1.8:8001/";
     private boolean isMocked = false;
     // Progress dialog
     private ProgressDialog pDialog;
@@ -52,7 +52,7 @@ public class ServerRequest<T> {
         GET_SATSANG_LIST("get_satsang_list.php", "get_satsang_list.json", Request.Method.GET),
         JOIN_SATSANG("Join_Satsang.php", "join_satsang.json", Request.Method.POST),
         COUNTRY_LIST("countries.php", "countries.json", Request.Method.POST),
-        UPDATE_JAPAN_COUNT("update_japam_count.php", "update_japam_count.json", Request.Method.GET);
+        UPDATE_JAPAN_COUNT("update_japam_count.php", "update_japam.json", Request.Method.GET);
 
         private String functionname = null;
         private int requesttype;

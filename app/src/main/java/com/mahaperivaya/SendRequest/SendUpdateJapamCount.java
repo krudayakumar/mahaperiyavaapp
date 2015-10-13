@@ -11,10 +11,13 @@ public class SendUpdateJapamCount {
   @SerializedName("profileid")
   public int profileid;
 
+  @SerializedName("access_token")
+  public String access_token;
+
   @SerializedName("japamcount")
   public int japamcount;
 
   @SerializedName("japamupdatedate")
-  public Date japamupdatedate;
+  public String japamupdatedate;
 
 }

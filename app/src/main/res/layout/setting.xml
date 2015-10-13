@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
+
+  <ScrollView
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
+    <!-- The first child in the layout is for the main Activity UI-->
+
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:orientation="vertical"
+      android:padding="5dp">
+
+      <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="60dp"
+        android:gravity="left|center"
+        android:text="Settings"
+        android:textStyle="bold"
+        android:textColor="@color/safaron" />
+      <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray" />
+
+
+      <Button
+        android:layout_width="fill_parent"
+        android:layout_height="60dp"
+        android:gravity="left|center"
+        style="?android:attr/borderlessButtonStyle"
+        android:textAllCaps="false"
+        android:text="Change Password "
+        android:textColor="@color/black" />
+
+      <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="60dp"
+        android:gravity="left|center"
+        android:text="Suscribed Features "
+        android:textStyle="bold"
+        android:textColor="@color/safaron" />
+      <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray" />
+
+
+      <CheckBox
+        android:id="@+id/chkSatang"
+        style="@style/CheckBoxAppTheme"
+        android:layout_width="fill_parent"
+        android:layout_height="60dp"
+        android:text="@string/lbl_unscribe_satsang"
+        android:textColor="@color/black" />
+
+
+
+      <CheckBox
+        android:id="@+id/chkJapam"
+        style="@style/CheckBoxAppTheme"
+        android:layout_width="fill_parent"
+        android:layout_height="60dp"
+        android:text="@string/lbl_unscribe_japam"
+        android:textColor="@color/black"/>
+
+
+
+    </LinearLayout>
+  </ScrollView>
+</RelativeLayout>

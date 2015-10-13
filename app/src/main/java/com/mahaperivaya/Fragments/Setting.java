@@ -1,6 +1,5 @@
 package com.mahaperivaya.Fragments;
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,13 +10,15 @@ import com.mahaperivaya.R;
 /**
  * Created by m84098 on 9/3/15.
  */
-public class About extends  AppBaseFragement{
-        public static String TAG = "About";
+public class Setting extends  AppBaseFragement{
+        public static String TAG = "Setting";
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.about, container, false);
-            getActivity().setTitle(getResources().getString(R.string.lbl_about));
+            View rootView = inflater.inflate(R.layout.setting, container, false);
+
+            
+            getActivity().setTitle(getResources().getString(R.string.lbl_settings));
             return rootView;
         }
 

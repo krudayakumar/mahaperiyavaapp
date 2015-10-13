@@ -14,6 +14,7 @@ public class UserProfile {
 	public String emailid;
 	public int profileid;
 	public boolean ispasswordreset;
+  public String access_token;
 
 	// Satsang
 	public boolean isjoinedsatsang;

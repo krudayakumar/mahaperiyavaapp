@@ -1,0 +1,11 @@
+{
+  "status": "success",
+  "code": 2000,
+  "data": {
+    "message": "Successfully Japam Count updated",
+    "japam_count": 20,
+    "japam_last_updated_date": "12/12/2015",
+    "japam_count_over_all": "100",
+    "japam_count_satsanga": "100"
+  }
+}
