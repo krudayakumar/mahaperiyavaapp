@@ -4,82 +4,80 @@
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
   android:layout_margin="5dp"
-
   card_view:cardCornerRadius="4dp">
 
 
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="5dp">
 
+    <com.mahaperivaya.Component.CircularImageView
+      android:layout_width="100dp"
+      android:layout_height="100dp"
+      android:src="@drawable/perivaya1"
+      android:visibility="gone" />
 
     <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-        android:padding="5dp"
-      android:orientation="horizontal">
+      android:orientation="vertical">
 
-      <com.mahaperivaya.Component.CircularImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:src="@drawable/perivaya1"
-        android:visibility="gone"/>
+      <TextView
+        android:id="@+id/satsangtitle"
+        style="@style/text_general_bold"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:text="Maha Perivaya Satsang" />
+
+      <TextView
+        android:id="@+id/satsangcontent"
+        style="@style/black_small_text"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:text="The CardView UI component shows information inside cards. We can customise its corners, the elevation and so on. We want to use this component to show contact information. These cards will be the rows of RecyclerView and we will see later how to integrate these two components. By now, we can define our card layout:" />
 
       <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
         <TextView
-            android:id="@+id/satsangtitle"
-            style="@style/text_general_bold"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="5dp"
-            android:text="Maha Perivaya Satsang" />
-        <TextView
-          android:id="@+id/satsangcontent"
+          android:id="@+id/satsanglocation"
           style="@style/black_small_text"
-          android:layout_width="fill_parent"
+          android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_marginLeft="5dp"
-          android:layout_marginTop="5dp"
-          android:text="The CardView UI component shows information inside cards. We can customise its corners, the elevation and so on. We want to use this component to show contact information. These cards will be the rows of RecyclerView and we will see later how to integrate these two components. By now, we can define our card layout:" />
+          android:layout_weight="0.9"
+          android:gravity="top|left"
 
-        <LinearLayout
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_marginBottom="10dp"
-          android:orientation="horizontal"
-          android:weightSum="1">
+          android:text="Location : Hartford,US " />
 
-          <TextView
-            android:id="@+id/satsanglocation"
-            style="@style/black_small_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_weight="0.9"
-            android:gravity="top|left"
-
-            android:text="Location : Hartford,US " />
-
-          <Button
-            android:id="@+id/satsangjoin"
-            style="?android:attr/borderlessButtonStyle"
-            android:layout_width="50dp"
-            android:layout_height="30dp"
-            android:layout_marginRight="5dp"
-            android:background="@color/safaron"
-            android:gravity="center"
-              android:clickable="true"
-            android:text="@string/action_join"
-            android:textColor="@color/white" />
-
-
-        </LinearLayout>
+        <Button
+          android:id="@+id/satsangjoin"
+          style="?android:attr/borderlessButtonStyle"
+          android:layout_width="50dp"
+          android:layout_height="30dp"
+          android:layout_marginRight="5dp"
+          android:background="@color/safaron"
+          android:clickable="true"
+          android:gravity="center"
+          android:text="@string/action_join"
+          android:textColor="@color/white" />
 
 
       </LinearLayout>
-    </LinearLayout>
 
+
+    </LinearLayout>
+  </LinearLayout>
 
 
 </android.support.v7.widget.CardView>

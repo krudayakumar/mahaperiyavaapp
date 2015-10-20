@@ -56,8 +56,6 @@ public class SatsangList extends AppBaseFragement {
 
                 if (generalReceiveRequest.isSuccess()) {
                     satsangListAdapter = new SatsangListAdapter(getBaseActivity(), generalReceiveRequest.data);
-
-
                     recyclerView.setAdapter(satsangListAdapter);
 
 

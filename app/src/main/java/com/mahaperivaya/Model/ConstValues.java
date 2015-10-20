@@ -81,12 +81,24 @@ public class ConstValues {
   public final static int JAPAM_ERROR = JAPAM+ 3;
 
 
+  public final static int PHOTO_VIDEO_LIST = 210;
+  public final static int PHOTO_VIDEO_LIST_SERVER_REQUEST = PHOTO_VIDEO_LIST + 1;
+  public final static int PHOTO_VIDEO_LIST_SUCCESS= PHOTO_VIDEO_LIST+ 2;
+  public final static int PHOTO_VIDEO_LIST_ERROR = PHOTO_VIDEO_LIST+ 3;
+
+
+  public final static int PHOTO_LIST = 220;
+
+  public final static int VIDEO_LIST = 230;
 
   public final static int ERROR = 500;
   public final static int ERROR_DEFAULT = ERROR+ 1;
 
   public final static String SATSANG_DATA ="SATSANG_DATA";
   public final static String SATSANG_OPTION="SATSANG_OPTION";
+  public final static String VIDEO_PHOTO_OPTION="VIDEO_PHOTO_OPTION";
 
+  public final static String CONST_VIDEO="VIDEOS";
+  public final static String CONST_PHOTO="PHOTO";
 
 }

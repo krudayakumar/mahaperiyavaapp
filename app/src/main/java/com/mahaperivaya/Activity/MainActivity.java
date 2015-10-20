@@ -47,6 +47,7 @@ import com.mahaperivaya.Fragments.Dashboard;
 import com.mahaperivaya.Fragments.Japam;
 import com.mahaperivaya.Fragments.Login;
 import com.mahaperivaya.Fragments.NewSatsang;
+import com.mahaperivaya.Fragments.PhotoVideoList;
 import com.mahaperivaya.Fragments.Registration;
 import com.mahaperivaya.Fragments.SatsangList;
 import com.mahaperivaya.Fragments.SetPassword;
@@ -143,6 +144,7 @@ public class MainActivity extends MBaseActivity
     initializeMediaPlayer();
     UserProfile.getInstance();
     PreferenceData.getInstance(context);
+
     flowCallBackHandler();
     Message msg = Message.obtain();
     msg.what = ConstValues.WELCOME;
@@ -564,6 +566,26 @@ public class MainActivity extends MBaseActivity
             ShowSnackBar(context, getWindow().getDecorView(), generalReceiveRequest.data.message, null, null);
           }
           break;
+          case ConstValues.PHOTO_LIST: {
+            setTitle(getResources().getString(R.string.lbl_gallery));
+            Bundle bundle = new Bundle();
+            bundle.putString(ConstValues.VIDEO_PHOTO_OPTION, ConstValues.CONST_PHOTO);
+            showFragment(new PhotoVideoList(), bundle, R.id.content, true, PhotoVideoList.TAG);
+          }
+          break;
+
+          case ConstValues.VIDEO_LIST: {
+            setTitle(getResources().getString(R.string.lbl_videos));
+            Bundle bundle = new Bundle();
+            bundle.putString(ConstValues.VIDEO_PHOTO_OPTION, ConstValues.CONST_VIDEO);
+            showFragment(new PhotoVideoList(), bundle, R.id.content, true, PhotoVideoList.TAG);
+          }
+          break;
+          case ConstValues.PHOTO_VIDEO_LIST_SERVER_REQUEST: {
+            getServerRequestSend().executeRequest(
+                ServerRequest.SendServerRequest.PHOTO_VIDEO_LIST, null, (ServerCallback) msg.obj);
+          }
+          break;
 
           //Default Error
           case ConstValues.ERROR_DEFAULT:
@@ -652,15 +674,21 @@ public class MainActivity extends MBaseActivity
 
         break;
       case R.id.japam:
-        if (UserProfile.getUserProfile().isLoggedIn) {
-
-        }
         super.showFragment(new Japam(), null, R.id.content, true, Japam.TAG);
         break;
       case R.id.radio:
         item = globalmenu.findItem(R.id.radio);
         item.setVisible(true);
         break;
+      case R.id.gallery:
+        msg.what = ConstValues.PHOTO_LIST;
+        getFlowHandler().sendMessage(msg);
+        break;
+      case R.id.videos:
+        msg.what = ConstValues.VIDEO_LIST;
+        getFlowHandler().sendMessage(msg);
+        break;
+
       case R.id.setting:
         super.showFragment(new Setting(), null, R.id.content, true, Setting.TAG);
         break;

@@ -27,6 +27,12 @@
     <item
       android:id="@+id/radio"
       android:title="@string/lbl_online_radio" />
+    <item
+      android:id="@+id/gallery"
+      android:title="@string/lbl_gallery" />
+    <item
+      android:id="@+id/videos"
+      android:title="@string/lbl_videos" />
   </group>
   <group
     android:id="@+id/miscellaneous"

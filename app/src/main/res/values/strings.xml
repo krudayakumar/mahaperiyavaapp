@@ -107,6 +107,8 @@ Mahesh</string>
   <string name="lbl_books">Books</string>
   <string name="lbl_satsang">Satsang</string>
   <string name="lbl_japam">Japam</string>
+  <string name="lbl_gallery">Gallery</string>
+  <string name="lbl_videos">Videos</string>
   <string name="lbl_events">Events</string>
   <string name="lbl_online_radio">Online Radio</string>
   <string name="lbl_settings">Setting</string>

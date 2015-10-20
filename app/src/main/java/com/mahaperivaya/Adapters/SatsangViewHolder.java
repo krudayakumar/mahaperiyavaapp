@@ -13,6 +13,7 @@ import com.mahaperivaya.Model.ConstValues;
 import com.mahaperivaya.Model.UserProfile;
 import com.mahaperivaya.R;
 import com.mahaperivaya.ReceiveRequest.ReceiveSatsangList;
+import com.mahaperivaya.SendRequest.SendJoinSatsang;
 
 /**
  * Created by ess on 17/08/14.
@@ -42,13 +43,16 @@ public class SatsangViewHolder extends RecyclerView.ViewHolder implements View.O
 
     @Override
     public void onClick(View v) {
-        Toast.makeText(context, "Joining this satsang group", Toast.LENGTH_SHORT).show();
+
 
         switch (v.getId()) {
             case R.id.satsangjoin: {
                 android.os.Message msg = android.os.Message.obtain();
-                msg.what = ConstValues.EDIT_SATSANG;
-                msg.obj = (Object) Data;
+                msg.what = ConstValues.;
+                SendJoinSatsang sendJoinSatsang = new SendJoinSatsang();
+                sendJoinSatsang.profileid = UserProfile.getUserProfile().profileid;
+                sendJoinSatsang.satsangid = Data.satsangid;
+                msg.obj = (Object) sendJoinSatsang;
                 ((MainActivity) ((Activity) context)).getFlowHandler().sendMessage(msg);
                 break;
             }
