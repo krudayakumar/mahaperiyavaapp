@@ -90,6 +90,19 @@ public class ConstValues {
   public final static int PHOTO_LIST = 220;
 
   public final static int VIDEO_LIST = 230;
+  public final static int VIDEO_OPEN = VIDEO_LIST+1;
+
+
+
+
+  public final static int JOIN_SATSANG = 240;
+  public final static int JOIN_SATSANG_SERVER_REQUEST = JOIN_SATSANG + 1;
+  public final static int JOIN_SATSANG_SUCCESS= JOIN_SATSANG+ 2;
+  public final static int JOIN_SATSANG_ERROR = JOIN_SATSANG+ 3;
+
+  public final static int BOOKS_LIST = 250;
+
+  public final static int WEB_PAGE = 260;
 
   public final static int ERROR = 500;
   public final static int ERROR_DEFAULT = ERROR+ 1;
@@ -100,5 +113,6 @@ public class ConstValues {
 
   public final static String CONST_VIDEO="VIDEOS";
   public final static String CONST_PHOTO="PHOTO";
+  public final static String CONST_BOOKS="BOOKS";
 
 }

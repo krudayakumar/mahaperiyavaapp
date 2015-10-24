@@ -112,7 +112,7 @@ public abstract class MBaseActivity extends AppCompatActivity implements View.On
         });
     Log.i(TAG, "showFragment - " + fragment.getClass().getSimpleName());
 
-    showChildFragment(getFragmentManager(), fragment, args, layoutId, false,
+    showChildFragment(getFragmentManager(), fragment, args, layoutId, addToBackStack,
         R.animator.fade_in, R.animator.fade_out, R.animator.fade_in, R.animator.fade_out,
         fragmentTag);
   }

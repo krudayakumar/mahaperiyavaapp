@@ -15,10 +15,12 @@
  */
 package com.mahaperivaya.Fragments;
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
@@ -27,33 +29,66 @@ import android.webkit.WebViewClient;
 import com.mahaperivaya.Activity.MainActivity;
 import com.mahaperivaya.R;
 
-public class WebPage extends Fragment {
-	public static String TAG = "WebPage";
+public class WebPage extends AppBaseFragement {
+  public static String TAG = "WebPage";
+  WebView wv;
 
-	@Nullable
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		Bundle bundle = getArguments();
-		View rootView = inflater.inflate(R.layout.webpage, container, false);
+  @Nullable
+  @Override
+  public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                           Bundle savedInstanceState) {
+    Bundle bundle = getArguments();
+    View rootView = inflater.inflate(R.layout.webpage, container, false);
+    setHasOptionsMenu(true);
+    if (bundle != null) {
+      String strURL = bundle.getString(MainActivity.WEBURL);
+      wv = (WebView) rootView.findViewById(R.id.webView);
+      wv.getSettings().setJavaScriptEnabled(true);
+      wv.loadUrl(strURL);
 
-		if (bundle != null) {
-			String strURL = bundle.getString(MainActivity.WEBURL);
-			WebView wv = (WebView) rootView.findViewById(R.id.webView);
-			wv.getSettings().setJavaScriptEnabled(true);
-			wv.loadUrl(strURL);
+      wv.setWebViewClient(new WebViewClient() {
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+          view.loadUrl(url);
+          return false;
+        }
+      });
 
-			wv.setWebViewClient(new WebViewClient() {
-				@Override
-				public boolean shouldOverrideUrlLoading(WebView view, String url) {
-					view.loadUrl(url);
-					return false;
-				}
-			});
+    }
 
-		}
+    return rootView;
 
-		return rootView;
+  }
 
-	}
+  @Override
+  public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+    // Do something that differs the Activity's menu here
+    super.onCreateOptionsMenu(menu, inflater);
+
+
+  }
+
+
+
+  @Override
+  public void onResume() {
+    super.onResume();
+
+    getView().setFocusableInTouchMode(true);
+    getView().requestFocus();
+    getView().setOnKeyListener(new View.OnKeyListener() {
+      @Override
+      public boolean onKey(View v, int keyCode, KeyEvent event) {
+        if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
+
+            getFragmentManager().popBackStack();
+
+          return true;
+        }
+        return false;
+      }
+
+
+    });
+  }
 }

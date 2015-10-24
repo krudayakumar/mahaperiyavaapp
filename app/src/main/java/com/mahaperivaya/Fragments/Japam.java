@@ -58,7 +58,7 @@ public class Japam extends AppBaseFragement {
   };
 
   private void updateDateLabel() {
-    String myFormat = "dd/MMM/yyyy"; // "dd/MMM/yyyy";
+    String myFormat = "dd-MM-yyyy"; // "dd/MMM/yyyy";
     SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
     edDate.setText(sdf.format(japam_update_date.getTime()));

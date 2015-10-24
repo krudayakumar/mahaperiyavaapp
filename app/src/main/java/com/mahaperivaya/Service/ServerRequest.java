@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NoConnectionError;
 import com.android.volley.Request;
@@ -22,6 +23,9 @@ import com.mahaperivaya.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by m84098 on 9/26/15.
@@ -48,8 +52,8 @@ public class ServerRequest<T> {
     GET_SATSANG_LIST("get_satsang_list.php", "get_satsang_list.json", Request.Method.GET),
     JOIN_SATSANG("join_satsang.php", "join_satsang.json", Request.Method.POST),
     COUNTRY_LIST("countries.php", "countries.json", Request.Method.POST),
-    PHOTO_VIDEO_LIST("photo_video.php", "photo_video.json", Request.Method.POST),
-    UPDATE_JAPAN_COUNT("update_japam_count.php", "update_japam.json", Request.Method.GET);
+    PHOTO_VIDEO_LIST("photo_video_book.php", "photo_video_book.json", Request.Method.POST),
+    UPDATE_JAPAN_COUNT("update_japam_count.php", "update_japam.json", Request.Method.POST);
 
     private String functionname = null;
     private int requesttype;
@@ -216,6 +220,13 @@ public class ServerRequest<T> {
 
                 return headers;
             }*/
+
+      @Override
+      public Map<String, String> getHeaders() throws AuthFailureError {
+        HashMap<String, String> headers = new HashMap<String, String>();
+        headers.put("Content-Type", "application/json; charset=utf-8");
+        return headers;
+      }
 
     };
     jsObjRequest.setRetryPolicy(new DefaultRetryPolicy(5000,

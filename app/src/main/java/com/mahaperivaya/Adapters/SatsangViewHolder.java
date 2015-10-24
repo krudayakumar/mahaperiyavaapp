@@ -48,9 +48,9 @@ public class SatsangViewHolder extends RecyclerView.ViewHolder implements View.O
         switch (v.getId()) {
             case R.id.satsangjoin: {
                 android.os.Message msg = android.os.Message.obtain();
-                msg.what = ConstValues.;
+                msg.what = ConstValues.JOIN_SATSANG_SERVER_REQUEST;
                 SendJoinSatsang sendJoinSatsang = new SendJoinSatsang();
-                sendJoinSatsang.profileid = UserProfile.getUserProfile().profileid;
+                sendJoinSatsang.profileid = UserProfile.getInstance().profileid;
                 sendJoinSatsang.satsangid = Data.satsangid;
                 msg.obj = (Object) sendJoinSatsang;
                 ((MainActivity) ((Activity) context)).getFlowHandler().sendMessage(msg);

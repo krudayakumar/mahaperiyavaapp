@@ -15,8 +15,8 @@
       android:id="@+id/dashboard"
       android:title="@string/lbl_dashboard" />
     <item
-      android:id="@+id/devithinkural"
-      android:title="@string/lbl_devithin_kural" />
+      android:id="@+id/books"
+      android:title="@string/lbl_books" />
     <item
       android:id="@+id/satsang"
       android:title="@string/lbl_satsang" />

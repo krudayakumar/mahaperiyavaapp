@@ -33,6 +33,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -47,6 +48,7 @@ import com.mahaperivaya.Fragments.Dashboard;
 import com.mahaperivaya.Fragments.Japam;
 import com.mahaperivaya.Fragments.Login;
 import com.mahaperivaya.Fragments.NewSatsang;
+import com.mahaperivaya.Fragments.PhotoVideoBook;
 import com.mahaperivaya.Fragments.PhotoVideoList;
 import com.mahaperivaya.Fragments.Registration;
 import com.mahaperivaya.Fragments.SatsangList;
@@ -567,18 +569,23 @@ public class MainActivity extends MBaseActivity
           }
           break;
           case ConstValues.PHOTO_LIST: {
-            setTitle(getResources().getString(R.string.lbl_gallery));
             Bundle bundle = new Bundle();
             bundle.putString(ConstValues.VIDEO_PHOTO_OPTION, ConstValues.CONST_PHOTO);
-            showFragment(new PhotoVideoList(), bundle, R.id.content, true, PhotoVideoList.TAG);
+            showFragment(new PhotoVideoBook(), bundle, R.id.content, true, PhotoVideoBook.TAG);
           }
           break;
 
           case ConstValues.VIDEO_LIST: {
-            setTitle(getResources().getString(R.string.lbl_videos));
             Bundle bundle = new Bundle();
             bundle.putString(ConstValues.VIDEO_PHOTO_OPTION, ConstValues.CONST_VIDEO);
-            showFragment(new PhotoVideoList(), bundle, R.id.content, true, PhotoVideoList.TAG);
+            showFragment(new PhotoVideoBook(), bundle, R.id.content, true, PhotoVideoBook.TAG);
+
+          }
+          break;
+          case ConstValues.BOOKS_LIST: {
+            Bundle bundle = new Bundle();
+            bundle.putString(ConstValues.VIDEO_PHOTO_OPTION, ConstValues.CONST_BOOKS);
+            showFragment(new PhotoVideoBook(), bundle, R.id.content, true, PhotoVideoBook.TAG);
           }
           break;
           case ConstValues.PHOTO_VIDEO_LIST_SERVER_REQUEST: {
@@ -586,12 +593,62 @@ public class MainActivity extends MBaseActivity
                 ServerRequest.SendServerRequest.PHOTO_VIDEO_LIST, null, (ServerCallback) msg.obj);
           }
           break;
+          case ConstValues.JOIN_SATSANG_SERVER_REQUEST: {
+            getServerRequestSend().executeRequest(
+                ServerRequest.SendServerRequest.JOIN_SATSANG, msg.obj, new ServerCallback() {
+                  @Override
+                  public void onSuccess(JSONObject response) {
+                    GeneralReceiveRequest generalReceiveRequest = new Gson().fromJson(response.toString(),
+                        GeneralReceiveRequest.class);
+                    Message msgtmp = Message.obtain();
+                    msgtmp.obj = (Object) response;
+                    if (generalReceiveRequest.isSuccess()) {
+                      msgtmp.what = ConstValues.JOIN_SATSANG_SUCCESS;
+                    } else {
+                      msgtmp.what = ConstValues.JOIN_SATSANG_ERROR;
+                    }
+                    getFlowHandler().sendMessage(msgtmp);
+
+                  }
+
+                  @Override
+                  public void onError(VolleyError error) {
+                    error.printStackTrace();
+                    Message msg = Message.obtain();
+                    msg.what = ConstValues.ERROR_DEFAULT;
+                    getFlowHandler().sendMessage(msg);
+                  }
+                });
+          }
+          break;
+          case ConstValues.JOIN_SATSANG_SUCCESS: {
+            ShowSnackBar(context, getWindow().getDecorView(), getResources().getString(R.string.msg_successfully_joined_satsang), null, null);
+            break;
+          }
+          case ConstValues.JOIN_SATSANG_ERROR: {
+            GeneralReceiveRequest generalReceiveRequest = new Gson().fromJson(((JSONObject) msg.obj).toString(), GeneralReceiveRequest.class);
+            ShowSnackBar(context, getWindow().getDecorView(), generalReceiveRequest.data.message, null, null);
+          }
+          break;
+
+          case ConstValues.WEB_PAGE: {
+            Bundle bundle = new Bundle();
+            bundle.putString(WEBURL, (String)msg.obj);
+            showFragment(new WebPage(), bundle, R.id.content, true, WebPage.TAG);
+          }
+          break;
+
+          case ConstValues.VIDEO_OPEN: {
+            Bundle bundle = new Bundle();
+            context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse((String)msg.obj)));
+          }
+          break;
 
           //Default Error
-          case ConstValues.ERROR_DEFAULT:
+          case ConstValues.ERROR_DEFAULT: {
             ShowSnackBar(context, getWindow().getDecorView(), getResources().getString(R.string.err_default), null, null);
             break;
-
+          }
           default:
             break;
         }
@@ -657,11 +714,14 @@ public class MainActivity extends MBaseActivity
         }
         getFlowHandler().sendMessage(msg);
         break;
-
-      case R.id.devithinkural:
-        msg.what = ConstValues.DEIVATHIN_KURAL;
+      case R.id.books:
+        msg.what = ConstValues.BOOKS_LIST;
         getFlowHandler().sendMessage(msg);
         break;
+      /*case R.id.devithinkural:
+        msg.what = ConstValues.DEIVATHIN_KURAL;
+        getFlowHandler().sendMessage(msg);
+        break;*/
       case R.id.satsang:
         if (UserProfile.getUserProfile().isLoggedIn) {
           msg.what = ConstValues.SATSANG_LIST_LOGIN;
@@ -775,7 +835,19 @@ public class MainActivity extends MBaseActivity
 
     return super.onOptionsItemSelected(item);
   }
+  @Override
+  public boolean onKeyDown(int keyCode, KeyEvent event)  {
+    if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.ECLAIR
+        && keyCode == KeyEvent.KEYCODE_BACK
+        && event.getRepeatCount() == 0) {
+      // Take care of calling this method on earlier versions of
+      // the platform where it doesn't exist.
+      getFragmentManager().popBackStack();
+      onBackPressed();
+    }
 
+    return super.onKeyDown(keyCode, event);
+  }
   @Override
   public void onBackPressed() {
     if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {

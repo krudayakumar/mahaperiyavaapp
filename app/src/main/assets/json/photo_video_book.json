@@ -1,0 +1,111 @@
+{
+  "status": "success",
+  "code": 2000,
+  "data": [
+    {
+      "categorytitle": "Photo Gallery",
+      "categorytype": "Photo",
+      "categories": [
+        {
+          "title": "Chronological Photos of Periyava",
+          "link": "https://picasaweb.google.com/117457240529894530138/ChronologicalPhotosOfPeriyava?authkey=Gv1sRgCLe69PKngMPxrAE"
+        },
+        {
+          "title": "Hi-Res Periyava Photos",
+          "link": "https://picasaweb.google.com/117457240529894530138/ChronologicalPhotosOfPeriyava?authkey=Gv1sRgCLe69PKngMPxrAE"
+        },
+        {
+          "title": "Maha Periyava Photos",
+          "subcategory": [
+            {
+              "title": "Volume - 1",
+              "link": "https://picasaweb.google.com/117457240529894530138/Mahaperiyava"
+            },
+            {
+              "title": "Volume - 2",
+              "link": "https://picasaweb.google.com/117457240529894530138/Mahaperiyava_Vol2"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "categorytitle": "Videos",
+      "categorytype": "Videos",
+      "categories": [
+        {
+          "title": "Sage of Kanchi Documentary",
+          "subcategory": [
+            {
+              "title": "Part 1",
+              "link": "http://www.youtube.com/watch?v=s5oeSl3Yv7s"
+            },
+            {
+              "title": "Part 2",
+              "link": "http://www.youtube.com/watch?v=eHcwfD8TKv4"
+            },
+            {
+              "title": "Part 3",
+              "link": "http://www.youtube.com/watch?v=R6FbwCh648I"
+            },
+            {
+              "title": "Part 4",
+              "link": "http://www.youtube.com/watch?v=EvJbloXA2eU"
+            },
+            {
+              "title": "Part 5",
+              "link": "http://www.youtube.com/watch?v=G7eAWFqtqtU"
+            },
+            {
+              "title": "Part 6",
+              "link": "http://www.youtube.com/watch?v=3lEHb5fff4g"
+            },
+            {
+              "title": "Part 7",
+              "link": "http://www.youtube.com/watch?v=4XiWdjSlNOQ"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "categorytitle": "Books",
+      "categorytype": "Books",
+      "categories":  [
+        {
+          "title": "Deivathin Kural",
+          "subcategory": [
+            {
+              "title": "Volume - 1",
+              "link": "http://www.maharudram.net/dk/dk1_index.html"
+            },
+            {
+              "title": "Volume - 2",
+              "link": "http://www.maharudram.net/dk/dk2_index.html"
+            },
+            {
+              "title": "Volume - 3",
+              "link": "http://www.maharudram.net/dk/dk3_index.html"
+            },
+            {
+              "title": "Volume - 4",
+              "link": "http://www.maharudram.net/dk/dk4_index.html"
+            },
+            {
+              "title": "Volume - 5",
+              "link": "http://www.maharudram.net/dk/dk5_index.html"
+            },
+            {
+              "title": "Volume - 6",
+              "link": "http://www.maharudram.net/dk/dk6_index.html"
+            },
+            {
+              "title": "Volume - 7",
+              "link": "http://www.maharudram.net/dk/dk2_index.html"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
