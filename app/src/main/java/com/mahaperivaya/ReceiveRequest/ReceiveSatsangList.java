@@ -20,23 +20,29 @@ public class ReceiveSatsangList  {
 	@SerializedName("data")
 	public ArrayList<Data> data;
 
+  @SerializedName("message")
+  public String message;
+
 	@SuppressWarnings("serial")
 	public static class Data implements Serializable{
 
 		@SerializedName("satsangid")
-		public int satsangid;
+		public long satsangid;
 
 		@SerializedName("profileid")
-		public int profileid;
+		public long profileid;
 
 		@SerializedName("name")
 		public String name;
 
+    @SerializedName("operationtype")
+    public String operationtype;
+
 		@SerializedName("description")
 		public String description;
 
-		@SerializedName("contactpersonname")
-		public String contactpersonname;
+		@SerializedName("contactname")
+		public String contactname;
 
 		@SerializedName("contactno")
 		public String contactno;
@@ -52,6 +58,8 @@ public class ReceiveSatsangList  {
 
 		@SerializedName("country")
 		public String country;
+
+
 	}
 	public boolean isSuccess() {
 		return status.equalsIgnoreCase("success") ? true : false;

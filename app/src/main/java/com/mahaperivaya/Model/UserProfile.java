@@ -18,7 +18,7 @@ public class UserProfile {
 
 	// Satsang
 	public boolean isjoinedsatsang;
-	public String satsangid;
+	public int satsangid;
 
 	// Japam
 	public boolean isjoinedjapam;
@@ -51,8 +51,8 @@ public class UserProfile {
   }
 
   public void clearAll() {
-    japam_last_updated_date = satsangid = emailid = username="";
-    profileid = japam_count = japam_count_over_all = japam_count_satsang = 0;
+    japam_last_updated_date =  emailid = username="";
+    satsangid = profileid = japam_count = japam_count_over_all = japam_count_satsang = 0;
     isjoinedjapam = isjoinedsatsang = ispasswordreset = false;
     isLoggedIn = false;
   }

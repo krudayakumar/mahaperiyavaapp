@@ -51,6 +51,8 @@ public class ConstValues {
   public final static int SATSANG_LIST_LOGIN = SATSANG + 1;
   public final static int SATSANG_LIST_WITHOUT_LOGIN = SATSANG + 2;
   public final static int SATSANG_LIST_SERVER_REQUEST = SATSANG + 3;
+  public final static int SATSANG_LIST_SERVER_SUCCESS = SATSANG + 4;
+  public final static int SATSANG_LIST_SERVER_ERROR = SATSANG + 5;
 
 
   public final static int NEW_SATSANG = 170;

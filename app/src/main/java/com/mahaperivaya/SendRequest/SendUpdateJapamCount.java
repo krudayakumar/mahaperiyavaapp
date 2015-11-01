@@ -20,4 +20,8 @@ public class SendUpdateJapamCount {
   @SerializedName("japamupdatedate")
   public String japamupdatedate;
 
+  @SerializedName("satsangid")
+  public int satsangid;
+
+
 }

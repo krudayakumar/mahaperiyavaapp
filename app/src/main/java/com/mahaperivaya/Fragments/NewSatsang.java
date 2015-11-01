@@ -152,7 +152,7 @@ public class NewSatsang extends AppBaseFragement {
         if (data != null) {
           name.setText(data.name);
           description.setText(data.description);
-          personname.setText(data.contactpersonname);
+          personname.setText(data.contactname);
           contactno.setText(data.contactno);
           emailid.setText(data.emailid);
           city.setText(data.city);
@@ -348,11 +348,14 @@ public class NewSatsang extends AppBaseFragement {
         }
         if (satsangoption.equalsIgnoreCase("NEW")) {
           data.satsangid = 0;
-          data.profileid = UserProfile.getUserProfile().profileid;
+          data.operationtype="NEW";
+        }else {
+          data.operationtype="UPDATE";
         }
+        data.profileid = UserProfile.getUserProfile().profileid;
         data.name = name.getText().toString();
         data.description = description.getText().toString();
-        data.contactpersonname = personname.getText().toString();
+        data.contactname = personname.getText().toString();
         data.contactno = contactno.getText().toString();
         data.emailid = emailid.getText().toString();
         data.city = city.getText().toString();

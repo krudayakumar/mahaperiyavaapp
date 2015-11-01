@@ -13,14 +13,9 @@ public class GeneralReceiveRequest {
 	@SerializedName("code")
 	public int code;
 
-	@SerializedName("data")
-	public Data data;
+  @SerializedName("message")
+  public String message;
 
-
-  public class Data {
-    @SerializedName("message")
-    public String message;
-  }
   public boolean isSuccess() {
     return status.equalsIgnoreCase("success") ? true : false;
   }

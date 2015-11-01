@@ -16,8 +16,8 @@ public class SendNewSatsang {
 	@SerializedName("description")
 	public String description;
 
-	@SerializedName("contactpersonname")
-	public String contactpersonname;
+	@SerializedName("contactname")
+	public String contactname;
 
 	@SerializedName("contactno")
 	public String contactno;

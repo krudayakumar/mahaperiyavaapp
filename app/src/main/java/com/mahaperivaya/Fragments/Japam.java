@@ -158,7 +158,7 @@ public class Japam extends AppBaseFragement {
         sendUpdateJapamCount.japamupdatedate = edDate.getText().toString();
         sendUpdateJapamCount.profileid = UserProfile.getUserProfile().profileid;
         sendUpdateJapamCount.access_token = UserProfile.getUserProfile().access_token;
-
+        sendUpdateJapamCount.satsangid = UserProfile.getUserProfile().satsangid;
 
         ServerCallback serverCallback = new ServerCallback() {
 

@@ -157,6 +157,7 @@ Mahesh</string>
   <string name="err_default">Currently we are unable to service your request. Please try after some time.</string>
   <string name="err_invalid_email_id">Invalid Email Id.</string>
   <string name="err_field_should_not_be_empty">Field should not be empty.</string>
+  <string name="err_no_special_characters">No special characters.</string>
   <string name="err_enter_right_count">Enter right count.</string>
   <string name="err_connect_to_internet">Connect to network</string>
   <string name="err_password_not_same">Password and Confirm Password are not same.</string>

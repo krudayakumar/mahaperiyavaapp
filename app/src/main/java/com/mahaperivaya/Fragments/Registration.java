@@ -21,6 +21,9 @@ import com.mahaperivaya.Model.UserProfile;
 import com.mahaperivaya.R;
 import com.mahaperivaya.SendRequest.SendRegister;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * Created by m84098 on 10/4/15.
  */
@@ -104,34 +107,18 @@ public class Registration extends AppBaseFragement {
           break;
         }
 
-        //Password
-        textInputLayout.setError(null);
-        textInputLayout = (TextInputLayout) rootView.findViewById(R.id.layoutPassword);
-        if (TextUtils.isEmpty(password.getText())) {
+        Pattern p = Pattern.compile("[^a-z ]", Pattern.CASE_INSENSITIVE);
+        Matcher m = p.matcher(username.getText());
+        boolean b = m.find();
 
+        if (b) {
           textInputLayout.setError(
-              getResources().getString(R.string.err_field_should_not_be_empty));
-          break;
-        }
-        //Confirm password.
-        textInputLayout.setError(null);
-        textInputLayout = (TextInputLayout) rootView.findViewById(R.id.layoutConfirmPassword);
-        if (TextUtils.isEmpty(confirmpassword.getText())) {
-
-          textInputLayout.setError(
-              getResources().getString(R.string.err_field_should_not_be_empty));
-          break;
+              getResources().getString(R.string.err_no_special_characters));
         }
 
-        if (confirmpassword.getText().toString().equals(password.getText().toString()) == false) {
-          textInputLayout.setError(
-              getResources().getString(R.string.err_password_not_same));
-          break;
-        }
         textInputLayout.setError(null);
         SendRegister sendRegister = new SendRegister();
         sendRegister.emailid = email.getText().toString();
-        sendRegister.password = password.getText().toString();
         sendRegister.username = username.getText().toString();
 
         //Sending the Message

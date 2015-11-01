@@ -47,7 +47,7 @@ public class ServerRequest<T> {
     REGISTER("register.php", "register.json", Request.Method.POST),
     PASSWORD_RESET("password_reset.php", "password_rest.json", Request.Method.POST),
     FORGOT_PASSWORD("forgot_password.php", "forgot_password.json", Request.Method.POST),
-    SET_PASSWORD("set_password", "set_password.json", Request.Method.POST),
+    SET_PASSWORD("set_password.php", "set_password.json", Request.Method.POST),
     NEW_SATSANG("new_satsang.php", "new_satsang.json", Request.Method.POST),
     GET_SATSANG_LIST("get_satsang_list.php", "get_satsang_list.json", Request.Method.GET),
     JOIN_SATSANG("join_satsang.php", "join_satsang.json", Request.Method.POST),

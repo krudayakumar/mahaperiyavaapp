@@ -27,7 +27,7 @@ public class ReceiveJapamDetails {
     public String japam_last_updated_date;
     @SerializedName("japam_count_over_all")
     public int japam_count_over_all;
-    @SerializedName("japam_count_satsanga")
+    @SerializedName("japam_count_satsang")
     public int japam_count_satsang;
 
 

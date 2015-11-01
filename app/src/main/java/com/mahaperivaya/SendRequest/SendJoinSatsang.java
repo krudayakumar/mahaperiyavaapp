@@ -10,7 +10,7 @@ public class SendJoinSatsang {
   public int profileid;
 
   @SerializedName("satsangid")
-  public int satsangid;
+  public long satsangid;
 
 
 }

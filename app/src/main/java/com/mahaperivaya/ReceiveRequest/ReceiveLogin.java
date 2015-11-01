@@ -14,7 +14,10 @@ public class ReceiveLogin {
 	@SerializedName("code")
 	public int code;
 
-	@SerializedName("data")
+  @SerializedName("message")
+  public String message;
+
+  @SerializedName("data")
 	public Data data;
 
 	public class Data {
@@ -23,17 +26,17 @@ public class ReceiveLogin {
 		@SerializedName("profileid")
 		public int profileid;
 		@SerializedName("ispasswordreset")
-		public boolean ispasswordreset;
+		public int ispasswordreset;
 
 		// Satsang
 		@SerializedName("isjoinedsatsang")
-		public boolean isjoinedsatsang;
+		public int isjoinedsatsang;
 		@SerializedName("satsangid")
-		public String satsangid;
+		public int satsangid;
 
 		// Japam
 		@SerializedName("isjoinedjapam")
-		public boolean isjoinedjapam;
+		public int isjoinedjapam;
 		@SerializedName("japam_count")
 		public int japam_count;
 		@SerializedName("japam_last_updated_date")
@@ -43,8 +46,6 @@ public class ReceiveLogin {
 		@SerializedName("japam_count_satsang")
 		public int japam_count_satsang;
 
-		@SerializedName("message")
-		public String message;
 
 	}
 

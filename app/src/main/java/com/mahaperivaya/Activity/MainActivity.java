@@ -278,9 +278,9 @@ public class MainActivity extends MBaseActivity
                   UserProfile.getUserProfile().username = receiveLogin.data.username;
                   UserProfile.getUserProfile().profileid = receiveLogin.data.profileid;
                   UserProfile.getUserProfile().emailid = loginsendrequest.emailid;
-                  UserProfile.getUserProfile().isjoinedjapam = receiveLogin.data.isjoinedjapam;
-                  UserProfile.getUserProfile().isjoinedsatsang = receiveLogin.data.isjoinedsatsang;
-                  UserProfile.getUserProfile().ispasswordreset = receiveLogin.data.ispasswordreset;
+                  UserProfile.getUserProfile().isjoinedjapam = receiveLogin.data.isjoinedjapam  == 0 ? false : true ;
+                  UserProfile.getUserProfile().isjoinedsatsang = receiveLogin.data.isjoinedsatsang == 0 ? false : true;
+                  UserProfile.getUserProfile().ispasswordreset = receiveLogin.data.ispasswordreset == 0 ? false : true ;
                   UserProfile.getUserProfile().satsangid = receiveLogin.data.satsangid;
                   UserProfile.getUserProfile().japam_count = receiveLogin.data.japam_count;
                   UserProfile.getUserProfile().japam_last_updated_date = receiveLogin.data.japam_last_updated_date;
@@ -317,7 +317,7 @@ public class MainActivity extends MBaseActivity
           }
           case ConstValues.LOGIN_ERROR: {
             ReceiveLogin receiveLogin = new Gson().fromJson(((JSONObject) msg.obj).toString(), ReceiveLogin.class);
-            ShowSnackBar(context, getWindow().getDecorView(), receiveLogin.data.message, null, null);
+            ShowSnackBar(context, getWindow().getDecorView(), receiveLogin.message, null, null);
             break;
           }
 
@@ -372,7 +372,8 @@ public class MainActivity extends MBaseActivity
             break;
           }
           case ConstValues.SET_PASSWORD_SUCCESS: {
-            ShowSnackBar(context, getWindow().getDecorView(), getResources().getString(R.string.msg_successfully_password_saved), null, null);
+            GeneralReceiveRequest generalReceiveRequest = new Gson().fromJson(((JSONObject) msg.obj).toString(), GeneralReceiveRequest.class);
+            ShowSnackBar(context, getWindow().getDecorView(), generalReceiveRequest.message, null, null);
             Message msgtmp = Message.obtain();
             msgtmp.what = ConstValues.DASHBOARD_LOGIN;
             getFlowHandler().sendMessage(msgtmp);
@@ -380,7 +381,7 @@ public class MainActivity extends MBaseActivity
           }
           case ConstValues.SET_PASSWORD_ERROR: {
             GeneralReceiveRequest generalReceiveRequest = new Gson().fromJson(((JSONObject) msg.obj).toString(), GeneralReceiveRequest.class);
-            ShowSnackBar(context, getWindow().getDecorView(), generalReceiveRequest.data.message, null, null);
+            ShowSnackBar(context, getWindow().getDecorView(), generalReceiveRequest.message, null, null);
             break;
           }
           //Registration Flow
@@ -419,7 +420,8 @@ public class MainActivity extends MBaseActivity
           break;
 
           case ConstValues.REGISTER_SUCCESS: {
-            ShowSnackBar(context, getWindow().getDecorView(), getResources().getString(R.string.msg_successfully_registred), null, null);
+            GeneralReceiveRequest generalReceiveRequest = new Gson().fromJson(((JSONObject) msg.obj).toString(), GeneralReceiveRequest.class);
+            ShowSnackBar(context, getWindow().getDecorView(), generalReceiveRequest.message, null, null);
             Message msgtmp = Message.obtain();
             msgtmp.what = ConstValues.LOGIN;
             getFlowHandler().sendMessage(msgtmp);
@@ -427,7 +429,7 @@ public class MainActivity extends MBaseActivity
           }
           case ConstValues.REGISTER_ERROR: {
             GeneralReceiveRequest generalReceiveRequest = new Gson().fromJson(((JSONObject) msg.obj).toString(), GeneralReceiveRequest.class);
-            ShowSnackBar(context, getWindow().getDecorView(), generalReceiveRequest.data.message, null, null);
+            ShowSnackBar(context, getWindow().getDecorView(), generalReceiveRequest.message, null, null);
           }
           break;
 
@@ -466,7 +468,7 @@ public class MainActivity extends MBaseActivity
           }
           case ConstValues.FORGOT_PASSWORD_ERROR: {
             GeneralReceiveRequest generalReceiveRequest = new Gson().fromJson(((JSONObject) msg.obj).toString(), GeneralReceiveRequest.class);
-            ShowSnackBar(context, getWindow().getDecorView(), generalReceiveRequest.data.message, null, null);
+            ShowSnackBar(context, getWindow().getDecorView(), generalReceiveRequest.message, null, null);
           }
           break;
 
@@ -488,6 +490,11 @@ public class MainActivity extends MBaseActivity
             getServerRequestSend().executeRequest(
                 ServerRequest.SendServerRequest.GET_SATSANG_LIST, null, (ServerCallback) msg.obj);
 
+          }
+          break;
+          case ConstValues.SATSANG_LIST_SERVER_ERROR: {
+            GeneralReceiveRequest generalReceiveRequest = new Gson().fromJson(((JSONObject) msg.obj).toString(), GeneralReceiveRequest.class);
+            ShowSnackBar(context, getWindow().getDecorView(), generalReceiveRequest.message, null, null);
           }
           break;
           case ConstValues.NEW_SATSANG: {
@@ -534,7 +541,7 @@ public class MainActivity extends MBaseActivity
           }
           case ConstValues.NEW_SATSANG_SAVE_ERROR: {
             GeneralReceiveRequest generalReceiveRequest = new Gson().fromJson(((JSONObject) msg.obj).toString(), GeneralReceiveRequest.class);
-            ShowSnackBar(context, getWindow().getDecorView(), generalReceiveRequest.data.message, null, null);
+            ShowSnackBar(context, getWindow().getDecorView(), generalReceiveRequest.message, null, null);
           }
 
           break;
@@ -627,7 +634,7 @@ public class MainActivity extends MBaseActivity
           }
           case ConstValues.JOIN_SATSANG_ERROR: {
             GeneralReceiveRequest generalReceiveRequest = new Gson().fromJson(((JSONObject) msg.obj).toString(), GeneralReceiveRequest.class);
-            ShowSnackBar(context, getWindow().getDecorView(), generalReceiveRequest.data.message, null, null);
+            ShowSnackBar(context, getWindow().getDecorView(), generalReceiveRequest.message, null, null);
           }
           break;
 
