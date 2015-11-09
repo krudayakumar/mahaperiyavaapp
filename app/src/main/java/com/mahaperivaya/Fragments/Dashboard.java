@@ -22,21 +22,61 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.mahaperivaya.Activity.MainActivity;
+import com.mahaperivaya.Model.UserProfile;
 import com.mahaperivaya.R;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Dashboard extends AppBaseFragement {
-  public static String TAG ="MainActivity";
+  public static String TAG = "MainActivity";
   View rootView;
+
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
                            Bundle savedInstanceState) {
     rootView = inflater.inflate(R.layout.dashboard, container, false);
     getActivity().setTitle(getResources().getString(R.string.lbl_dashboard));
     setHasOptionsMenu(true);
+    init();
     return rootView;
   }
+
+
+  private void init() {
+    if(UserProfile.getUserProfile().isLoggedIn == false) {
+      return;
+    }
+    rootView.findViewById(R.id.japaminfo).setVisibility(UserProfile.getUserProfile().isLoggedIn == true ? View.VISIBLE : View.GONE);
+    ((TextView) rootView.findViewById(R.id.japam_count_over_all)).setText("" + UserProfile.getUserProfile().japam_count_over_all);
+    ((TextView) rootView.findViewById(R.id.japam_count_satsang)).setText(UserProfile.getInstance().isjoinedsatsang == false ? "Not Joined to Satsang":  "" + UserProfile.getUserProfile().japam_count_satsang);
+    ((TextView) rootView.findViewById(R.id.japam_count)).setText("" + UserProfile.getUserProfile().japam_count);
+
+
+    final String NEW_FORMAT = "dd-MMM-yyyy";
+    final String OLD_FORMAT = "yyyy-MM-dd HH:mm:ss";
+
+  // August 12, 2010
+    String oldDateString = UserProfile.getUserProfile().japam_last_updated_date;
+    String newDateString="";
+
+    SimpleDateFormat sdf = new SimpleDateFormat(OLD_FORMAT);
+    Date d = null;
+    try {
+      d = sdf.parse(oldDateString);
+      sdf.applyPattern(NEW_FORMAT);
+      newDateString = sdf.format(d);
+    } catch (ParseException e) {
+      e.printStackTrace();
+    }
+
+    ((TextView) rootView.findViewById(R.id.japam_last_updated_date)).setText(newDateString);
+  }
+
 
   @Override
   public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {

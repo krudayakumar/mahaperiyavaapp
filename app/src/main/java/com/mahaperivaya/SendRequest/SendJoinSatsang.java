@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
  */
 public class SendJoinSatsang {
   @SerializedName("profileid")
-  public int profileid;
+  public long profileid;
 
   @SerializedName("satsangid")
   public long satsangid;

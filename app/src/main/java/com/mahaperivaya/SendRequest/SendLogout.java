@@ -10,7 +10,7 @@ public class SendLogout {
   public String emailid;
 
   @SerializedName("profileid")
-  public int profileid;
+  public long profileid;
 
 
 }

@@ -9,7 +9,7 @@ import java.util.Date;
  */
 public class SendUpdateJapamCount {
   @SerializedName("profileid")
-  public int profileid;
+  public long profileid;
 
   @SerializedName("access_token")
   public String access_token;
@@ -17,11 +17,11 @@ public class SendUpdateJapamCount {
   @SerializedName("japamcount")
   public int japamcount;
 
-  @SerializedName("japamupdatedate")
+  @SerializedName("japamupdateddate")
   public String japamupdatedate;
 
   @SerializedName("satsangid")
-  public int satsangid;
+  public long satsangid;
 
 
 }

@@ -101,10 +101,18 @@ public class ConstValues {
   public final static int JOIN_SATSANG_SERVER_REQUEST = JOIN_SATSANG + 1;
   public final static int JOIN_SATSANG_SUCCESS= JOIN_SATSANG+ 2;
   public final static int JOIN_SATSANG_ERROR = JOIN_SATSANG+ 3;
+  public final static int JOIN_SATSANG_ALREADY_JOINED = JOIN_SATSANG+ 4;
 
   public final static int BOOKS_LIST = 250;
 
   public final static int WEB_PAGE = 260;
+
+  public final static int GENERAL_SETTING = 270;
+  public final static int GENERAL_SETTING_SERVER_REQUEST = GENERAL_SETTING + 1;
+
+
+
+
 
   public final static int ERROR = 500;
   public final static int ERROR_DEFAULT = ERROR+ 1;

@@ -14,19 +14,24 @@
     <item
       android:id="@+id/dashboard"
       android:title="@string/lbl_dashboard" />
-    <item
-      android:id="@+id/books"
-      android:title="@string/lbl_books" />
+
     <item
       android:id="@+id/satsang"
       android:title="@string/lbl_satsang" />
     <item
       android:id="@+id/japam"
       android:title="@string/lbl_japam" />
-
+  </group>
+  <group
+    android:id="@+id/others"
+    android:checkableBehavior="single">
     <item
       android:id="@+id/radio"
-      android:title="@string/lbl_online_radio" />
+      android:title="@string/lbl_online_radio"
+      android:visible="false"/>
+  <item
+    android:id="@+id/books"
+    android:title="@string/lbl_books" />
     <item
       android:id="@+id/gallery"
       android:title="@string/lbl_gallery" />

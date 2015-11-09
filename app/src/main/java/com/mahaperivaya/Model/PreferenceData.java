@@ -12,8 +12,8 @@ public class PreferenceData {
     private static SharedPreferences settings;
 
     public enum PREFVALUES {
-        EMAILID("emailid");
-
+        EMAILID("emailid"),
+        GENERAL_SETTINGS("GENERAL_SETTINGS");
         private String value;
 
         PREFVALUES(String value) {

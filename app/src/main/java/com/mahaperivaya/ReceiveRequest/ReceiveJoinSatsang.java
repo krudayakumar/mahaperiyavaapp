@@ -3,25 +3,24 @@ package com.mahaperivaya.ReceiveRequest;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Created by m84098 on 9/27/15.
+ * Created by m84098 on 11/8/15.
  */
-public class ReceiveJapamDetails {
+public class ReceiveJoinSatsang {
+  @SerializedName("status")
+  public String status;
 
-	@SerializedName("status")
-	public String status;
-
-	@SerializedName("code")
-	public int code;
+  @SerializedName("code")
+  public int code;
 
   @SerializedName("message")
   public String message;
 
-	@SerializedName("data")
-	public Data data;
-
+  @SerializedName("data")
+  public Data data;
 
   public class Data {
-
+    @SerializedName("satsangid")
+    public long satsangid;
     @SerializedName("japam_count")
     public int japam_count;
     @SerializedName("japam_last_updated_date")
@@ -31,11 +30,6 @@ public class ReceiveJapamDetails {
     @SerializedName("japam_count_satsang")
     public int japam_count_satsang;
 
-
-
-  }
-  public boolean isSuccess() {
-    return status.equalsIgnoreCase("success") ? true : false;
   }
 
 }

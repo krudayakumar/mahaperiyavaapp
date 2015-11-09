@@ -12,13 +12,13 @@ public class UserProfile {
 
 	public String username;
 	public String emailid;
-	public int profileid;
+	public long profileid;
 	public boolean ispasswordreset;
   public String access_token;
 
 	// Satsang
 	public boolean isjoinedsatsang;
-	public int satsangid;
+	public long satsangid;
 
 	// Japam
 	public boolean isjoinedjapam;
@@ -30,7 +30,7 @@ public class UserProfile {
 	private Bundle arguments;
 	private Bitmap image;
 
-	public boolean isLoggedIn = true;
+	public boolean isLoggedIn = false;
 
 	private static UserProfile userProfile;
 
@@ -52,7 +52,8 @@ public class UserProfile {
 
   public void clearAll() {
     japam_last_updated_date =  emailid = username="";
-    satsangid = profileid = japam_count = japam_count_over_all = japam_count_satsang = 0;
+    satsangid  = japam_count = japam_count_over_all = japam_count_satsang = 0;
+    profileid =0;
     isjoinedjapam = isjoinedsatsang = ispasswordreset = false;
     isLoggedIn = false;
   }

@@ -8,7 +8,7 @@ import com.google.gson.annotations.SerializedName;
 public class SendNewSatsang {
 
 	@SerializedName("profileid")
-	public int profileid;
+	public long profileid;
 
 	@SerializedName("name")
 	public String name;

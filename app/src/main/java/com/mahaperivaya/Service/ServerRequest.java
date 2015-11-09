@@ -53,7 +53,8 @@ public class ServerRequest<T> {
     JOIN_SATSANG("join_satsang.php", "join_satsang.json", Request.Method.POST),
     COUNTRY_LIST("countries.php", "countries.json", Request.Method.POST),
     PHOTO_VIDEO_LIST("photo_video_book.php", "photo_video_book.json", Request.Method.POST),
-    UPDATE_JAPAN_COUNT("update_japam_count.php", "update_japam.json", Request.Method.POST);
+    UPDATE_JAPAN_COUNT("update_japam_count.php", "update_japam.json", Request.Method.POST),
+    GENERAL_SETTINGS("general_settings.php", "general_setting.json", Request.Method.POST);
 
     private String functionname = null;
     private int requesttype;
@@ -135,6 +136,9 @@ public class ServerRequest<T> {
         strURL = baseurl + SendServerRequest.PHOTO_VIDEO_LIST.getFunctionName();
         break;
       case COUNTRY_LIST:
+        strURL = baseurl + SendServerRequest.COUNTRY_LIST.getFunctionName();
+        break;
+      case GENERAL_SETTINGS:
         strURL = baseurl + SendServerRequest.COUNTRY_LIST.getFunctionName();
         break;
     }

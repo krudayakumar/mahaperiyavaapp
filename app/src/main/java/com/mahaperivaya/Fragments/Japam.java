@@ -28,9 +28,11 @@ import com.mahaperivaya.SendRequest.SendUpdateJapamCount;
 
 import org.json.JSONObject;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 /**
@@ -58,7 +60,7 @@ public class Japam extends AppBaseFragement {
   };
 
   private void updateDateLabel() {
-    String myFormat = "dd-MM-yyyy"; // "dd/MMM/yyyy";
+    String myFormat = "MM/dd/yyyy"; // "dd/MMM/yyyy";
     SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
     edDate.setText(sdf.format(japam_update_date.getTime()));
@@ -248,7 +250,23 @@ public class Japam extends AppBaseFragement {
     japam_count_over_all.setText("" + UserProfile.getUserProfile().japam_count_over_all);
     japam_count_satsang.setText("" + UserProfile.getUserProfile().japam_count_satsang);
     japam_count.setText("" + UserProfile.getUserProfile().japam_count);
-    japam_last_updated_date.setText(UserProfile.getUserProfile().japam_last_updated_date);
+    final String NEW_FORMAT = "dd-MMM-yyyy";
+    final String OLD_FORMAT = "yyyy-MM-dd HH:mm:ss";
+
+    // August 12, 2010
+    String oldDateString = UserProfile.getUserProfile().japam_last_updated_date;
+    String newDateString="";
+
+    SimpleDateFormat sdf = new SimpleDateFormat(OLD_FORMAT);
+    Date d = null;
+    try {
+      d = sdf.parse(oldDateString);
+      sdf.applyPattern(NEW_FORMAT);
+      newDateString = sdf.format(d);
+    } catch (ParseException e) {
+      e.printStackTrace();
+    }
+    japam_last_updated_date.setText(newDateString);
   }
 
   private void setEnableAllControls(boolean isEnable) {

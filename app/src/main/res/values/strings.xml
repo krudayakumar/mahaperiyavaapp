@@ -30,6 +30,7 @@
   <string name="lbl_continue">Continue</string>
   <string name="lbl_set_password">Set Password</string>
   <string name="lbl_password">Password</string>
+  <string name="lbl_search">Search</string>
   <string name="lbl_confirm_password">Confirm Password</string>
     <string name="lbl_password_title">Must not contain significant portions of the users account name or full name.
 \nMust be at least eight (8) characters in length.
@@ -111,6 +112,7 @@ Mahesh</string>
   <string name="lbl_videos">Videos</string>
   <string name="lbl_events">Events</string>
   <string name="lbl_online_radio">Online Radio</string>
+  <string name="lbl_filter">Filter</string>
   <string name="lbl_settings">Setting</string>
   <string name="lbl_feedback">Feedback</string>
   <string name="lbl_about">About</string>
@@ -161,12 +163,22 @@ Mahesh</string>
   <string name="err_enter_right_count">Enter right count.</string>
   <string name="err_connect_to_internet">Connect to network</string>
   <string name="err_password_not_same">Password and Confirm Password are not same.</string>
+  <string name="err_not_joined">Join Satsang to enable this feature</string>
 
   <!-- Links-->
 
   <!--  <string name="link_devithinkural">https://mahaperiyavaa.wordpress.com/2013/09/10/deivathin-kural-corrected-version/</string> -->
   <string name="link_devithinkural">https://mahaperiyavaal.wordpress.com/</string>
   <string name="link_radio">http://1651.live.streamtheworld.com/SAM09AAC202_SC</string>
-  <string name="feedback_emailid">krudayakumar@gmail.com</string>
-
+  <string name="feedback_emailid"></string>
+  <string-array name="spinnerItems">
+    <item>None</item>
+    <item>Satsang Name</item>
+    <item>Person Name</item>
+    <item>Contact No</item>
+    <item>Email ID</item>
+    <item>City</item>
+    <item>State</item>
+    <item>Country</item>
+  </string-array>
 </resources>

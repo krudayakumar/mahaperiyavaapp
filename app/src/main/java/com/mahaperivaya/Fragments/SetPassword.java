@@ -72,7 +72,7 @@ public class SetPassword extends AppBaseFragement {
   private void initComponent() {
     password = (EditText) rootView.findViewById(R.id.edPassword);
     confirmpassword = (EditText) rootView.findViewById(R.id.edConfirmPassword);
-    next = (FloatingActionButton) rootView.findViewById(R.id.next);
+
   }
 
 

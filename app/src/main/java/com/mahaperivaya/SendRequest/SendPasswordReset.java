@@ -9,7 +9,7 @@ public class SendPasswordReset {
 
 
   @SerializedName("profileid")
-  public int profileid;
+  public long profileid;
 
   @SerializedName("password")
   public String password;

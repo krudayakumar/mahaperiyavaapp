@@ -1,43 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="150dp"
-    android:background="@color/drawer_header_bg"
+  android:layout_width="match_parent"
+  android:layout_height="150dp"
+  android:background="@color/drawer_header_bg"
+  android:orientation="vertical">
+
+  <com.mahaperivaya.Component.CircularImageView
+    android:id="@+id/userimage"
+    style="@style/general_circular_pading"
+    android:src="@drawable/periyava" />
+
+  <LinearLayout
+    style="@style/general_pading"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom|start"
     android:orientation="vertical">
 
-    <com.mahaperivaya.Component.CircularImageView
-        android:id="@+id/userimage"
-        style="@style/general_circular_pading"
-        android:src="@drawable/periyava" />
+    <TextView
+      android:id="@+id/username"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_gravity="bottom|start"
+      android:text="@string/app_name"
+      android:textAppearance="?android:attr/textAppearanceMedium"
+      android:textColor="@color/white"
+      android:textStyle="bold" />
 
-    <LinearLayout
-        style="@style/general_pading"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|start"
+    <TextView
+      android:id="@+id/emailid"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_gravity="bottom|start"
+      android:text="krudayakumar@gmail.com"
+      android:textAppearance="?android:attr/textAppearanceSmall"
+      android:textColor="@color/white" />
 
-        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/username"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|start"
-            android:text="@string/app_name"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        <TextView
-            android:id="@+id/emailid"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|start"
-            android:text="krudayakumar@gmail.com"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="@color/white" />
-
-    </LinearLayout>
+  </LinearLayout>
 
 
 </FrameLayout>

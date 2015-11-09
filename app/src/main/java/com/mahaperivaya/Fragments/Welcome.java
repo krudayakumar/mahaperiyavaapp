@@ -19,7 +19,7 @@ import com.mahaperivaya.R;
 /**
  * Created by m84098 on 9/3/15.
  */
-public class Welcome extends Fragment {
+public class Welcome extends AppBaseFragement {
   public static String TAG = "Welcome";
   Context context;
   View rootView;
@@ -31,6 +31,9 @@ public class Welcome extends Fragment {
     context = container.getContext();
 
     initCompontents();
+   /* Message msg = Message.obtain();
+    msg.what = ConstValues.GENERAL_SETTING_SERVER_REQUEST;
+    getBaseActivity().getFlowHandler().sendMessage(msg);*/
     return rootView;
   }
 

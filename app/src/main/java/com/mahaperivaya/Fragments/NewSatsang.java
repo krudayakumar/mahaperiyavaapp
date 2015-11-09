@@ -37,13 +37,14 @@ import java.util.List;
 /**
  * Created by m84098 on 9/3/15.
  */
-public class NewSatsang extends AppBaseFragement {
+public class NewSatsang extends AppBaseFragement  {
   public static String TAG = "NewSatsang";
   LinearLayout llMainLayout;
   EditText name, description, personname, contactno, emailid, city, country, state;
   ArrayList<EditText> allControls = new ArrayList<>();
   View rootView;
   String satsangoption = "";
+  boolean isEditiable = false;
   LinkedHashMap<String, ReceiveCountryList.Country> countryNameMap = new LinkedHashMap<String, ReceiveCountryList.Country>();
   LinkedHashMap<String, ReceiveCountryList.Country> countryCodeMap = new LinkedHashMap<String, ReceiveCountryList.Country>();
   List<String> countries = new ArrayList<String>();
@@ -156,7 +157,9 @@ public class NewSatsang extends AppBaseFragement {
           contactno.setText(data.contactno);
           emailid.setText(data.emailid);
           city.setText(data.city);
-
+          state.setText(data.state);
+          country.setText(data.country);
+/*
           if (countryCodeMap.get(data.country) != null) {
             country.setTag(countryCodeMap.get(data.country));
 
@@ -181,7 +184,7 @@ public class NewSatsang extends AppBaseFragement {
               state.setText(data.state);
             }
 
-          }
+          }*/
 
 
         }
@@ -211,11 +214,15 @@ public class NewSatsang extends AppBaseFragement {
 
   void setEnableAllControls(boolean isEnable) {
     for (int i = 0; i < allControls.size(); i++) {
+
+
       if (isEnable) {
         (allControls.get(i)).setFocusable(true);
         (allControls.get(i)).setFocusableInTouchMode(true);
+
       } else {
         (allControls.get(i)).setFocusable(false);
+        (allControls.get(i)).setOnClickListener(null);
       }
 
     }
@@ -231,9 +238,11 @@ public class NewSatsang extends AppBaseFragement {
     if (UserProfile.getUserProfile().isLoggedIn) {
       if (satsangoption.equalsIgnoreCase("EDIT") && UserProfile.getUserProfile().profileid == data.profileid) {
         getBaseActivity().getMenuVisible(MainActivity.MenuOptions.EDIT);
+
       }
       if (satsangoption.equalsIgnoreCase("NEW")) {
         getBaseActivity().getMenuVisible(MainActivity.MenuOptions.SAVE);
+        isEditiable = true;
       }
     }
 
@@ -276,6 +285,7 @@ public class NewSatsang extends AppBaseFragement {
         getBaseActivity().getMenuOption(MainActivity.MenuOptions.EDIT).setVisible(false);
         getBaseActivity().getMenuOption(MainActivity.MenuOptions.SAVE).setVisible(true);
         setEnableAllControls(true);
+        isEditiable = true;
       }
       break;
       case R.id.save: {
@@ -348,9 +358,9 @@ public class NewSatsang extends AppBaseFragement {
         }
         if (satsangoption.equalsIgnoreCase("NEW")) {
           data.satsangid = 0;
-          data.operationtype="NEW";
-        }else {
-          data.operationtype="UPDATE";
+          data.operationtype = "NEW";
+        } else {
+          data.operationtype = "UPDATE";
         }
         data.profileid = UserProfile.getUserProfile().profileid;
         data.name = name.getText().toString();
@@ -366,6 +376,7 @@ public class NewSatsang extends AppBaseFragement {
         msg.what = ConstValues.NEW_SATSANG_SAVE;
         msg.obj = (Object) data;
         getBaseActivity().getFlowHandler().sendMessage(msg);
+        isEditiable = false;
       }
       break;
       default:
@@ -386,23 +397,16 @@ public class NewSatsang extends AppBaseFragement {
     state = (EditText) rootView.findViewById(R.id.edSatsangState);
     city = (EditText) rootView.findViewById(R.id.edSatsangCity);
 
+    country.setTag("CUSTOM");
+    state.setTag("CUSTOM");
 
     country.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        state.setFocusable(false);
-        displayCountryStateDialog(SelectionType.COUNTRY);
-
+        if(isEditiable)
+          displayCountryStateDialog(SelectionType.COUNTRY);
       }
     });
-    state.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        displayCountryStateDialog(SelectionType.STATE);
-      }
-    });
-
-
     allControls.add(name);
     allControls.add(description);
     allControls.add(personname);
@@ -414,12 +418,26 @@ public class NewSatsang extends AppBaseFragement {
 
   }
 
+  /*@Override
+  public void onClick(View v) {
+    switch (v.getId()) {
+      case R.id.edSatsangCountry:
+        state.setFocusable(false);
+        displayCountryStateDialog(SelectionType.COUNTRY);
+        break;
+      case R.id.edSatsangCity:
+        displayCountryStateDialog(SelectionType.STATE);
+        break;
+
+    }
+  }*/
+
   private enum SelectionType {
     COUNTRY,
     STATE,
-  };
+  }
 
-
+  ;
 
 
   private void displayCountryStateDialog(final SelectionType selectionType) {
@@ -439,6 +457,22 @@ public class NewSatsang extends AppBaseFragement {
             country.setText(countries.get(which));
             country.setTag(countryNameMap.get(country.getText().toString()));
             state.setText("");
+
+            ReceiveCountryList.Country selectedcountry = countryNameMap.get(country.getText().toString());
+            if (selectedcountry.states != null) {
+              state.setFocusable(false);
+              state.setFocusableInTouchMode(false);
+              state.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                  displayCountryStateDialog(SelectionType.STATE);
+                }
+              });
+            } else {
+              state.setFocusable(true);
+              state.setFocusableInTouchMode(true);
+            }
+
           }
         });
 
@@ -450,8 +484,8 @@ public class NewSatsang extends AppBaseFragement {
           getBaseActivity().ShowSnackBar(context, getBaseActivity().getWindow().getDecorView(), getResources().getString(R.string.msg_select_country), null, null);
           return;
         }
-        ReceiveCountryList.Country selectedcountry = (ReceiveCountryList.Country) country.getTag();
-        //ReceiveCountryList.Country selectedcountry = countryNameMap.get(country.getText().toString());
+        //ReceiveCountryList.Country selectedcountry = (ReceiveCountryList.Country) country.getTag();
+        ReceiveCountryList.Country selectedcountry = countryNameMap.get(country.getText().toString());
         if (selectedcountry.states != null) {
           if (selectedcountry.states.size() != 0) {
             stateCodeMap.clear();
@@ -465,10 +499,8 @@ public class NewSatsang extends AppBaseFragement {
 
               @Override
               public void onClick(DialogInterface dialog, int which) {
-
                 state.setText(states.get(which));
                 state.setTag(states.get(which));
-
               }
             });
           }

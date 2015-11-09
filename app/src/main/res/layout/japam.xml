@@ -207,15 +207,4 @@
   </LinearLayout>
 
 
-  <android.support.design.widget.FloatingActionButton
-    android:id="@+id/next"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_margin="16dp"
-    android:clickable="true"
-    android:rotation="180"
-    android:src="@drawable/ic_save"
-    app:layout_anchor="@id/viewB"
-    app:layout_anchorGravity="bottom|right|end" />
-
 </android.support.design.widget.CoordinatorLayout>

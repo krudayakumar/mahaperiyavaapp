@@ -2,6 +2,7 @@ package com.mahaperivaya.Fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,6 +13,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
 
 import com.android.volley.VolleyError;
 import com.google.gson.Gson;
@@ -127,6 +129,22 @@ public class SatsangList extends AppBaseFragement {
       getBaseActivity().getMenuOption(MainActivity.MenuOptions.ADD_NEW).setTitle(getResources().getString(R.string.lbl_new_satsang));
     }
 
+
+    // Associate searchable configuration with the SearchView
+    // SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+    /*SearchView searchView = (SearchView) MenuItemCompat.getActionView(menu.findItem(R.id.action_search));
+    // searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+    searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+      @Override
+      public boolean onQueryTextSubmit(String query) {
+        return false;
+      }
+
+      @Override
+      public boolean onQueryTextChange(String newText) {
+        return false;
+      }
+    });*/
   }
 
   @Override

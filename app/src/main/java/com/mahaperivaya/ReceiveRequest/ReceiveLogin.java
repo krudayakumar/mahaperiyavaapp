@@ -24,7 +24,7 @@ public class ReceiveLogin {
 		@SerializedName("username")
 		public String username;
 		@SerializedName("profileid")
-		public int profileid;
+		public long profileid;
 		@SerializedName("ispasswordreset")
 		public int ispasswordreset;
 
@@ -32,7 +32,7 @@ public class ReceiveLogin {
 		@SerializedName("isjoinedsatsang")
 		public int isjoinedsatsang;
 		@SerializedName("satsangid")
-		public int satsangid;
+		public long satsangid;
 
 		// Japam
 		@SerializedName("isjoinedjapam")

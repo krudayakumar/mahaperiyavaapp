@@ -32,6 +32,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -49,7 +50,6 @@ import com.mahaperivaya.Fragments.Japam;
 import com.mahaperivaya.Fragments.Login;
 import com.mahaperivaya.Fragments.NewSatsang;
 import com.mahaperivaya.Fragments.PhotoVideoBook;
-import com.mahaperivaya.Fragments.PhotoVideoList;
 import com.mahaperivaya.Fragments.Registration;
 import com.mahaperivaya.Fragments.SatsangList;
 import com.mahaperivaya.Fragments.SetPassword;
@@ -59,11 +59,14 @@ import com.mahaperivaya.Fragments.Welcome;
 import com.mahaperivaya.Interface.DialogActionCallback;
 import com.mahaperivaya.Interface.ServerCallback;
 import com.mahaperivaya.Model.ConstValues;
+import com.mahaperivaya.Model.GeneralSetting;
 import com.mahaperivaya.Model.PreferenceData;
 import com.mahaperivaya.Model.UserProfile;
 import com.mahaperivaya.R;
 import com.mahaperivaya.ReceiveRequest.GeneralReceiveRequest;
+import com.mahaperivaya.ReceiveRequest.ReceiveGeneralSettings;
 import com.mahaperivaya.ReceiveRequest.ReceiveJapamDetails;
+import com.mahaperivaya.ReceiveRequest.ReceiveJoinSatsang;
 import com.mahaperivaya.ReceiveRequest.ReceiveLogin;
 import com.mahaperivaya.ReceiveRequest.ReceiveSatsangList;
 import com.mahaperivaya.SendRequest.SendLogin;
@@ -146,6 +149,7 @@ public class MainActivity extends MBaseActivity
     initializeMediaPlayer();
     UserProfile.getInstance();
     PreferenceData.getInstance(context);
+    GeneralSetting.getInstance();
 
     flowCallBackHandler();
     Message msg = Message.obtain();
@@ -205,6 +209,7 @@ public class MainActivity extends MBaseActivity
       navigationView.getMenu().findItem(R.id.signin).setVisible(false);
       navigationView.getMenu().findItem(R.id.signout).setVisible(true);
       navigationView.getMenu().findItem(R.id.setting).setVisible(true);
+      navigationView.getMenu().findItem(R.id.japam).setVisible(true);
     } else {
       username.setVisibility(View.GONE);
       emailid.setVisibility(View.GONE);
@@ -278,9 +283,9 @@ public class MainActivity extends MBaseActivity
                   UserProfile.getUserProfile().username = receiveLogin.data.username;
                   UserProfile.getUserProfile().profileid = receiveLogin.data.profileid;
                   UserProfile.getUserProfile().emailid = loginsendrequest.emailid;
-                  UserProfile.getUserProfile().isjoinedjapam = receiveLogin.data.isjoinedjapam  == 0 ? false : true ;
+                  UserProfile.getUserProfile().isjoinedjapam = receiveLogin.data.isjoinedjapam == 0 ? false : true;
                   UserProfile.getUserProfile().isjoinedsatsang = receiveLogin.data.isjoinedsatsang == 0 ? false : true;
-                  UserProfile.getUserProfile().ispasswordreset = receiveLogin.data.ispasswordreset == 0 ? false : true ;
+                  UserProfile.getUserProfile().ispasswordreset = receiveLogin.data.ispasswordreset == 0 ? false : true;
                   UserProfile.getUserProfile().satsangid = receiveLogin.data.satsangid;
                   UserProfile.getUserProfile().japam_count = receiveLogin.data.japam_count;
                   UserProfile.getUserProfile().japam_last_updated_date = receiveLogin.data.japam_last_updated_date;
@@ -572,7 +577,7 @@ public class MainActivity extends MBaseActivity
           }
           case ConstValues.JAPAM_ERROR: {
             ReceiveJapamDetails generalReceiveRequest = new Gson().fromJson(((JSONObject) msg.obj).toString(), ReceiveJapamDetails.class);
-            ShowSnackBar(context, getWindow().getDecorView(), generalReceiveRequest.data.message, null, null);
+            ShowSnackBar(context, getWindow().getDecorView(), generalReceiveRequest.message, null, null);
           }
           break;
           case ConstValues.PHOTO_LIST: {
@@ -629,25 +634,77 @@ public class MainActivity extends MBaseActivity
           }
           break;
           case ConstValues.JOIN_SATSANG_SUCCESS: {
-            ShowSnackBar(context, getWindow().getDecorView(), getResources().getString(R.string.msg_successfully_joined_satsang), null, null);
+            ReceiveJoinSatsang generalReceiveRequest = new Gson().fromJson(((JSONObject) msg.obj).toString(), ReceiveJoinSatsang.class);
+            UserProfile.getUserProfile().isjoinedsatsang = true;
+            UserProfile.getUserProfile().satsangid = generalReceiveRequest.data.satsangid;
+            UserProfile.getUserProfile().japam_count = generalReceiveRequest.data.japam_count;
+            UserProfile.getUserProfile().japam_last_updated_date = generalReceiveRequest.data.japam_last_updated_date;
+            UserProfile.getUserProfile().japam_count_satsang = generalReceiveRequest.data.japam_count_satsang;
+            UserProfile.getUserProfile().japam_count_over_all = generalReceiveRequest.data.japam_count_over_all;
+            ShowSnackBar(context, getWindow().getDecorView(), generalReceiveRequest.message, null, null);
             break;
           }
           case ConstValues.JOIN_SATSANG_ERROR: {
             GeneralReceiveRequest generalReceiveRequest = new Gson().fromJson(((JSONObject) msg.obj).toString(), GeneralReceiveRequest.class);
             ShowSnackBar(context, getWindow().getDecorView(), generalReceiveRequest.message, null, null);
           }
+          case ConstValues.JOIN_SATSANG_ALREADY_JOINED: {
+
+            ShowSnackBar(context, getWindow().getDecorView(), "Currently you are associated with this satsang", null, null);
+          }
           break;
 
           case ConstValues.WEB_PAGE: {
             Bundle bundle = new Bundle();
-            bundle.putString(WEBURL, (String)msg.obj);
+            bundle.putString(WEBURL, (String) msg.obj);
             showFragment(new WebPage(), bundle, R.id.content, true, WebPage.TAG);
           }
           break;
 
           case ConstValues.VIDEO_OPEN: {
             Bundle bundle = new Bundle();
-            context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse((String)msg.obj)));
+            context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse((String) msg.obj)));
+          }
+          break;
+
+
+          case ConstValues.GENERAL_SETTING_SERVER_REQUEST: {
+            getServerRequestSend().executeRequest(
+                ServerRequest.SendServerRequest.GENERAL_SETTINGS, msg.obj, new ServerCallback() {
+                  @Override
+                  public void onSuccess(JSONObject response) {
+
+                    ReceiveGeneralSettings generalReceiveRequest = new Gson().fromJson(response.toString(),
+                        ReceiveGeneralSettings.class);
+
+                    if (generalReceiveRequest.isSuccess()) {
+
+                      PreferenceData.getInstance(context).setValue(PreferenceData.PREFVALUES.GENERAL_SETTINGS.toString(), new Gson().toJson(generalReceiveRequest.data).toString());
+                    } else {
+                      new Gson().toJson(generalReceiveRequest.data).toString();
+                      String strData = "";
+                      strData = (String) PreferenceData.getInstance(context).getValue(PreferenceData.PREFVALUES.GENERAL_SETTINGS.toString(), (Object) strData);
+                      if(!TextUtils.isEmpty(strData)) {
+                        GeneralSetting.setInstance(new Gson().fromJson(response.toString(),
+                            GeneralSetting.class));
+                      }
+                      Message msgtmp = Message.obtain();
+                      msgtmp.obj = (Object) response;
+                      msgtmp.what = ConstValues.ERROR_DEFAULT;
+                      getFlowHandler().sendMessage(msgtmp);
+                    }
+
+
+                  }
+
+                  @Override
+                  public void onError(VolleyError error) {
+                    error.printStackTrace();
+                    Message msg = Message.obtain();
+                    msg.what = ConstValues.ERROR_DEFAULT;
+                    getFlowHandler().sendMessage(msg);
+                  }
+                });
           }
           break;
 
@@ -741,7 +798,11 @@ public class MainActivity extends MBaseActivity
 
         break;
       case R.id.japam:
-        super.showFragment(new Japam(), null, R.id.content, true, Japam.TAG);
+        if (UserProfile.getInstance().isjoinedsatsang == true) {
+          super.showFragment(new Japam(), null, R.id.content, true, Japam.TAG);
+        } else {
+          ShowSnackBar(context, getWindow().getDecorView(), getResources().getString(R.string.err_not_joined), null, null);
+        }
         break;
       case R.id.radio:
         item = globalmenu.findItem(R.id.radio);
@@ -825,7 +886,7 @@ public class MainActivity extends MBaseActivity
         emailIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         emailIntent.setType("vnd.android.cursor.item/email");
         emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL,
-            new String[]{getResources().getString(R.string.feedback_emailid)});
+            new String[]{GeneralSetting.getInstance().feedbackemailid});
         emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,
             getResources().getString(R.string.lbl_feedback));
         emailIntent.putExtra(android.content.Intent.EXTRA_TEXT,
@@ -842,8 +903,9 @@ public class MainActivity extends MBaseActivity
 
     return super.onOptionsItemSelected(item);
   }
+
   @Override
-  public boolean onKeyDown(int keyCode, KeyEvent event)  {
+  public boolean onKeyDown(int keyCode, KeyEvent event) {
     if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.ECLAIR
         && keyCode == KeyEvent.KEYCODE_BACK
         && event.getRepeatCount() == 0) {
@@ -855,6 +917,7 @@ public class MainActivity extends MBaseActivity
 
     return super.onKeyDown(keyCode, event);
   }
+
   @Override
   public void onBackPressed() {
     if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
