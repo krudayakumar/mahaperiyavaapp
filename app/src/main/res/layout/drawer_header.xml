@@ -2,13 +2,20 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="match_parent"
   android:layout_height="150dp"
-  android:background="@color/drawer_header_bg"
+  android:background="@color/white"
   android:orientation="vertical">
 
-  <com.mahaperivaya.Component.CircularImageView
+  <!--<com.mahaperivaya.Component.CircularImageView
     android:id="@+id/userimage"
     style="@style/general_circular_pading"
-    android:src="@drawable/periyava" />
+    android:src="@drawable/periyava" />-->
+
+  <ImageView
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    android:scaleType="fitXY"
+    android:alpha="0.8"
+    android:src="@drawable/periva_blessing"/>
 
   <LinearLayout
     style="@style/general_pading"

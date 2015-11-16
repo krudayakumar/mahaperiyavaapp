@@ -1,17 +1,24 @@
 package com.mahaperivaya.Fragments;
 
-import android.app.Fragment;
 import android.content.Context;
+import android.graphics.Point;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Message;
 import android.text.Html;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.mahaperivaya.Activity.MainActivity;
+import com.mahaperivaya.Component.CircularImage;
+import com.mahaperivaya.Component.CircularImageView;
+import com.mahaperivaya.Component.ScalableImage;
 import com.mahaperivaya.Model.ConstValues;
 import com.mahaperivaya.Model.UserProfile;
 import com.mahaperivaya.R;
@@ -30,7 +37,9 @@ public class Welcome extends AppBaseFragement {
     rootView = inflater.inflate(R.layout.welcome, container, false);
     context = container.getContext();
 
+
     initCompontents();
+
    /* Message msg = Message.obtain();
     msg.what = ConstValues.GENERAL_SETTING_SERVER_REQUEST;
     getBaseActivity().getFlowHandler().sendMessage(msg);*/
@@ -38,7 +47,10 @@ public class Welcome extends AppBaseFragement {
   }
 
 
+
   private void initCompontents() {
+
+
     ((TextView) rootView.findViewById(R.id.tvSignInRegister))
         .setText(Html.fromHtml(getResources().getString(R.string.lbl_already_login)));
     rootView.findViewById(R.id.tvSignInRegister).setOnClickListener(new View.OnClickListener() {

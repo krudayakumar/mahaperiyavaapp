@@ -43,7 +43,7 @@ public class Japam extends AppBaseFragement {
 
   TextView japam_count_over_all, japam_count_satsang, japam_count, japam_last_updated_date;
   EditText edCount, edDate;
-  ArrayList<EditText> allControls = new ArrayList<>();
+  ArrayList<EditText> allControls = new ArrayList<EditText>();
 
   View rootView;
 

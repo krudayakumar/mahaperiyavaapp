@@ -38,7 +38,7 @@
     android:id="@+id/radio"
     android:icon="@drawable/ic_play"
     android:title="@string/lbl_online_radio"
-    android:visible="false"
+    android:visible="true"
     app:showAsAction="always" />
 
   <item

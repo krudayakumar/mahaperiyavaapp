@@ -6,11 +6,9 @@
   android:orientation="vertical">
 
 
-
   <ScrollView
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:layout_below="@+id/rlBlockTop">
+    android:layout_height="wrap_content">
 
     <LinearLayout
       android:layout_width="match_parent"
@@ -24,7 +22,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">
 
-        <EditText
+        <android.support.v7.widget.AppCompatEditText
           android:id="@+id/edEmailId"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
@@ -39,7 +37,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">
 
-        <EditText
+        <android.support.v7.widget.AppCompatEditText
           android:id="@+id/edPassword"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"

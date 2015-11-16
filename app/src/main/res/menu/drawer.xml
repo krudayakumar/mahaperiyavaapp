@@ -4,52 +4,66 @@
   <!-- group with single selected item so only one item is highlighted in the nav menu -->
   <item
     android:id="@+id/signin"
+    android:icon="@drawable/ic_login"
     android:title="@string/lbl_signin" />
   <item
     android:id="@+id/signout"
+    android:icon="@drawable/ic_logout"
     android:title="@string/lbl_signout" />
-  <group
+  <item
     android:id="@+id/features"
+    android:title="@string/lbl_activities"
     android:checkableBehavior="single">
+    <menu>
     <item
       android:id="@+id/dashboard"
-      android:title="@string/lbl_dashboard" />
-
+      android:icon="@drawable/ic_satsang"
+      android:title="@string/lbl_devithin_kural_finder" />
     <item
       android:id="@+id/satsang"
-      android:title="@string/lbl_satsang" />
+      android:icon="@drawable/ic_japam"
+      android:title="@string/lbl_anusham_pooja_finder" />
     <item
       android:id="@+id/japam"
-      android:title="@string/lbl_japam" />
-  </group>
+      android:icon="@drawable/ic_pooja"
+      android:title="@string/lbl_sahasra_gayathri_counter" />
+    </menu>
+  </item>
   <group
     android:id="@+id/others"
     android:checkableBehavior="single">
-    <item
-      android:id="@+id/radio"
-      android:title="@string/lbl_online_radio"
-      android:visible="false"/>
+
   <item
     android:id="@+id/books"
+    android:icon="@drawable/ic_books"
     android:title="@string/lbl_books" />
     <item
       android:id="@+id/gallery"
+      android:icon="@drawable/ic_gallery"
       android:title="@string/lbl_gallery" />
     <item
       android:id="@+id/videos"
+      android:icon="@drawable/ic_videos"
       android:title="@string/lbl_videos" />
+    <item
+      android:id="@+id/radio"
+      android:icon="@drawable/ic_radio"
+      android:title="@string/lbl_online_radio"
+      android:visible="true"/>
   </group>
   <group
     android:id="@+id/miscellaneous"
     android:checkableBehavior="single">
     <item
       android:id="@+id/setting"
+      android:icon="@drawable/ic_settings"
       android:title="@string/lbl_settings" />
 
     <item
       android:id="@+id/about"
       android:title="@string/lbl_about" />
   </group>
+
 
 
 </menu>

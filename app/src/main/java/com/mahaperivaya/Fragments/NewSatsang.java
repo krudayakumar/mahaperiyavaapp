@@ -41,7 +41,7 @@ public class NewSatsang extends AppBaseFragement  {
   public static String TAG = "NewSatsang";
   LinearLayout llMainLayout;
   EditText name, description, personname, contactno, emailid, city, country, state;
-  ArrayList<EditText> allControls = new ArrayList<>();
+  ArrayList<EditText> allControls = new ArrayList<EditText>();
   View rootView;
   String satsangoption = "";
   boolean isEditiable = false;

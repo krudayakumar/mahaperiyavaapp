@@ -34,12 +34,16 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.google.gson.Gson;
@@ -192,7 +196,7 @@ public class MainActivity extends MBaseActivity
     mDrawerToggle.syncState();
     username = (TextView) findViewById(R.id.username);
     emailid = (TextView) findViewById(R.id.emailid);
-    userimage = (CircularImageView) findViewById(R.id.userimage);
+    //userimage = (CircularImageView) findViewById(R.id.userimage);
 
     navigate(mNavItemId);
 
@@ -205,7 +209,7 @@ public class MainActivity extends MBaseActivity
       emailid.setVisibility(View.VISIBLE);
       username.setText(UserProfile.getUserProfile().username);
       emailid.setText(UserProfile.getUserProfile().emailid);
-      userimage.setVisibility(View.GONE);
+      //userimage.setVisibility(View.GONE);
       navigationView.getMenu().findItem(R.id.signin).setVisible(false);
       navigationView.getMenu().findItem(R.id.signout).setVisible(true);
       navigationView.getMenu().findItem(R.id.setting).setVisible(true);
@@ -213,7 +217,7 @@ public class MainActivity extends MBaseActivity
     } else {
       username.setVisibility(View.GONE);
       emailid.setVisibility(View.GONE);
-      userimage.setVisibility(View.GONE);
+      //userimage.setVisibility(View.GONE);
       navigationView.getMenu().findItem(R.id.signin).setVisible(true);
       navigationView.getMenu().findItem(R.id.signout).setVisible(false);
       navigationView.getMenu().findItem(R.id.japam).setVisible(false);
@@ -434,7 +438,8 @@ public class MainActivity extends MBaseActivity
           }
           case ConstValues.REGISTER_ERROR: {
             GeneralReceiveRequest generalReceiveRequest = new Gson().fromJson(((JSONObject) msg.obj).toString(), GeneralReceiveRequest.class);
-            ShowSnackBar(context, getWindow().getDecorView(), generalReceiveRequest.message, null, null);
+            View view = findViewById(R.id.content);
+            ShowSnackBar(context, view, generalReceiveRequest.message, null, null);
           }
           break;
 
@@ -1025,4 +1030,55 @@ public class MainActivity extends MBaseActivity
   public ServerRequest getServerRequestSend() {
     return ServerRequest.getInstance(context, getWindow().getDecorView());
   }
+
+  public static Toast currentToast;
+  /**
+   * Use a custom display for Toasts.
+   *
+   * @param message
+   */
+  public static void customToast(Context context, String message) {
+    // Avoid creating a queue of toasts
+    if (currentToast != null) {
+      // Dismiss the current showing Toast
+      currentToast.cancel();
+    }
+    //Retrieve the layout Inflater
+    LayoutInflater inflater = (LayoutInflater)
+        context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    //Assign the custom layout to view
+    View layout = inflater.inflate(R.layout.custom_toast, null);
+    //Return the application context
+    currentToast = new Toast(context.getApplicationContext());
+    //Set toast gravity to center
+    currentToast.setGravity(Gravity.BOTTOM | Gravity.LEFT|Gravity.FILL_HORIZONTAL, 0, 0);
+    //Set toast duration
+    currentToast.setDuration(Toast.LENGTH_LONG);
+    //Set the custom layout to Toast
+    currentToast.setView(layout);
+    //Get the TextView for the message of the Toast
+    TextView text = (TextView) layout.findViewById(R.id.text);
+    //Set the custom text for the message of the Toast
+    text.setText(message);
+    //Display toast
+    currentToast.show();
+    // Check if the layout is visible - just to be sure
+    if (layout != null) {
+      // Touch listener for the layout
+      // This will listen for any touch event on the screen
+      layout.setOnTouchListener(new View.OnTouchListener() {
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+          // No need to check the event, just dismiss the toast if it is showing
+          if (currentToast != null) {
+            currentToast.cancel();
+            // we return True if the listener has consumed the event
+            return true;
+          }
+          return false;
+        }
+      });
+    }
+  }
+
 }

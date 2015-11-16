@@ -9,11 +9,16 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.ContextThemeWrapper;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 
@@ -249,10 +254,93 @@ public abstract class MBaseActivity extends AppCompatActivity implements View.On
         .setTextColor(getResources().getColor(R.color.primary));
   }
 
+  public void showMesseageBox(String strTitle, String strMessage,  String strOkButtonText, String strCancelButtonText, final DialogActionCallback callback){
+    final String strErrorCode="";
+    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+
+    if ((strTitle != null)) {
+      alertDialogBuilder.setTitle(strTitle);
+    }
+
+    if (strMessage != null) {
+      alertDialogBuilder.setMessage(strMessage);
+    }
+
+    if (strOkButtonText != null) {
+      alertDialogBuilder.setPositiveButton(strOkButtonText,
+          new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+              if (callback != null) {
+                callback.onOKClick(strErrorCode);
+              }
+              dialog.dismiss();
+
+            }
+          });
+    }
+    if (strCancelButtonText != null) {
+      alertDialogBuilder.setNegativeButton(strCancelButtonText,
+          new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+              if (callback != null) {
+                callback.onCancelClick(strErrorCode);
+              }
+              dialog.dismiss();
+
+            }
+          });
+    }
+
+    final AlertDialog dialog = alertDialogBuilder.create();
+
+    Window window = dialog.getWindow();
+    WindowManager.LayoutParams wlp = window.getAttributes();
+
+    wlp.gravity = Gravity.BOTTOM;
+    wlp.flags &= ~WindowManager.LayoutParams.FLAG_DIM_BEHIND;
+    window.setAttributes(wlp);
+
+    //dialog.setCancelable(false);
+    // dialog.setCanceledOnTouchOutside(false);
+    dialog.show();
+    dialog.getButton(dialog.BUTTON_NEGATIVE)
+        .setTextColor(getResources().getColor(R.color.primary));
+    dialog.getButton(dialog.BUTTON_POSITIVE)
+        .setTextColor(getResources().getColor(R.color.primary));
+
+    // Hide after some seconds
+    final Handler handler  = new Handler();
+    final Runnable runnable = new Runnable() {
+      @Override
+      public void run() {
+        if (dialog.isShowing()) {
+          dialog.dismiss();
+        }
+      }
+    };
+
+    dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+      @Override
+      public void onDismiss(DialogInterface dialog) {
+        handler.removeCallbacks(runnable);
+      }
+    });
+
+    handler.postDelayed(runnable, 3500);
+
+    //dialog.getWindow().setBackgroundDrawable(null);
+
+  }
+
   public void ShowSnackBar(Context context, View view, String title, String actiontext,
                            View.OnClickListener listener) {
     InputMethodManager imm = (InputMethodManager) context
         .getSystemService(Context.INPUT_METHOD_SERVICE);
+
     imm.hideSoftInputFromWindow(
         ((Activity) context).getCurrentFocus().getWindowToken(), 0);
 
@@ -261,7 +349,9 @@ public abstract class MBaseActivity extends AppCompatActivity implements View.On
       snackbar.setAction(actiontext, listener);
       snackbar.setActionTextColor(Color.RED);
     }
-    snackbar.show();
+    //snackbar.show();
+    //MainActivity.customToast(context,title);
+    showMesseageBox(null, title, null, null, null);
 
   }
 
