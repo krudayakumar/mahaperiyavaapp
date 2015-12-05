@@ -28,7 +28,7 @@
           android:layout_height="wrap_content"
           android:ems="10"
           android:hint="@string/lbl_help_email"
-
+          android:text="krudayakumar@gmail.com"
           android:inputType="textEmailAddress" />
       </android.support.design.widget.TextInputLayout>
 

@@ -3,6 +3,7 @@
   "code": 2000,
   "data": {
     "version": 100,
-    "feedbackemailid": "ipg.kgpfoundationorg@boscustweb0105.eigbox.net"
+    "feedbackemailid": "ipg.kgpfoundationorg@boscustweb0105.eigbox.net",
+    "forceupgrade":true
   }
 }

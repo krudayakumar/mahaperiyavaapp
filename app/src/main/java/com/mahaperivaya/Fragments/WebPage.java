@@ -17,6 +17,7 @@ package com.mahaperivaya.Fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -42,6 +43,7 @@ public class WebPage extends AppBaseFragement {
     setHasOptionsMenu(true);
     if (bundle != null) {
       String strURL = bundle.getString(MainActivity.WEBURL);
+      Log.d(TAG,"URL::"+ strURL);
       wv = (WebView) rootView.findViewById(R.id.webView);
       wv.getSettings().setJavaScriptEnabled(true);
       wv.loadUrl(strURL);

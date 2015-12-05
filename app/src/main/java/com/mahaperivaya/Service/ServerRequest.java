@@ -54,6 +54,9 @@ public class ServerRequest<T> {
     COUNTRY_LIST("countries.php", "countries.json", Request.Method.POST),
     PHOTO_VIDEO_LIST("photo_video_book.php", "photo_video_book.json", Request.Method.POST),
     UPDATE_JAPAN_COUNT("update_japam_count.php", "update_japam.json", Request.Method.POST),
+    ABOUT_MATAM("about_matam.php", "about_matam.json", Request.Method.POST),
+    ABOUT_GURU_PARAMPARA("about_guru_parampara.php", "about_guru_parampara.json", Request.Method.POST),
+    ABOUT_US("about_us.php", "about_us.json", Request.Method.POST),
     GENERAL_SETTINGS("general_settings.php", "general_setting.json", Request.Method.POST);
 
     private String functionname = null;
@@ -137,6 +140,15 @@ public class ServerRequest<T> {
         break;
       case COUNTRY_LIST:
         strURL = baseurl + SendServerRequest.COUNTRY_LIST.getFunctionName();
+        break;
+      case ABOUT_MATAM:
+        strURL = baseurl + SendServerRequest.ABOUT_MATAM.getFunctionName();
+        break;
+      case ABOUT_GURU_PARAMPARA:
+        strURL = baseurl + SendServerRequest.ABOUT_GURU_PARAMPARA.getFunctionName();
+        break;
+      case ABOUT_US:
+        strURL = baseurl + SendServerRequest.ABOUT_US.getFunctionName();
         break;
       case GENERAL_SETTINGS:
         strURL = baseurl + SendServerRequest.COUNTRY_LIST.getFunctionName();

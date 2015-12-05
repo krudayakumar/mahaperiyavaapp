@@ -103,27 +103,30 @@ Mahesh</string>
   <string name="lbl_signin">Sign in </string>
   <string name="lbl_register">Register</string>
   <string name="lbl_signout">Sign Out</string>
-
   <string name="lbl_activities">Activities</string>
   <string name="lbl_sahasra_gayathri_counter">Sahasra Gayathri Counter</string>
   <string name="lbl_anusham_pooja_finder">Anusham Pooja Finder</string>
   <string name="lbl_devithin_kural_finder">Devithin Kural Finder</string>
-
-
   <string name="lbl_dashboard">Dashboard</string>
-
   <string name="lbl_devithin_kural">Devithin Kural</string>
+  <string name="lbl_about_peetham">About Peetham</string>
+  <string name="lbl_about_acharayas">About Acharayas</string>
+
+
   <string name="lbl_books">Books</string>
   <string name="lbl_satsang">Satsang</string>
   <string name="lbl_japam">Japam</string>
-  <string name="lbl_gallery">Gallery</string>
+  <string name="lbl_gallery">Photos</string>
   <string name="lbl_videos">Videos</string>
   <string name="lbl_events">Events</string>
-  <string name="lbl_online_radio">Online Radio</string>
+  <string name="lbl_online_radio">Periyava Radio</string>
   <string name="lbl_filter">Filter</string>
   <string name="lbl_settings">Setting</string>
-  <string name="lbl_feedback">Feedback</string>
-  <string name="lbl_about">About</string>
+  <string name="lbl_feedback">Help &amp; feedback</string>
+  <string name="lbl_about">About us</string>
+  <string name="lbl_about_about_matam">About Matam</string>
+  <string name="lbl_about_guru_parampara">Guru Parampara</string>
+  <string name="lbl_about_us">About Us</string>
   <string name="lbl_already_login">Already have an account? &lt;u&gt;&lt;b&gt;Log in&lt;/b&gt;&lt;/u&gt;</string>
   <string name="lbl_do_you_want_register">Do you want to &lt;u&gt;&lt;b&gt;Register&lt;/b&gt;&lt;/u&gt; ?</string>
   <string name="lbl_forgot_password">&lt;u&gt;&lt;b&gt;Forgot Password&lt;/b&gt;&lt;/u&gt;</string>
@@ -175,9 +178,15 @@ Mahesh</string>
 
   <!-- Links-->
 
+  <string name="base_url">http://kgpfoundation.org/Satsang1/</string>
+
   <!--  <string name="link_devithinkural">https://mahaperiyavaa.wordpress.com/2013/09/10/deivathin-kural-corrected-version/</string> -->
   <string name="link_devithinkural">https://mahaperiyavaal.wordpress.com/</string>
-  <string name="link_radio">http://1651.live.streamtheworld.com/SAM09AAC202_SC</string>
+  <!--<string name="link_radio">http://1651.live.streamtheworld.com/SAM09AAC202_SC</string>-->
+  <string name="link_radio">http://streaming.radio.co/sfe8bb6b1e/listen</string>
+  <string name="link_about_peetham">http://www.kgpfoundation.org/Satsang1/about_matam.php</string>
+  <string name="link_about_guru">http://www.kamakoti.org/peeth/origin.html</string>
+
   <string name="feedback_emailid"></string>
   <string-array name="spinnerItems">
     <item>None</item>

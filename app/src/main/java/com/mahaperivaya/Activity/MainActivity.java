@@ -209,19 +209,22 @@ public class MainActivity extends MBaseActivity
       emailid.setVisibility(View.VISIBLE);
       username.setText(UserProfile.getUserProfile().username);
       emailid.setText(UserProfile.getUserProfile().emailid);
+      username.setVisibility(View.GONE);
+      emailid.setVisibility(View.GONE);
       //userimage.setVisibility(View.GONE);
       navigationView.getMenu().findItem(R.id.signin).setVisible(false);
-      navigationView.getMenu().findItem(R.id.signout).setVisible(true);
-      navigationView.getMenu().findItem(R.id.setting).setVisible(true);
-      navigationView.getMenu().findItem(R.id.japam).setVisible(true);
+      navigationView.getMenu().findItem(R.id.signout).setVisible(false);
+      //navigationView.getMenu().findItem(R.id.setting).setVisible(false);
+      navigationView.getMenu().findItem(R.id.japam).setVisible(false);
     } else {
       username.setVisibility(View.GONE);
       emailid.setVisibility(View.GONE);
       //userimage.setVisibility(View.GONE);
-      navigationView.getMenu().findItem(R.id.signin).setVisible(true);
+
+      navigationView.getMenu().findItem(R.id.signin).setVisible(false);
       navigationView.getMenu().findItem(R.id.signout).setVisible(false);
       navigationView.getMenu().findItem(R.id.japam).setVisible(false);
-      navigationView.getMenu().findItem(R.id.setting).setVisible(false);
+      //navigationView.getMenu().findItem(R.id.setting).setVisible(false);
     }
 
   }
@@ -262,7 +265,7 @@ public class MainActivity extends MBaseActivity
         //Menu Setting;
         MenuItem item;
 
-
+        Bundle bundle = new Bundle();
         //Activity Starting
         switch (msg.what) {
           case ConstValues.WELCOME:
@@ -270,6 +273,45 @@ public class MainActivity extends MBaseActivity
             getVisibilityToolBar(false);
             showFragment(new Welcome(), null, R.id.content, true, Welcome.TAG);
             break;
+
+          case ConstValues.ABOUT_PEETHAM:
+            setTitle(getResources().getString(R.string.lbl_about_peetham));
+            bundle = new Bundle();
+            bundle.putString(WEBURL, getResources().getString(R.string.base_url)+"about_peetham.php");
+            showFragment(new WebPage(), bundle, R.id.content, true, WebPage.TAG);
+            break;
+
+          case ConstValues.ABOUT_ACHARAYAS: {
+            setTitle(getResources().getString(R.string.lbl_about_acharayas));
+            bundle = new Bundle();
+            bundle.putString(WEBURL, getResources().getString(R.string.base_url)+"about_acharays.php");
+            showFragment(new WebPage(), bundle, R.id.content, true, WebPage.TAG);
+          }
+            break;
+
+
+          case ConstValues.ABOUT_US: {
+            setTitle(getResources().getString(R.string.lbl_about_acharayas));
+            bundle = new Bundle();
+            bundle.putString(WEBURL, getResources().getString(R.string.base_url)+"about_us.php");
+            showFragment(new WebPage(), bundle, R.id.content, true, WebPage.TAG);
+          }
+          break;
+
+          case ConstValues.FEEDBACK: {
+            setTitle(getResources().getString(R.string.lbl_about_acharayas));
+            bundle = new Bundle();
+            bundle.putString(WEBURL, getResources().getString(R.string.base_url)+"about_acharays.php");
+            showFragment(new WebPage(), bundle, R.id.content, true, WebPage.TAG);
+          }
+          break;
+
+
+
+
+
+
+
           case ConstValues.LOGIN:
             setDrawerState(false);
             getVisibilityToolBar(false);
@@ -484,7 +526,7 @@ public class MainActivity extends MBaseActivity
 
           case ConstValues.DEIVATHIN_KURAL: {
             setTitle(getResources().getString(R.string.lbl_devithin_kural));
-            Bundle bundle = new Bundle();
+            bundle = new Bundle();
             bundle.putString(WEBURL, getResources().getString(R.string.link_devithinkural));
             showFragment(new WebPage(), bundle, R.id.content, true, WebPage.TAG);
           }
@@ -508,7 +550,7 @@ public class MainActivity extends MBaseActivity
           }
           break;
           case ConstValues.NEW_SATSANG: {
-            Bundle bundle = new Bundle();
+            bundle = new Bundle();
             bundle.putSerializable(ConstValues.SATSANG_OPTION, "NEW");
             showFragment(new NewSatsang(), bundle, R.id.content, true, NewSatsang.TAG);
           }
@@ -557,7 +599,7 @@ public class MainActivity extends MBaseActivity
           break;
 
           case ConstValues.EDIT_SATSANG: {
-            Bundle bundle = new Bundle();
+            bundle = new Bundle();
             bundle.putSerializable(ConstValues.SATSANG_OPTION, "EDIT");
             bundle.putSerializable(ConstValues.SATSANG_DATA, (ReceiveSatsangList.Data) msg.obj);
             showFragment(new NewSatsang(), bundle, R.id.content, true, NewSatsang.TAG);
@@ -586,21 +628,21 @@ public class MainActivity extends MBaseActivity
           }
           break;
           case ConstValues.PHOTO_LIST: {
-            Bundle bundle = new Bundle();
+            bundle = new Bundle();
             bundle.putString(ConstValues.VIDEO_PHOTO_OPTION, ConstValues.CONST_PHOTO);
             showFragment(new PhotoVideoBook(), bundle, R.id.content, true, PhotoVideoBook.TAG);
           }
           break;
 
           case ConstValues.VIDEO_LIST: {
-            Bundle bundle = new Bundle();
+            bundle = new Bundle();
             bundle.putString(ConstValues.VIDEO_PHOTO_OPTION, ConstValues.CONST_VIDEO);
             showFragment(new PhotoVideoBook(), bundle, R.id.content, true, PhotoVideoBook.TAG);
 
           }
           break;
           case ConstValues.BOOKS_LIST: {
-            Bundle bundle = new Bundle();
+            bundle = new Bundle();
             bundle.putString(ConstValues.VIDEO_PHOTO_OPTION, ConstValues.CONST_BOOKS);
             showFragment(new PhotoVideoBook(), bundle, R.id.content, true, PhotoVideoBook.TAG);
           }
@@ -660,14 +702,14 @@ public class MainActivity extends MBaseActivity
           break;
 
           case ConstValues.WEB_PAGE: {
-            Bundle bundle = new Bundle();
+            bundle = new Bundle();
             bundle.putString(WEBURL, (String) msg.obj);
             showFragment(new WebPage(), bundle, R.id.content, true, WebPage.TAG);
           }
           break;
 
           case ConstValues.VIDEO_OPEN: {
-            Bundle bundle = new Bundle();
+            bundle = new Bundle();
             context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse((String) msg.obj)));
           }
           break;
@@ -753,6 +795,25 @@ public class MainActivity extends MBaseActivity
     MenuItem item;
     Message msg = Message.obtain();
     switch (itemId) {
+      case R.id.about_peetham:
+        msg.what = ConstValues.ABOUT_PEETHAM;
+        getFlowHandler().sendMessage(msg);
+        break;
+      case R.id.about_acharays:
+        msg.what = ConstValues.ABOUT_ACHARAYAS;
+        getFlowHandler().sendMessage(msg);
+        break;
+
+      case R.id.aboutus:
+        msg.what = ConstValues.ABOUT_US;
+        getFlowHandler().sendMessage(msg);
+        break;
+
+      case R.id.feedback:
+        msg.what = ConstValues.FEEDBACK;
+        getFlowHandler().sendMessage(msg);
+        break;
+
       case R.id.signin:
         msg.what = ConstValues.LOGIN;
         getFlowHandler().sendMessage(msg);
@@ -822,13 +883,14 @@ public class MainActivity extends MBaseActivity
         getFlowHandler().sendMessage(msg);
         break;
 
-      case R.id.setting:
+      /*case R.id.setting:
         super.showFragment(new Setting(), null, R.id.content, true, Setting.TAG);
         break;
 
       case R.id.about:
         super.showFragment(mAbout, null, R.id.content, true, mAbout.TAG);
         break;
+        */
       default:
         // ignore
         break;

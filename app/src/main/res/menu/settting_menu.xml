@@ -43,6 +43,7 @@
 
   <item
     android:id="@+id/feedback"
+    android:visible="false"
     android:title="@string/lbl_feedback" />
 
 </menu>

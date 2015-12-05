@@ -1,29 +1,28 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  xmlns:fresco="http://schemas.android.com/apk/res-auto"
   android:layout_gravity="center_horizontal"
   android:background="@color/safaron"
   android:orientation="vertical"
-  tools:context=".MainActivity$PlaceholderFragment">
+  >
+
 
   <LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center_horizontal|center"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_above="@+id/mLlayoutBottomButtons"
+    android:gravity="center_vertical|center_horizontal"
     android:orientation="vertical">
 
-   <!--<com.mahaperivaya.Component.CircularImageView
+    <com.mahaperivaya.Component.CircularImageView
       android:id="@+id/circular_image_view"
-      android:layout_width="150dp"
-      android:layout_height="150dp"
+      android:layout_width="200dp"
+      android:layout_height="200dp"
       android:layout_gravity="center_vertical|center_horizontal"
-      android:src="@drawable/perivaya1"
-     android:scaleType="centerCrop"
-      android:layout_marginBottom="20dp"/>
--->
-
+      android:layout_marginBottom="20dp"
+      android:scaleType="centerCrop"
+      android:src="@drawable/perivaya1" />
 
     <TextView
       android:id="@+id/section_label"
@@ -34,6 +33,35 @@
       android:text="@string/lbl_hara_hara"
       android:textColor="@color/white" />
 
+  </LinearLayout>
+
+
+  <LinearLayout
+    android:id="@+id/mLlayoutBottomButtons"
+    android:layout_width="fill_parent"
+    android:layout_height="100dp"
+    android:layout_alignParentBottom="true"
+    android:orientation="vertical">
+
+    <TextView
+      android:id="@+id/later"
+      style="@style/white_medium_text"
+      android:layout_gravity="center_vertical|center_horizontal"
+      android:layout_weight="1"
+      android:gravity="center"
+      android:text="@string/lbl_later"
+      android:textColor="@color/white" />
+
+
+  </LinearLayout>
+
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal|center"
+    android:orientation="vertical">
+
 
     <TextView
       android:id="@+id/tvSignInRegister"
@@ -42,16 +70,25 @@
       android:layout_marginBottom="20dp"
       android:gravity="center"
       android:text="@string/lbl_already_login"
-      android:textColor="@color/white" />
+      android:textColor="@color/white"
+      android:visibility="gone" />
 
     <TextView
-      android:id="@+id/later"
+      android:id="@+id/register"
       style="@style/white_medium_text"
-
       android:layout_gravity="center_vertical|center_horizontal"
       android:gravity="center"
-      android:text="@string/lbl_later"
-      android:textColor="@color/white" />
+      android:text="@string/lbl_register"
+      android:textColor="@color/white"
+      android:visibility="gone" />
+
+
   </LinearLayout>
 
-</LinearLayout>
+
+</RelativeLayout>
+
+
+
+
+

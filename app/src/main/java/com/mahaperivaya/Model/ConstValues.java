@@ -110,9 +110,14 @@ public class ConstValues {
   public final static int GENERAL_SETTING = 270;
   public final static int GENERAL_SETTING_SERVER_REQUEST = GENERAL_SETTING + 1;
 
+  public final static int ABOUT_PEETHAM = 300;
+
+  public final static int ABOUT_ACHARAYAS = 400;
 
 
+  public final static int ABOUT_US = 500;
 
+  public final static int FEEDBACK = 600;
 
   public final static int ERROR = 500;
   public final static int ERROR_DEFAULT = ERROR+ 1;
