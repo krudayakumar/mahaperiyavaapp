@@ -15,6 +15,7 @@
  */
 package com.mahaperivaya.Activity;
 
+import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -54,6 +55,7 @@ import com.mahaperivaya.Fragments.Japam;
 import com.mahaperivaya.Fragments.Login;
 import com.mahaperivaya.Fragments.NewSatsang;
 import com.mahaperivaya.Fragments.PhotoVideoBook;
+import com.mahaperivaya.Fragments.Radio;
 import com.mahaperivaya.Fragments.Registration;
 import com.mahaperivaya.Fragments.SatsangList;
 import com.mahaperivaya.Fragments.SetPassword;
@@ -103,12 +105,13 @@ public class MainActivity extends MBaseActivity
   private int mNavItemId;
   Context context;
   FloatingActionButton radio;
-  static boolean radiostate = false;
+  public static boolean radiostate = false;
   public static Menu globalmenu;
   // Progress dialog
   private ProgressDialog pDialog;
   private NavigationView navigationView;
   private static Toolbar toolbar;
+  private Menu menu;
 
   public enum MenuOptions {
     GENERAL(0),
@@ -291,7 +294,7 @@ public class MainActivity extends MBaseActivity
 
 
           case ConstValues.ABOUT_US: {
-            setTitle(getResources().getString(R.string.lbl_about_acharayas));
+            setTitle(getResources().getString(R.string.lbl_about_us));
             bundle = new Bundle();
             bundle.putString(WEBURL, getResources().getString(R.string.base_url)+"about_us.php");
             showFragment(new WebPage(), bundle, R.id.content, true, WebPage.TAG);
@@ -299,14 +302,22 @@ public class MainActivity extends MBaseActivity
           break;
 
           case ConstValues.FEEDBACK: {
-            setTitle(getResources().getString(R.string.lbl_about_acharayas));
+            setTitle(getResources().getString(R.string.lbl_feedback));
             bundle = new Bundle();
             bundle.putString(WEBURL, getResources().getString(R.string.base_url)+"about_acharays.php");
             showFragment(new WebPage(), bundle, R.id.content, true, WebPage.TAG);
           }
           break;
-
-
+          case ConstValues.RADIO: {
+            setTitle(getResources().getString(R.string.lbl_online_radio));
+            showFragment(new Radio(), null, R.id.content, true, Radio.TAG);
+            break;
+          }
+          case ConstValues.RADIO_RUN_STOP: {
+            MenuItem actionRestart = (MenuItem) menu.findItem(R.id.radio);
+            onOptionsItemSelected(actionRestart);
+            break;
+          }
 
 
 
@@ -756,8 +767,26 @@ public class MainActivity extends MBaseActivity
           break;
 
           //Default Error
+
+          //Default Error
           case ConstValues.ERROR_DEFAULT: {
             ShowSnackBar(context, getWindow().getDecorView(), getResources().getString(R.string.err_default), null, null);
+            break;
+          }
+
+          //Internet Error
+          case ConstValues.ERROR_INTERNET_CONNECTION: {
+            Message msgtmp = Message.obtain();
+            msgtmp.what = ConstValues.DASHBOARD_WITHOUT_LOGIN;
+            getFlowHandler().sendMessage(msgtmp);
+            ShowSnackBar(context, getWindow().getDecorView(), getResources().getString(R.string.err_connect_to_internet), "Settings", new View.OnClickListener() {
+              @Override
+              public void onClick(View view) {
+                Intent intent = new Intent(android.provider.Settings.ACTION_SETTINGS);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
+              }
+            });
             break;
           }
           default:
@@ -779,6 +808,7 @@ public class MainActivity extends MBaseActivity
 
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
+    this.menu = menu;
     setMenuOption(menu);
     MenuInflater inflater = getMenuInflater();
     inflater.inflate(R.menu.settting_menu, menu);
@@ -813,7 +843,9 @@ public class MainActivity extends MBaseActivity
         msg.what = ConstValues.FEEDBACK;
         getFlowHandler().sendMessage(msg);
         break;
-
+      case R.id.exit:
+        android.os.Process.killProcess(android.os.Process.myPid());
+        break;
       case R.id.signin:
         msg.what = ConstValues.LOGIN;
         getFlowHandler().sendMessage(msg);
@@ -873,6 +905,8 @@ public class MainActivity extends MBaseActivity
       case R.id.radio:
         item = globalmenu.findItem(R.id.radio);
         item.setVisible(true);
+        msg.what = ConstValues.RADIO;
+        getFlowHandler().sendMessage(msg);
         break;
       case R.id.gallery:
         msg.what = ConstValues.PHOTO_LIST;
@@ -925,22 +959,30 @@ public class MainActivity extends MBaseActivity
     mDrawerToggle.onConfigurationChanged(newConfig);
   }
 
+  public void RunRadio(MenuItem item){
+    Radio frg = (Radio) getFragmentManager()
+        .findFragmentByTag(Radio.TAG);
+    if (radiostate == false) {
+      startPlaying();
+      radiostate = true;
+      showProgressDialog();
+      item.setIcon(R.drawable.ic_stop);
+    } else {
+      stopPlaying();
+      radiostate = false;
+      item.setIcon(R.drawable.ic_play);
+    }
+    if(frg!=null) {
+      frg.setRadioButtonState(radiostate);
+    }
+
+  }
   @Override
   public boolean onOptionsItemSelected(final MenuItem item) {
 
     switch (item.getItemId()) {
       case R.id.radio:
-
-        if (radiostate == false) {
-          startPlaying();
-          radiostate = true;
-          showProgressDialog();
-          item.setIcon(R.drawable.ic_pause);
-        } else {
-          stopPlaying();
-          radiostate = false;
-          item.setIcon(R.drawable.ic_play);
-        }
+        RunRadio(item);
         break;
       case R.id.feedback:
 

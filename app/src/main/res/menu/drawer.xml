@@ -4,12 +4,13 @@
   <!-- group with single selected item so only one item is highlighted in the nav menu -->
   <group
     android:id="@+id/about_peetham_acharay"
-    android:checkableBehavior="single"
+
     android:title="@string/lbl_about">
     <item
       android:id="@+id/about_peetham"
       android:icon="@drawable/ic_japam"
       android:title="@string/lbl_about_peetham" />
+
     <item
       android:id="@+id/about_acharays"
       android:icon="@drawable/ic_pooja"
@@ -18,7 +19,7 @@
 
   <group
     android:id="@+id/others"
-    android:checkableBehavior="single">
+  >
     <item
       android:id="@+id/books"
       android:icon="@drawable/ic_books"
@@ -39,7 +40,7 @@
   </group>
   <group
     android:id="@+id/about_section"
-    android:checkableBehavior="single">
+    >
     <item
       android:id="@+id/feedback"
       android:icon="@drawable/ic_feedback"
@@ -48,6 +49,10 @@
       android:id="@+id/aboutus"
       android:icon="@drawable/ic_aboutus"
       android:title="@string/lbl_about_us" />
+    <item
+      android:id="@+id/exit"
+      android:icon="@drawable/ic_logout"
+      android:title="@string/lbl_exit" />
 
   </group>
 

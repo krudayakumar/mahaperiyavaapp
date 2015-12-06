@@ -349,9 +349,9 @@ public abstract class MBaseActivity extends AppCompatActivity implements View.On
       snackbar.setAction(actiontext, listener);
       snackbar.setActionTextColor(Color.RED);
     }
-    //snackbar.show();
+    snackbar.show();
     //MainActivity.customToast(context,title);
-    showMesseageBox(null, title, null, null, null);
+    //showMesseageBox(null, title, null, null, null);
 
   }
 

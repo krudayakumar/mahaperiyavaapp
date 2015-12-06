@@ -2,6 +2,7 @@ package com.mahaperivaya.Service;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -18,6 +19,7 @@ import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.mahaperivaya.Activity.MainActivity;
 import com.mahaperivaya.Interface.ServerCallback;
+import com.mahaperivaya.Model.ConstValues;
 import com.mahaperivaya.Model.NetworkConnection;
 import com.mahaperivaya.R;
 
@@ -176,7 +178,9 @@ public class ServerRequest<T> {
     }
 
     if (!NetworkConnection.isConnected(context)) {
-      ((MainActivity) context).ShowSnackBar(context, view, context.getResources().getString(R.string.err_connect_to_internet), null, null);
+      android.os.Message msg = android.os.Message.obtain();
+      msg.what = ConstValues.ERROR_INTERNET_CONNECTION;
+      MainActivity.getFlowHandler().sendMessage(msg);
       return;
     }
 

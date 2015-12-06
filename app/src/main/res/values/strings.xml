@@ -124,6 +124,8 @@ Mahesh</string>
   <string name="lbl_settings">Setting</string>
   <string name="lbl_feedback">Help &amp; feedback</string>
   <string name="lbl_about">About us</string>
+  <string name="lbl_exit">Exit</string>
+
   <string name="lbl_about_about_matam">About Matam</string>
   <string name="lbl_about_guru_parampara">Guru Parampara</string>
   <string name="lbl_about_us">About Us</string>
@@ -172,7 +174,7 @@ Mahesh</string>
   <string name="err_field_should_not_be_empty">Field should not be empty.</string>
   <string name="err_no_special_characters">No special characters.</string>
   <string name="err_enter_right_count">Enter right count.</string>
-  <string name="err_connect_to_internet">Connect to network</string>
+  <string name="err_connect_to_internet">Connect to internet network</string>
   <string name="err_password_not_same">Password and Confirm Password are not same.</string>
   <string name="err_not_joined">Join Satsang to enable this feature</string>
 

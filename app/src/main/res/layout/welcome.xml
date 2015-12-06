@@ -50,6 +50,7 @@
       android:layout_weight="1"
       android:gravity="center"
       android:text="@string/lbl_later"
+      android:visibility="gone"
       android:textColor="@color/white" />
 
 

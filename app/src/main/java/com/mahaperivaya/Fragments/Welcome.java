@@ -1,24 +1,16 @@
 package com.mahaperivaya.Fragments;
 
 import android.content.Context;
-import android.graphics.Point;
-import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Message;
 import android.text.Html;
-import android.view.Display;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.mahaperivaya.Activity.MainActivity;
-import com.mahaperivaya.Component.CircularImage;
-import com.mahaperivaya.Component.CircularImageView;
-import com.mahaperivaya.Component.ScalableImage;
 import com.mahaperivaya.Model.ConstValues;
 import com.mahaperivaya.Model.UserProfile;
 import com.mahaperivaya.R;
@@ -32,11 +24,27 @@ public class Welcome extends AppBaseFragement {
   View rootView;
 
   @Override
-  public View onCreateView(LayoutInflater inflater, ViewGroup container,
+  public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                            Bundle savedInstanceState) {
     rootView = inflater.inflate(R.layout.welcome, container, false);
     context = container.getContext();
+    Thread splashThread = new Thread() {
+      public void run() {
 
+        try {
+          // Thread will sleep for 2 seconds
+          sleep(2 * 1000);
+          android.os.Message msg = Message.obtain();
+          msg.what = ConstValues.DASHBOARD_WITHOUT_LOGIN;
+          MainActivity.getFlowHandler().sendMessage(msg);
+
+
+        } catch (Exception e) {
+          Log.d(TAG, e.getMessage().toString());
+        }
+      }
+    };
+    splashThread.start();
 
     initCompontents();
 
@@ -45,7 +53,6 @@ public class Welcome extends AppBaseFragement {
     getBaseActivity().getFlowHandler().sendMessage(msg);*/
     return rootView;
   }
-
 
 
   private void initCompontents() {

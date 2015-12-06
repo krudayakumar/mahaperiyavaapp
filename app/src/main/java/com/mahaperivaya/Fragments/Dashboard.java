@@ -39,10 +39,10 @@ public class Dashboard extends AppBaseFragement {
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
                            Bundle savedInstanceState) {
-    rootView = inflater.inflate(R.layout.dashboard, container, false);
+    rootView = inflater.inflate(R.layout.dashboard_main, container, false);
     getActivity().setTitle(getResources().getString(R.string.lbl_dashboard));
     setHasOptionsMenu(true);
-    init();
+    //init();
     return rootView;
   }
 

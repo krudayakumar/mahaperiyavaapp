@@ -118,9 +118,12 @@ public class ConstValues {
   public final static int ABOUT_US = 500;
 
   public final static int FEEDBACK = 600;
+  public final static int RADIO = 700;
+  public final static int RADIO_RUN_STOP = RADIO +1;
 
-  public final static int ERROR = 500;
+  public final static int ERROR = 1000;
   public final static int ERROR_DEFAULT = ERROR+ 1;
+  public final static int ERROR_INTERNET_CONNECTION = ERROR+ 2;
 
   public final static String SATSANG_DATA ="SATSANG_DATA";
   public final static String SATSANG_OPTION="SATSANG_OPTION";

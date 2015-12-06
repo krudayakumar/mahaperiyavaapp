@@ -49,7 +49,7 @@ public class PhotoVideoBook extends AppBaseFragement {
     expandableListView = (ExpandableListView) rootView.findViewById(R.id.expListView);
     context = container.getContext();
 
-    setHasOptionsMenu(true);
+
     ServerCallback serverCallback = new ServerCallback() {
       @Override
       public void onSuccess(JSONObject response) {
@@ -163,22 +163,5 @@ public class PhotoVideoBook extends AppBaseFragement {
     });
   }
 
-  @Override
-  public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-    // Do something that differs the Activity's menu here
-    super.onCreateOptionsMenu(menu, inflater);
 
-
-  }
-
-  @Override
-  public boolean onOptionsItemSelected(MenuItem item) {
-    return false;
-  }
-
-
-  @Override
-  public void onViewCreated(View view, Bundle savedInstanceState) {
-
-  }
 }

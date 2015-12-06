@@ -28,22 +28,23 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.mahaperivaya.Activity.MainActivity;
+import com.mahaperivaya.Model.ConstValues;
 import com.mahaperivaya.R;
 
 public class WebPage extends AppBaseFragement {
   public static String TAG = "WebPage";
   WebView wv;
-
+  View rootView;
   @Nullable
   @Override
-  public View onCreateView(LayoutInflater inflater, ViewGroup container,
+  public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                            Bundle savedInstanceState) {
     Bundle bundle = getArguments();
-    View rootView = inflater.inflate(R.layout.webpage, container, false);
-    setHasOptionsMenu(true);
+    final View rootView = inflater.inflate(R.layout.webpage, container, false);
+
     if (bundle != null) {
       String strURL = bundle.getString(MainActivity.WEBURL);
-      Log.d(TAG,"URL::"+ strURL);
+      Log.d(TAG, "URL::" + strURL);
       wv = (WebView) rootView.findViewById(R.id.webView);
       wv.getSettings().setJavaScriptEnabled(true);
       wv.loadUrl(strURL);
@@ -54,22 +55,22 @@ public class WebPage extends AppBaseFragement {
           view.loadUrl(url);
           return false;
         }
+
+        @Override
+        public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
+          // Do something
+          android.os.Message msg = android.os.Message.obtain();
+          msg.what = ConstValues.ERROR_INTERNET_CONNECTION;
+          MainActivity.getFlowHandler().sendMessage(msg);
+        }
       });
+
 
     }
 
     return rootView;
 
   }
-
-  @Override
-  public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-    // Do something that differs the Activity's menu here
-    super.onCreateOptionsMenu(menu, inflater);
-
-
-  }
-
 
 
   @Override
@@ -83,7 +84,7 @@ public class WebPage extends AppBaseFragement {
       public boolean onKey(View v, int keyCode, KeyEvent event) {
         if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
 
-            getFragmentManager().popBackStack();
+          getFragmentManager().popBackStack();
 
           return true;
         }
