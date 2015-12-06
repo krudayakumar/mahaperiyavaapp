@@ -117,7 +117,7 @@ public class ConstValues {
 
   public final static int ABOUT_US = 500;
 
-  public final static int FEEDBACK = 600;
+  public final static int HELP_FEEDBACK = 600;
   public final static int RADIO = 700;
   public final static int RADIO_RUN_STOP = RADIO +1;
 

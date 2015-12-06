@@ -45,5 +45,11 @@
     android:id="@+id/feedback"
     android:visible="false"
     android:title="@string/lbl_feedback" />
+  <item
+    android:id="@+id/share"
+    android:visible="true"
+    android:icon="@android:drawable/ic_menu_share"
+    app:showAsAction="always"
+    android:title="@string/lbl_share" />
 
 </menu>

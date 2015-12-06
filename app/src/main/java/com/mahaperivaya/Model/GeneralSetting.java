@@ -14,7 +14,7 @@ public class GeneralSetting {
   public String version;
 
   @SerializedName("feedbackemailid")
-  public String feedbackemailid="ipg.kgpfoundationorg@boscustweb0105.eigbox.net";
+  public String feedbackemailid="info@kgpfoundation.org";
 
 	private static GeneralSetting generalSetting;
 

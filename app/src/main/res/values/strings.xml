@@ -122,7 +122,11 @@ Mahesh</string>
   <string name="lbl_online_radio">Periyava Radio</string>
   <string name="lbl_filter">Filter</string>
   <string name="lbl_settings">Setting</string>
-  <string name="lbl_feedback">Help &amp; feedback</string>
+  <string name="lbl_help_feedback">Help &amp; feedback</string>
+  <string name="lbl_feedback">Feedback</string>
+  <string name="lbl_share">Share</string>
+
+  <string name="lbl_help">Help</string>
   <string name="lbl_about">About us</string>
   <string name="lbl_exit">Exit</string>
 

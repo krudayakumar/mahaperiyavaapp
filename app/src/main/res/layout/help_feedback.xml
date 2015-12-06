@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:orientation="vertical"
+      android:padding="5dp">
+
+      <LinearLayout
+        android:id="@+id/llpassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+          android:layout_width="fill_parent"
+          android:layout_height="60dp"
+          android:gravity="left|center"
+          android:text="@string/lbl_feedback"
+          android:textColor="@color/safaron"
+          android:textStyle="bold" />
+
+        <View
+          android:layout_width="match_parent"
+          android:layout_height="1dp"
+          android:background="@android:color/darker_gray" />
+
+
+        <Button
+          android:id="@+id/feedback"
+          style="?android:attr/borderlessButtonStyle"
+          android:layout_width="fill_parent"
+          android:layout_height="60dp"
+          android:gravity="left|center"
+          android:text="@string/lbl_feedback"
+          android:textStyle="normal"
+          android:textAllCaps="false"
+           />
+      </LinearLayout>
+
+      <LinearLayout
+        android:id="@+id/llfeatures"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+          android:layout_width="fill_parent"
+          android:layout_height="60dp"
+          android:gravity="left|center"
+          android:text="@string/lbl_help"
+          android:textColor="@color/safaron"
+          android:textStyle="bold" />
+
+        <View
+          android:layout_width="match_parent"
+          android:layout_height="1dp"
+          android:background="@android:color/darker_gray" />
+
+        <WebView
+          android:id="@+id/webView"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent">
+
+        </WebView>
+
+      </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

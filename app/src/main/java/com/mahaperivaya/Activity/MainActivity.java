@@ -51,6 +51,7 @@ import com.google.gson.Gson;
 import com.mahaperivaya.Component.CircularImageView;
 import com.mahaperivaya.Fragments.About;
 import com.mahaperivaya.Fragments.Dashboard;
+import com.mahaperivaya.Fragments.HelpFeedback;
 import com.mahaperivaya.Fragments.Japam;
 import com.mahaperivaya.Fragments.Login;
 import com.mahaperivaya.Fragments.NewSatsang;
@@ -301,11 +302,11 @@ public class MainActivity extends MBaseActivity
           }
           break;
 
-          case ConstValues.FEEDBACK: {
+          case ConstValues.HELP_FEEDBACK: {
             setTitle(getResources().getString(R.string.lbl_feedback));
             bundle = new Bundle();
-            bundle.putString(WEBURL, getResources().getString(R.string.base_url)+"about_acharays.php");
-            showFragment(new WebPage(), bundle, R.id.content, true, WebPage.TAG);
+            bundle.putString(WEBURL, getResources().getString(R.string.base_url)+"general_help.php");
+            showFragment(new HelpFeedback(), bundle, R.id.content, true, HelpFeedback.TAG);
           }
           break;
           case ConstValues.RADIO: {
@@ -840,7 +841,7 @@ public class MainActivity extends MBaseActivity
         break;
 
       case R.id.feedback:
-        msg.what = ConstValues.FEEDBACK;
+        msg.what = ConstValues.HELP_FEEDBACK;
         getFlowHandler().sendMessage(msg);
         break;
       case R.id.exit:
@@ -984,6 +985,7 @@ public class MainActivity extends MBaseActivity
       case R.id.radio:
         RunRadio(item);
         break;
+      case R.id.share:
       case R.id.feedback:
 
         // TODO Auto-generated method stub
@@ -997,12 +999,12 @@ public class MainActivity extends MBaseActivity
         emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL,
             new String[]{GeneralSetting.getInstance().feedbackemailid});
         emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,
-            getResources().getString(R.string.lbl_feedback));
+            getResources().getString(R.string.lbl_share));
         emailIntent.putExtra(android.content.Intent.EXTRA_TEXT,
-            getResources().getString(R.string.lbl_feedback));
+            getResources().getString(R.string.lbl_share));
         emailIntent.setType("image/png");
         emailIntent.putExtra(Intent.EXTRA_STREAM, uri);
-        startActivity(Intent.createChooser(emailIntent, "Send mail using..."));
+        startActivity(Intent.createChooser(emailIntent, "Share Using..."));
         break;
       case android.R.id.home: {
         return mDrawerToggle.onOptionsItemSelected(item);
