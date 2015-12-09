@@ -1,13 +1,13 @@
 <resources>
 
-  <string name="app_name">Kanchi Periyava</string>
+  <string name="app_name">Maha Perivaya</string>
   <string name="item_1">First Item</string>
   <string name="item_2">Second Item</string>
   <string name="cd_logo">logo</string>
   <string name="open">open navigation drawer</string>
   <string name="close">close navigation drawer</string>
   <string name="action_settings">Settings</string>
-  <string name="lbl_hara_hara">Hara Hara Shankara \nJaya Jaya Shankara</string>
+  <string name="lbl_hara_hara">ஹர ஹர சங்கர \nஜெயா ஜெயா சங்கர</string>
   <string name="lbl_message">Jaya Jaya Shankara Hara Hara Shankara \nHara Hara Shankara Jaya Jaya Shankara</string>
 
   <!--Registration -->
@@ -109,30 +109,30 @@ Mahesh</string>
   <string name="lbl_devithin_kural_finder">Devithin Kural Finder</string>
   <string name="lbl_dashboard">Dashboard</string>
   <string name="lbl_devithin_kural">தெய்வத்தின் குரல்</string>
-  <string name="lbl_about_peetham">About Peetham</string>
-  <string name="lbl_about_acharayas">About Acharayas</string>
+  <string name="lbl_about_peetham">பீடம் பற்றி</string>
+  <string name="lbl_about_acharayas">குரு பரம்பரா</string>
 
 
-  <string name="lbl_books">Books</string>
+  <string name="lbl_books">புத்தகம்</string>
   <string name="lbl_satsang">Satsang</string>
   <string name="lbl_japam">Japam</string>
-  <string name="lbl_gallery">Photos</string>
-  <string name="lbl_videos">Videos</string>
+  <string name="lbl_gallery">புகைப்படம்</string>
+  <string name="lbl_videos">வீடியோ</string>
   <string name="lbl_events">Events</string>
-  <string name="lbl_online_radio">Periyava Radio</string>
+  <string name="lbl_online_radio">பெரியவா வானொலி</string>
   <string name="lbl_filter">Filter</string>
   <string name="lbl_settings">Setting</string>
-  <string name="lbl_help_feedback">Help &amp; feedback</string>
-  <string name="lbl_feedback">Feedback</string>
+  <string name="lbl_help_feedback">உதவி &amp; கருத்து</string>
+  <string name="lbl_feedback">கருத்து</string>
   <string name="lbl_share">Share</string>
 
-  <string name="lbl_help">Help</string>
-  <string name="lbl_about">About us</string>
-  <string name="lbl_exit">Exit</string>
+  <string name="lbl_help">உதவி</string>
+  <string name="lbl_about">எங்களை பற்றி</string>
+  <string name="lbl_exit">வெளியேறும்</string>
 
   <string name="lbl_about_about_matam">About Matam</string>
   <string name="lbl_about_guru_parampara">Guru Parampara</string>
-  <string name="lbl_about_us">About Us</string>
+  <string name="lbl_about_us">எங்களை பற்றி</string>
   <string name="lbl_already_login">Already have an account? &lt;u&gt;&lt;b&gt;Log in&lt;/b&gt;&lt;/u&gt;</string>
   <string name="lbl_do_you_want_register">Do you want to &lt;u&gt;&lt;b&gt;Register&lt;/b&gt;&lt;/u&gt; ?</string>
   <string name="lbl_forgot_password">&lt;u&gt;&lt;b&gt;Forgot Password&lt;/b&gt;&lt;/u&gt;</string>

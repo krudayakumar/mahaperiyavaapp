@@ -15,7 +15,7 @@
     android:gravity="center_vertical|center_horizontal"
     android:orientation="vertical">
 
-    <com.mahaperivaya.Component.CircularImageView
+    <com.kanchi.periyava.Component.CircularImageView
       android:id="@+id/circular_image_view"
       android:layout_width="200dp"
       android:layout_height="200dp"

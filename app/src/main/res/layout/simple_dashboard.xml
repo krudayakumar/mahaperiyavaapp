@@ -17,7 +17,7 @@
       android:orientation="vertical"
       android:padding="30dp">
 
-      <com.mahaperivaya.Component.CircularImageView
+      <com.kanchi.periyava.Component.CircularImageView
         android:id="@+id/userimage"
         style="@style/general_dashboard_pading"
         android:src="@drawable/periyava" />
