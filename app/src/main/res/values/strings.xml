@@ -7,7 +7,7 @@
   <string name="open">open navigation drawer</string>
   <string name="close">close navigation drawer</string>
   <string name="action_settings">Settings</string>
-  <string name="lbl_hara_hara">Hara Hara Shankara \nJaya Jaya Shankara</string>
+  <string name="lbl_hara_hara">Hara Hara Shankara\nJaya Jaya Shankara</string>
   <string name="lbl_message">Jaya Jaya Shankara Hara Hara Shankara \nHara Hara Shankara Jaya Jaya Shankara</string>
 
   <!--Registration -->
@@ -109,7 +109,7 @@ Mahesh</string>
   <string name="lbl_devithin_kural_finder">Devithin Kural Finder</string>
   <string name="lbl_dashboard">Dashboard</string>
   <string name="lbl_devithin_kural">தெய்வத்தின் குரல்</string>
-  <string name="lbl_about_peetham">About Peetham</string>
+  <string name="lbl_about_peetham">About Peetam</string>
   <string name="lbl_about_acharayas">About Acharayas</string>
 
 
