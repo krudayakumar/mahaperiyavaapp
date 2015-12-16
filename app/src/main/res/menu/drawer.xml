@@ -25,6 +25,11 @@
       android:icon="@drawable/ic_books"
       android:title="@string/lbl_devithin_kural" />
     <item
+      android:id="@+id/radio"
+      android:icon="@drawable/ic_radio"
+      android:title="@string/lbl_online_radio"
+      android:visible="true" />
+    <item
       android:id="@+id/gallery"
       android:icon="@drawable/ic_gallery"
       android:title="@string/lbl_gallery" />
@@ -32,11 +37,7 @@
       android:id="@+id/videos"
       android:icon="@drawable/ic_videos"
       android:title="@string/lbl_videos" />
-    <item
-      android:id="@+id/radio"
-      android:icon="@drawable/ic_radio"
-      android:title="@string/lbl_online_radio"
-      android:visible="true"/>
+
   </group>
   <group
     android:id="@+id/about_section"

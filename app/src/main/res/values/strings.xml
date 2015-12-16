@@ -1,13 +1,13 @@
 <resources>
 
-  <string name="app_name">Kanchi Periyava</string>
+  <string name="app_name">Kanchi Sankara</string>
   <string name="item_1">First Item</string>
   <string name="item_2">Second Item</string>
   <string name="cd_logo">logo</string>
   <string name="open">open navigation drawer</string>
   <string name="close">close navigation drawer</string>
   <string name="action_settings">Settings</string>
-  <string name="lbl_hara_hara">Hara Hara Shankara\nJaya Jaya Shankara</string>
+  <string name="lbl_hara_hara">ஹர ஹர சங்கர \nஜெயா ஜெயா சங்கர</string>
   <string name="lbl_message">Jaya Jaya Shankara Hara Hara Shankara \nHara Hara Shankara Jaya Jaya Shankara</string>
 
   <!--Registration -->
@@ -66,19 +66,73 @@
 \n\n9. One attains one’s goal by performance of one’s duties.
 \n\n10. Jnana is the only solvent of our troubles and sufferings.  </string>
   <string name="lbl_about_title">About</string>
-    <string name="lbl_about_content">The goal of this blog is to consolidate any unique information about HH Sri Mahaperiyava under one place. The other benefit of this blog is to help our next generation(s) to know about mahans like Him and learn. It is not my intention to violate any copyrights. If it had happened accidentally, please bring it to my notice and I will take those articles down. Needless to say, about 90% of the articles are not authored by me.
+    <string name="lbl_about_content">
+      &lt;p&gt;Kanchi Guruparampara Foundation, a non-profit organization registered in USA, is founded to spread the teachings of acharyas of Sri Kanchi Kamakoti Peetam, Kanchipuram. The foundation’s primary objectives are to support vedic education, gho rakshanam and temple renovations. This mobile portal has been designed to host several useful applications related to the teachings of Sanatana dharma that helps devotees to progress in their spiritual journey.
+      &lt;/p&gt;&lt;p&gt;We hope that this app will help you build bakthi towards Kanchi acharayaas and their teachings. We hope you enjoy this application. Please feel free to share this with your friends and family. And also please send us your feedback and suggestions by using the “Feedback” menu available in this app.
+      &lt;/p&gt;&lt;p&gt;For more informations, please visit &lt;a href=\"http://kgpfoundation.org\"&gt; kgpfoundation.org &lt;/a&gt;
+      &lt;/p&gt;&lt;p&gt;Hara Hara Sankara Jaya Jaya Sankara!
+      &lt;/p&gt;
+</string>
 
-About me, not a lot to share….just another devotee of Sri Kanchi Madam, who hails from Dalmiapuram, Trichy Dist. By profession, I am a senior IT guy currently employed with Cognizant Technology Solutions, based out of Chicagoland….I am truly fortunate to have (1) an amazing sets of vedic friends in Chicagoland (2) great devotees of Mahaperiyava in Chennai (3) all the readers from this blog  who have been motivating me to bring this blog to this level (4) above all, HH Sri Mahaperiyava without His blessings, we couldn’t have achieved anything.
-
-I truly believe that living in the same time period of HH Sri Mahaperiyava, Bagawan Ramana and other mahans as a true blessing. Let His grace be on us at all times to guide us and elevate us to next level in the spiritual journey.
-
-I sincerely hope that we as individuals not only read and enjoy these articles but also to follow Him in whatever extent possible. It is equally or more important to pass on these knowledge to our next generation and insist them to follow the direction laid out by our Mahaswami.
-
-I can be reached at mk.netid@gmail.com
-
-Jaya Jaya Shankara Hara Hara Shankara
-
-Mahesh</string>
+  <string name="lbl_about_peetam_content">
+ &lt;p&gt;
+More than 2500 years ago, an avalanche of heretic and non-Vedic sects, with horrible religious practices threatened to wipe away the ancient Veda-Dharma. In the Bhagavad Geeta, Lord Krishna has told Arjuna that, whenever there arises danger to Dharma, He (Krishna) will incarnate in this world to eradicate adharma and re-establish Dharma. In consonance with his words, the Lord has made partial incarnations during the course of the present Kali Age. And such an incarnation is the partial incarnation of Siva as Sankara Bhagavatpada, which happened some twenty-five centuries ago, on the prayer of celestials to Lord Siva to redeem Bharata-desa from the clutches of non-Vedic heretic sects. Several sources of authentic information lead to the conclusion that Sri Adi Sankara was born at Kaladi on the fifth day of the bright fortnight of the Vaisaka month of the cyclic year Nandana in cyclic year Nandana - Kali 2593 corresponding to 509 B.C.
+&lt;/p&gt;
+&lt;p&gt;
+Sri Sankara Bhagavadpadacharya was one of the greatest philosophers and spiritualists of the world. He was a discerning dialectician, a consummate commentator and celebrated poet. His miraculous achievements, within a short span of life of thirty-two years, speak of his super-human aspect. Sages and scholars, who have shone through the centuries after his time, have regarded Him as an incarnation of the Divine. Many a thinker and many a scholar of different climes and times has been attracted by the philosophic discipline of Advaita (Monism) effectively propagated by Sankara. Even modern thinkers and scholars have paid eulogistic tributes to Sankara\'s genius.
+&lt;/p&gt;
+&lt;p&gt;
+Sankara\'s yatra to Kailasa, the abode of Lord Siva, is one of the most notable events in the history of the Acharya. During the course of his peregrination in the Himalayan region, Sankaracharya desired to have darshan of Sri Paramesvara having his abode in Kailas. Sankara managed to reach Kailas quickly because of His yogic power. He had darshan of Lord Paramesvara and Devi Parvati. According to tradition, Sankara adored Paramesvara by singing two hymns, known as \"Sivapadadi-kesanta stotram\" and \"Sivakesadi-padanta stotram\". Immensely pleased with Sankara\'s prayers, Paramesvara blessed Sankara, presented him with five sphatika (crystal) lingas and instructed him to arrange for the worship of the lingas for the sake of the welfare of the universe, indicating also the mode of worship. Paramesvara also handed over to Sankara the palm-leaf manuscript of Soundarya Lahari, which is noted as Siva\'s own hymn in praise of the Parasakti.
+&lt;/p&gt;
+&lt;p&gt;
+From available biographical information, it is learnt that Sankaracharya placed one of the five sphatika lingas got at Kailas and kept the Yoga Linga for his own personal worship and that of his successors at Kanchi.
+&lt;/p&gt;
+&lt;p&gt;
+Bhagavatpada Sankara got Kanchi city remodeled and also caused the reconstruction of the three principal temples of Kanchi, viz., the temples of Sri Ekamranatha, Devi Kamakshi and Sri Varadaraja with the assistance of Rajasena, ruler of Kanchi. Sankara consecrated the Srichakra before Devi Kamakshi and thereby secured Her bounteous grace for devotees having Her darshan.
+&lt;/p&gt;
+&lt;p&gt;
+A significant event in the history of Sankaracharya is his occupying the Sarvajnapeetha - the Throne of Omniscience at Kanchi. A great ascetic one of the early Acharyas of the Kanchi Sankaracharya Math - by name Jnanottama - has written a commentary entitled \"Chandrika\", on Sureswaracharya\'s \"Naishkarmyasiddhi\". The second sloka (at the end of the commentary) alludes to the author of the Chandrika as the glory of the Sarvajnasrama by which term we have to understand the Sarvajna Pitha or the Pontifical seat the Advaita Matha in Kancheepuram.
+&lt;/p&gt;
+&lt;p&gt;
+Sankara Bhagavapadacharya retired to Kanchi, the Southern Mokshapuri, towards the end of his earthly career and shook off his mortal coils in that sacred city. A number of works state these facts. Verse 46 of the sixteenth chapter of the ninth section of the voluminous Sanskrit work \"Sivarahasya\" (in the printed Canareese edition No. 32), Jayachamarajendra Series of the Mysore Palace, refers to Sankaracharya\'s worship of the Yoga, Bhoga, Vara, Mukti and Moksha lingas, to his success over scholars of other faiths and to his attaining siddhi (eternal bliss) at his own ashrama in Kanchi.
+&lt;/p&gt;
+&lt;p&gt;
+Markandeya Samhita, an ancient puranic treatise, consists of 100 khandas, each having sub-sections called parispandas, Sub-section 7 and 8 of the 72nd khanda of this work narrate briefly the history of Sankara. \"Sankaracaritam\". A verse, in the seventh parispanda of the 72nd khanda of this work, relates that the Mahatma Sankara, attained the cit-svarupa, i.e. attained eternal bliss at Kanchi, after having consecrated Kamakshi.
+&lt;/p&gt;
+&lt;p&gt;
+Anantanandagiri\'s biography of Sankara (12th century A.D.) - all versions printed and manuscripts, including the Madras University edition - says \"The World Preceptor (Sankara) desiring to leave for his own abode, sitting once in the Moskhapuri of Kanchi, absorbed his gross body into the subtle one and getting reduced into the size of a thumb, attained eternal bliss and remains as the all-pervading \"Cit\" to this day\".
+&lt;/p&gt;
+&lt;p&gt;
+Coming to modern times, there is quite a large number of works, in different languages, written by erudite scholars mentioning Kanchi as the last resort of Sankara.
+&lt;/p&gt;
+&lt;p&gt;
+Apart from all the citations made above, it needs mention that, in the Srimukha-Birudavali (the string of honorific epithets) of the Sankaracharya Math at Kanchi (existing without change from very ancient times), the following epithet is found:
+&lt;/p&gt;
+&lt;p&gt;
+\"Srimacchankara Bhagavatpadacharyanam adhisthane Simhasanabhishiktanam\"
+&lt;/p&gt;
+&lt;p&gt;
+The word \"adhisthane\" points to Sankara\'s siddhi at Kanchi.
+&lt;/p&gt;
+&lt;p&gt;
+It may be noted that the name of Sri Sankaracharya is found only in the official seal of Kanchi Kamakoti Matha. The word \"Kanci-divya kshetre and the phrase \"Srimacchankara-Bhagavatpadacaryanam adhisthane\" in the birudavali indicate Sankara\'s siddhi at Kanchi.
+&lt;/p&gt;
+&lt;p&gt;
+Sri Sankara Bhagavatpada was not merely a great philosopher and preceptor, but an adept in organising and a conspicuous national integrator of a very early period of India\'s history. For safeguarding the Veda-Dharma and restoring it to its pristine glory and for propagating the Advaita discipline, the Great Acharya established monastic institutions at many of the sacred and important places of the country that he had visited during his digvijaya-yatra..
+&lt;/p&gt;
+&lt;p&gt;
+From Anantanandagiri (1119 - 1199 A.D.) whose work is the earliest biography of Sankara, down to Mahamahopadhyaya Lakshmana Suri (Author of \"Bhagavatpadabhyudayam\" - 1917) of the last century, a number of reputed historians, distinguished scholars and researchers have candidly stated, in their works, that the Great Sankara established monastic institutions (mathas) at many an important and sacred places that he visited, during his digvijaya tours.
+&lt;/p&gt;
+&lt;p&gt;
+Guhya-Sahasranama (Sanskrit) refers to five Sankaracharya Peethas (Maths), -Kamakoti Peetha as presided over by Sankara himself, to four disciples, Suresvara, Padmapada, Totaka and Hastamalaka, to the places of the four other peethas and to five Sphatika lingas.
+&lt;/p&gt;
+&lt;p&gt;
+It may be interesting to read about a Sankara Math at the sacred city of Kasi. This is known as Sumeru Math and as Paduka Math. It is presided over by an Advaita Dandi Sanyasi. In some authentic works, only one monastic institution is spoken of. In the Sankaracharya Charita by Govindanatha, and the Sankarabhydaya of Rajachudamani Deekshita, there is no mention about any Matha or Peetha except the Sarvagna Peetha at Kanchi.
+&lt;/p&gt;
+&lt;p&gt;
+Sri Sankara Bhagavatpada settled down at Kancheepuram (Kanchi) at the end of his peregrinations and spent the evening years of his life in the Math at Kanchi, established on Vaisakha Sukla Purnima of the year Sidharthi - Kali 2620 (482 B.C.) He initiated a very young boy into the ascetic order, nominated him as his successor in his Kanchi Matha, and placed him under the care of Sri Suresvara, the most aged and the most erudite of His disciples. Sri Sankara Bhagavatpada attained Videha mukti in his 32nd year - Cyclic year Raktakshi, Adhika Rishabha Maasa, Sukla Ekadasi - Kali 2625 (477 B.C.)
+&lt;/p&gt;
+</string>
 
   <string name="hello_world">Hello world!</string>
 
@@ -108,11 +162,35 @@ Mahesh</string>
   <string name="lbl_anusham_pooja_finder">Anusham Pooja Finder</string>
   <string name="lbl_devithin_kural_finder">Devithin Kural Finder</string>
   <string name="lbl_dashboard">Dashboard</string>
-  <string name="lbl_devithin_kural">தெய்வத்தின் குரல்</string>
-  <string name="lbl_about_peetham">About Peetam</string>
-  <string name="lbl_about_acharayas">About Acharayas</string>
+  <string name="lbl_devithin_kural">Deivathin Kural</string>
+  <string name="lbl_about_peetham">Our Peetam</string>
+  <string name="lbl_about_acharayas">Our Acharayas</string>
 
+  <string name="lbl_periyava_pootri">
+  தென்னாடுடைய பெரியவா போற்றி
+  \nஎந்நாட்டவர்க்கும் இறைவா போற்றி
+  \nசர்வக்ஞா சர்வவ்யாபி பெரியவா சரணம்
+  \nமாயப்பிறப்பறுக்கும் மஹா பெரியவா அடி போற்றி!
+</string>
+<string name="lbl_radio_schedule">
+  06.00  - 06.30 : Suprabhatham
+  \n06.00  - 06.45 : Aditya Hrudayam
+  \n06.45  - 07.30 : Ganapathi Atharvasheeresham
+  \n07.30  - 08.00 : Stotram
+  \n08.00  - 09.00 : Periyavaa Kural
+  \n09.00  - 10.00 : Ganesa Sarma
+  \n10.00  - 11.00 : Devotee Experience
+  \n11.00  - 12.00 : Thevaram/Thiruvasagam
+  \n12.00  - 01.00 : Indra Soundararajan
+  \n01.00  - 03.00 : Guru Bhajans
+  \n03.00  - 04.00 : Periyavaa Mahimai
+  \n04.00  - 05.00 : Devotee Experience
+  \n05.00  - 06.00 : Pradosha Kaala Seva
+  \n06.00  - 06.30 : Sahasranama Seva
+  \n06.30  - 07.00 : Stotram
+  \n07.00  - 08.30 : VDPS
 
+</string>
   <string name="lbl_books">Books</string>
   <string name="lbl_satsang">Satsang</string>
   <string name="lbl_japam">Japam</string>
@@ -132,7 +210,7 @@ Mahesh</string>
 
   <string name="lbl_about_about_matam">About Matam</string>
   <string name="lbl_about_guru_parampara">Guru Parampara</string>
-  <string name="lbl_about_us">About Us</string>
+  <string name="lbl_about_us">About us</string>
   <string name="lbl_already_login">Already have an account? &lt;u&gt;&lt;b&gt;Log in&lt;/b&gt;&lt;/u&gt;</string>
   <string name="lbl_do_you_want_register">Do you want to &lt;u&gt;&lt;b&gt;Register&lt;/b&gt;&lt;/u&gt; ?</string>
   <string name="lbl_forgot_password">&lt;u&gt;&lt;b&gt;Forgot Password&lt;/b&gt;&lt;/u&gt;</string>
@@ -144,6 +222,28 @@ Mahesh</string>
   <string name="lbl_date">Date </string>
   <string name="lbl_unscribe_satsang">Satsang </string>
   <string name="lbl_unscribe_japam">Japam </string>
+
+  <string name="lbl_about_acharaya68_fullname">The 68th Pontiff His Holiness Sri Chandrasekharendra Saraswati Swamigal</string>
+  <string name="lbl_about_acharaya68_name">Sri Chandrasekharendra Saraswati Swamigal</string>
+  <string name="lbl_about_acharaya68_content">
+    &lt;p&gt; Sri Swaminathan (born at Villupuram on 20th May 1894 -Anuradha Star) was taken to Kalavai in his 13th year, when he was studying at Tindivanam, to be initiated into ascetic order and ordained as the 68th Acharya of the Kanchi Kamakoti Math. He was given the Sanyasa name Sri Chandrasekharendra Saraswati. He was affectionately called \"Mahaswamigal\" and \"Walking God\". He adorned the Peetam from February 13, 1907. True to the tradition of the Peetam set by Adi Sankara, Mahaswamigal travelled throughout the country by foot or by the traditional palanquin. He also stood by the national sentiments in discarding \"foreign cloth\" (He immersed them in water instead of setting fire) and started wearing Khadi. He set the trend to create Trusts for achieving the objectives of the Peetham. His foremost concern was preservation of the Vedas, tradition and dharma. He advocated simplicity, shunned pomp, ostentation and extravagance. His exposition of Vedanta, sastras and the dharmic duties attracted scholars and laymen alike, from far and wide, for it has always been rich in values and simple in understanding. Great humorist he had the keen acumen to relate root words of all the languages to Sanskrit highlighting its greatness. He attained moksha at Kancheepuram on 8th January 1994 (Dhanur, Krishna Dwadasi) in his Centenary year.
+    &lt;/p&gt;
+  </string>
+  <string name="lbl_about_acharaya69_fullname">The 69th Pontiff His Holiness Sri Jayendra Saraswati Swamigal</string>
+  <string name="lbl_about_acharaya69_name">Sri Jayendra Saraswati Swamigal</string>
+  <string name="lbl_about_acharaya69_content">
+    &lt;p&gt;
+    Sri Subramaniyam, born on July 18, 1935 at Irulneekki in Thanjavur District had Veda Adyayanam at Tiruvidaimarudur under the direction of Mahaswamjgal and was initiated into Sanyasa on March 22, 1954 and was declared as successor Acharya and given the Sanyasa name Sri Jayendra Saraswati Sri Pada. In the footsteps of the Mahaswamigal, He too undertook yatra throughout the country. He attracted people from every nook and corner. He intensified the activities of the Matam to cover new social objectives -education, health, employment, temple renovation etc. It is due to His untiring efforts, Kamakoti Peetam established religious and social institutions in many parts of the country. Kamakoti Peetam has now become a beehive of socio- religious renaissance. The King of Nepal has erected an arch \"Welcome to the only Hindu Kingdom in the world\" at the instance of Sri Jayendra Saraswati, in 1988. The only Sankaracharya after the Adi Sankara to visit Manasarovar and Kailash is Sri Jayendra Saraswati Swamigal, in 1998; there He installed the idol of Adi Sankara. He had the unique distinction in being honoured by both Nepal and Chinese Governments. In known recent history, He is the only Sankaracharya to visit Dhaka in Bangladesh in June 2000. In honouring His visit, Sri Dhakeswari Temple named the entrance to the temple as \"Sankaracharya Gate\". His most notable contribution yet is the founding of the Sri Chandrasekharendra Saraswati Viswa Mahavidyalaya, a Deemed University in the name of His Guru.
+    &lt;/p&gt;
+  </string>
+  <string name="lbl_about_acharaya70_fullname">The 7Oth Pontiff His Holiness Sri Sankara Vijayendra Saraswati Swamigal</string>
+  <string name="lbl_about_acharaya70_name">Sri Sankara Vijayendra Saraswati Swamigal</string>
+  <string name="lbl_about_acharaya70_content">
+    &lt;p&gt;
+    Sri Sankaranarayanan, born on March 18, 1969, Periyapalayam, a village near Arani in Tiruvallore District, was taken as Acharya to the Peetham as Sri Sankara Vijayendra Saraswati, on 29th May 1983, while He was studying at Polur. Under the tutelage of His Guru and Parama Guru, the rare fortune for a Peetathipadi, He also travelled throughout the country including remote places like Megalaya. He is deeply worried about the worsening moral and ethical values of the youth and the deteriorating educational standards and vanishing cultural and artistic talents in the country. He has initiated a number of measures to draw the youth, train them in all these aspects along with modern education. His keen interest to preserve our ancient literature has brought out many publications through the Matam in Indian and foreign languages for the benefit of devotees. He has conducted a number of training centres for youth in the name of Bakti Kendra, Dharma Kendra, Karma Kendra, etc, to inculcate in them our values and traditions.
+    &lt;/p&gt;
+  </string>
+
 
   <string name="action_general">General</string>
   <string name="action_continue">Continue</string>

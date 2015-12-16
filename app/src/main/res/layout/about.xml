@@ -4,25 +4,40 @@
   android:layout_height="match_parent"
   android:layout_gravity="center_vertical|center_horizontal"
   android:orientation="vertical"
-  android:padding="5dp"
+
   tools:context=".MainActivity$PlaceholderFragment">
-
-
-  <TextView
-    android:id="@+id/title"
-    style="@style/black_large_text"
-    android:layout_marginBottom="20dp"
-    android:text="@string/lbl_about_title" />
 
   <ScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-      android:id="@+id/section_label"
-      style="@style/black_small_text"
-      android:text="@string/lbl_about_content" />
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:orientation="vertical">
 
+
+      <ImageView
+        android:id="@+id/imgView"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:src="@drawable/about_us"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp" />
+
+      <TextView
+        android:id="@+id/title"
+        style="@style/saffron_medium_text"
+        android:gravity="center"
+        android:textStyle="bold" />
+
+      <TextView
+        android:id="@+id/content"
+        style="@style/saffron_medium_text"
+        android:autoLink="web"
+        android:text="@string/lbl_about_content" />
+    </LinearLayout>
   </ScrollView>
 
 </LinearLayout>
