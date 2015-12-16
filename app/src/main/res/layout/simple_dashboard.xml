@@ -12,12 +12,12 @@
     android:layout_height="120dp"
     android:layout_gravity="center"
     android:layout_marginTop="10dp"
-    android:background="@drawable/kamakshi_devi" />
+    android:background="@drawable/kamakshi" />
 
 
   <ImageView
     android:layout_width="320dp"
-    android:layout_height="210dp"
+    android:layout_height="150dp"
     android:layout_gravity="center"
     android:layout_marginTop="10dp"
     android:background="@drawable/three_acharyas" />
