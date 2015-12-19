@@ -27,9 +27,16 @@ import android.webkit.WebView;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.android.volley.VolleyError;
+import com.google.gson.Gson;
 import com.kanchi.periyava.Activity.MainActivity;
+import com.kanchi.periyava.Interface.ServerCallback;
 import com.kanchi.periyava.Model.ConstValues;
 import com.kanchi.periyava.R;
+import com.kanchi.periyava.ReceiveRequest.GeneralReceiveRequest;
+import com.kanchi.periyava.ReceiveRequest.ReceiveScheduleList;
+
+import org.json.JSONObject;
 
 import java.util.Random;
 
@@ -40,7 +47,7 @@ public class Radio extends AppBaseFragement {
   Menu menu;
   ImageButton btnRadio;
   static String strPlaylist;
-  TextView tv;
+  TextView tvPlayList, tvScheduleList;
 
   @Nullable
   @Override
@@ -51,7 +58,46 @@ public class Radio extends AppBaseFragement {
 
     btnRadio = ((ImageButton) rootView.findViewById(R.id.btnRadio));
     strPlaylist = "";
-    tv = ((TextView) rootView.findViewById(R.id.playlist));
+    tvPlayList = ((TextView) rootView.findViewById(R.id.playlist));
+    tvScheduleList = ((TextView) rootView.findViewById(R.id.schedulelist));
+    ServerCallback serverCallback = new ServerCallback() {
+      @Override
+      public void onSuccess(JSONObject response) {
+        GeneralReceiveRequest generalReceive = new Gson().fromJson(response.toString(),
+            GeneralReceiveRequest.class);
+
+        if (generalReceive.isSuccess()) {
+          ReceiveScheduleList receiveScheduleList = new Gson().fromJson(response.toString(),
+              ReceiveScheduleList.class);
+          tvScheduleList.setText(receiveScheduleList.data);
+        } else {
+          android.os.Message msg = android.os.Message.obtain();
+          msg.what = ConstValues.ERROR_DEFAULT;
+          msg.obj = (Object) response;
+          getBaseActivity().getFlowHandler().sendMessage(msg);
+          tvScheduleList.setText("");
+        }
+
+
+      }
+
+      @Override
+      public void onError(VolleyError error) {
+        error.printStackTrace();
+        android.os.Message msg = android.os.Message.obtain();
+        msg.what = ConstValues.ERROR_DEFAULT;
+        getBaseActivity().getFlowHandler().sendMessage(msg);
+      }
+    };
+
+    //Sending the Message
+    android.os.Message msg = android.os.Message.obtain();
+    msg.what = ConstValues.RADIO_SCHEDULE_LIST;
+    msg.obj = (Object) serverCallback;
+    getBaseActivity().getFlowHandler().sendMessage(msg);
+
+
+
     setRadioButtonState(MainActivity.radiostate);
     getBaseActivity().getMenuOption(MainActivity.MenuOptions.RADIO).setVisible(false);
     btnRadio.setOnClickListener(new View.OnClickListener() {
@@ -62,10 +108,12 @@ public class Radio extends AppBaseFragement {
         MainActivity.getFlowHandler().sendMessage(msg);
       }
     });
+
+
     if (getBaseActivity().radiostate) {
-      android.os.Message msg = android.os.Message.obtain();
-      msg.what = ConstValues.RADIO_GET_PLAYLIST;
-      MainActivity.getFlowHandler().sendMessage(msg);
+      android.os.Message msg1 = android.os.Message.obtain();
+      msg1.what = ConstValues.RADIO_GET_PLAYLIST;
+      MainActivity.getFlowHandler().sendMessage(msg1);
       getBaseActivity().startAlaram();
     }
     return rootView;
@@ -106,15 +154,15 @@ public class Radio extends AppBaseFragement {
 
   public void setPlaylist(String strPlaylist) {
     if (rootView != null && this.strPlaylist.equalsIgnoreCase(strPlaylist) == false) {
-      tv.setText(strPlaylist + "              " + strPlaylist + "              " + strPlaylist);
+      tvPlayList.setText(strPlaylist + "              " + strPlaylist + "              " + strPlaylist);
       this.strPlaylist = strPlaylist;
-      tv.setSelected(true);
-      tv.setEllipsize(TextUtils.TruncateAt.MARQUEE);
-      tv.setSingleLine(true);
+      tvPlayList.setSelected(true);
+      tvPlayList.setEllipsize(TextUtils.TruncateAt.MARQUEE);
+      tvPlayList.setSingleLine(true);
     }
     Random rnd = new Random();
     int color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
-    tv.setTextColor(color);
+    tvPlayList.setTextColor(color);
   }
 
 }

@@ -59,6 +59,7 @@ public class ServerRequest<T> {
     ABOUT_GURU_PARAMPARA("about_guru_parampara.php", "about_guru_parampara.json", Request.Method.POST),
     ABOUT_US("about_us.php", "about_us.json", Request.Method.POST),
     GENERAL_SETTINGS("general_settings.php", "general_setting.json", Request.Method.POST),
+    RADIO_SCHEDULE_LIST("schedule_list.php", "schedule_list.json", Request.Method.POST),
     RADIO_STATUS("", "", Request.Method.GET);
 
     private String functionname = null;
@@ -153,9 +154,11 @@ public class ServerRequest<T> {
         strURL = baseurl + SendServerRequest.ABOUT_US.getFunctionName();
         break;
       case GENERAL_SETTINGS:
-        strURL = baseurl + SendServerRequest.COUNTRY_LIST.getFunctionName();
+        strURL = baseurl + SendServerRequest.GENERAL_SETTINGS.getFunctionName();
         break;
-
+      case RADIO_SCHEDULE_LIST:
+        strURL = baseurl + SendServerRequest.RADIO_SCHEDULE_LIST.getFunctionName();
+        break;
       case RADIO_STATUS:
         strURL = "https://public.radio.co/stations/sfe8bb6b1e/status";
         break;

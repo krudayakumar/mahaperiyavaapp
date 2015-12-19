@@ -26,7 +26,7 @@
 
     <TextView
       android:id="@+id/section_label"
-      style="@style/white_small_text"
+      style="@style/white_medium_text"
       android:layout_gravity="center_vertical|center_horizontal"
       android:layout_marginBottom="10dp"
       android:gravity="center"
@@ -40,6 +40,7 @@
     android:id="@+id/mLlayoutBottomButtons"
     android:layout_width="fill_parent"
     android:layout_height="100dp"
+
     android:layout_alignParentBottom="true"
     android:orientation="vertical">
 
@@ -53,6 +54,14 @@
       android:visibility="gone"
       android:textColor="@color/white" />
 
+    <TextView
+      android:id="@+id/version"
+      style="@style/white_small_text"
+      android:layout_gravity="center_vertical|center_horizontal"
+      android:layout_weight="1"
+      android:gravity="center"
+
+      android:textColor="@color/white" />
 
   </LinearLayout>
 

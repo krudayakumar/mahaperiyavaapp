@@ -393,6 +393,11 @@ public class MainActivity extends MBaseActivity
             onOptionsItemSelected(actionRestart);
             break;
           }
+          case ConstValues.RADIO_SCHEDULE_LIST: {
+            getServerRequestSend().executeRequest(
+                ServerRequest.SendServerRequest.RADIO_SCHEDULE_LIST, null, (ServerCallback) msg.obj);
+
+          }
           case ConstValues.RADIO_GET_PLAYLIST: {
 
             Radio radio = (Radio) ((Activity) (context)).getFragmentManager()
@@ -400,7 +405,7 @@ public class MainActivity extends MBaseActivity
             if (MainActivity.radiostate && radio != null) {
               //Sending the Message
               getServerRequestSend().executeRequest(
-                  ServerRequest.SendServerRequest.RADIO_STATUS, msg.obj, new ServerCallback() {
+                  ServerRequest.SendServerRequest.RADIO_STATUS, null, new ServerCallback() {
                     @Override
                     public void onSuccess(JSONObject response) {
                       RadioStatus radioStatus = new Gson().fromJson(response.toString(),
@@ -471,7 +476,11 @@ public class MainActivity extends MBaseActivity
             });
             break;
           }
-
+          case ConstValues.GENERAL_SETTING_SERVER_REQUEST: {
+            getServerRequestSend().executeRequest(
+                ServerRequest.SendServerRequest.GENERAL_SETTINGS, null, (ServerCallback) msg.obj, false);
+          }
+          break;
           case ConstValues.LOGIN_SUCCESSFUL: {
             Message msgtmp = Message.obtain();
             msgtmp.what = ConstValues.DASHBOARD_LOGIN;
@@ -827,45 +836,7 @@ public class MainActivity extends MBaseActivity
           break;
 
 
-          case ConstValues.GENERAL_SETTING_SERVER_REQUEST: {
-            getServerRequestSend().executeRequest(
-                ServerRequest.SendServerRequest.GENERAL_SETTINGS, msg.obj, new ServerCallback() {
-                  @Override
-                  public void onSuccess(JSONObject response) {
 
-                    ReceiveGeneralSettings generalReceiveRequest = new Gson().fromJson(response.toString(),
-                        ReceiveGeneralSettings.class);
-
-                    if (generalReceiveRequest.isSuccess()) {
-
-                      PreferenceData.getInstance(context).setValue(PreferenceData.PREFVALUES.GENERAL_SETTINGS.toString(), new Gson().toJson(generalReceiveRequest.data).toString());
-                    } else {
-                      new Gson().toJson(generalReceiveRequest.data).toString();
-                      String strData = "";
-                      strData = (String) PreferenceData.getInstance(context).getValue(PreferenceData.PREFVALUES.GENERAL_SETTINGS.toString(), (Object) strData);
-                      if (!TextUtils.isEmpty(strData)) {
-                        GeneralSetting.setInstance(new Gson().fromJson(response.toString(),
-                            GeneralSetting.class));
-                      }
-                      Message msgtmp = Message.obtain();
-                      msgtmp.obj = (Object) response;
-                      msgtmp.what = ConstValues.ERROR_DEFAULT;
-                      getFlowHandler().sendMessage(msgtmp);
-                    }
-
-
-                  }
-
-                  @Override
-                  public void onError(VolleyError error) {
-                    error.printStackTrace();
-                    Message msg = Message.obtain();
-                    msg.what = ConstValues.ERROR_DEFAULT;
-                    getFlowHandler().sendMessage(msg);
-                  }
-                });
-          }
-          break;
 
           //Default Error
 
@@ -1210,7 +1181,14 @@ public class MainActivity extends MBaseActivity
   private void initializeMediaPlayer() {
     player = new MediaPlayer();
     try {
-      player.setDataSource(getResources().getString(R.string.link_radio));
+      String radiourl = "";
+      if (TextUtils.isEmpty(GeneralSetting.getInstance().radiourl)) {
+        radiourl = getResources().getString(R.string.link_radio);
+      } else {
+        radiourl = GeneralSetting.getGeneralSetting().radiourl;
+      }
+      Log.d(TAG, "radio url" + radiourl);
+      player.setDataSource(radiourl);
     } catch (IllegalArgumentException e) {
       e.printStackTrace();
     } catch (IllegalStateException e) {

@@ -1,19 +1,36 @@
 package com.kanchi.periyava.Fragments;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Message;
 import android.text.Html;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.android.volley.VolleyError;
+import com.google.gson.Gson;
 import com.kanchi.periyava.Activity.MainActivity;
+import com.kanchi.periyava.Adapters.SatsangListAdapter;
+import com.kanchi.periyava.BuildConfig;
+import com.kanchi.periyava.Interface.ServerCallback;
 import com.kanchi.periyava.Model.ConstValues;
+import com.kanchi.periyava.Model.GeneralSetting;
+import com.kanchi.periyava.Model.PreferenceData;
 import com.kanchi.periyava.Model.UserProfile;
 import com.kanchi.periyava.R;
+import com.kanchi.periyava.ReceiveRequest.GeneralReceiveRequest;
+import com.kanchi.periyava.ReceiveRequest.ReceiveGeneralSettings;
+import com.kanchi.periyava.ReceiveRequest.ReceiveSatsangList;
+
+import org.json.JSONObject;
 
 /**
  * Created by m84098 on 9/3/15.
@@ -28,10 +45,13 @@ public class Welcome extends AppBaseFragement {
                            Bundle savedInstanceState) {
     rootView = inflater.inflate(R.layout.welcome, container, false);
     context = container.getContext();
-    Thread splashThread = new Thread() {
+    final String versionName = BuildConfig.VERSION_NAME;
+    ((TextView) (rootView.findViewById(R.id.version))).setText("Ver " + versionName);
+    final Thread splashThread = new Thread() {
       public void run() {
 
         try {
+
           // Thread will sleep for 2 seconds
           sleep(2 * 1000);
           android.os.Message msg = Message.obtain();
@@ -44,7 +64,73 @@ public class Welcome extends AppBaseFragement {
         }
       }
     };
-    splashThread.start();
+    ServerCallback serverCallback = new ServerCallback() {
+      @Override
+      public void onSuccess(JSONObject response) {
+
+        ReceiveGeneralSettings generalReceiveRequest = new Gson().fromJson(response.toString(),
+            ReceiveGeneralSettings.class);
+
+
+        if (generalReceiveRequest.isSuccess()) {
+          GeneralSetting.getGeneralSetting().radioplaylisturl = generalReceiveRequest.data.radioplaylisturl;
+          GeneralSetting.getGeneralSetting().radiourl = generalReceiveRequest.data.radiourl;
+          GeneralSetting.getGeneralSetting().feedbackemailid = generalReceiveRequest.data.feedbackemailid;
+          GeneralSetting.getGeneralSetting().version = generalReceiveRequest.data.version;
+          GeneralSetting.getGeneralSetting().forceupgrade = generalReceiveRequest.data.forceupgrade;
+          GeneralSetting.getGeneralSetting().maintenancemode = generalReceiveRequest.data.maintenancemode;
+          GeneralSetting.getGeneralSetting().playstoreurl = generalReceiveRequest.data.playstoreurl;
+          Log.d(TAG, "forceupgrade:" + GeneralSetting.getGeneralSetting().forceupgrade);
+          Log.d(TAG, "maintenancemode:" + GeneralSetting.getGeneralSetting().maintenancemode);
+
+
+          if (GeneralSetting.getGeneralSetting().forceupgrade && GeneralSetting.getGeneralSetting().version.equalsIgnoreCase(versionName) == false) {
+            showUpgradeMaintanence(true);
+          } else if (GeneralSetting.getGeneralSetting().maintenancemode) {
+            showUpgradeMaintanence(false);
+          } else {
+            splashThread.start();
+          }
+
+
+        } else {
+          new Gson().toJson(generalReceiveRequest.data).toString();
+          String strData = "";
+          strData = (String) PreferenceData.getInstance(context).getValue(PreferenceData.PREFVALUES.GENERAL_SETTINGS.toString(), (Object) strData);
+          if (!TextUtils.isEmpty(strData)) {
+            GeneralSetting.setInstance(new Gson().fromJson(response.toString(),
+                GeneralSetting.class));
+          }
+
+          Message msgtmp = Message.obtain();
+          msgtmp.obj = (Object) response;
+          msgtmp.what = ConstValues.ERROR_DEFAULT;
+          getBaseActivity().getFlowHandler().sendMessage(msgtmp);
+        }
+
+
+      }
+
+      @Override
+      public void onError(VolleyError error) {
+        error.printStackTrace();
+        Message msg = Message.obtain();
+        msg.what = ConstValues.ERROR_INTERNET_CONNECTION;
+        getBaseActivity().getFlowHandler().sendMessage(msg);
+
+      }
+    };
+
+    //Sending the Message
+    android.os.Message msg = android.os.Message.obtain();
+    msg.what = ConstValues.GENERAL_SETTING_SERVER_REQUEST;
+    msg.obj = (Object) serverCallback;
+    getBaseActivity().getFlowHandler().sendMessage(msg);
+
+
+
+
+
 
     initCompontents();
 
@@ -76,6 +162,39 @@ public class Welcome extends AppBaseFragement {
       }
     });
 
+  }
+
+  private void showUpgradeMaintanence(final boolean isUpgrade) {
+    AlertDialog.Builder builder = new AlertDialog.Builder(getBaseActivity());
+    String strOkButton = isUpgrade ? "Goto Play Store" : "Close";
+
+    builder.setPositiveButton(strOkButton,
+        new DialogInterface.OnClickListener() {
+
+          @Override
+          public void onClick(DialogInterface dialog, int which) {
+            if (isUpgrade) {
+              String strPlayStoreUrl = getBaseActivity().getResources().getString(R.string.link_playstore);
+              Intent i = new Intent(android.content.Intent.ACTION_VIEW);
+              if (!TextUtils.isEmpty(GeneralSetting.getGeneralSetting().playstoreurl)) {
+                strPlayStoreUrl = GeneralSetting.getGeneralSetting().playstoreurl;
+              }
+              i.setData(Uri.parse(strPlayStoreUrl));
+              startActivity(i);
+            } else {
+              getBaseActivity().finish();
+            }
+            dialog.dismiss();
+
+          }
+        });
+    builder.setTitle(getResources().getString(R.string.app_name));
+    builder.setMessage(isUpgrade ? "New Version Available" : "Application in Maintenance Mode");
+    AlertDialog alert = builder.create();
+    alert.setCancelable(false);
+    alert.show();
+    alert.getButton(alert.BUTTON_POSITIVE)
+        .setTextColor(getResources().getColor(R.color.primary));
   }
 
   private void setRegistrationClick(View v) {

@@ -10,8 +10,24 @@ public class GeneralSetting {
   @SerializedName("version")
   public String version;
 
+  @SerializedName("forceupgrade")
+  public boolean forceupgrade;
+
+  @SerializedName("maintenancemode")
+  public boolean maintenancemode;
+
+  @SerializedName("playstoreurl")
+  public String playstoreurl;
+
+
   @SerializedName("feedbackemailid")
   public String feedbackemailid = "info@kgpfoundation.org";
+
+  @SerializedName("radiourl")
+  public String radiourl;
+
+  @SerializedName("radioplaylisturl")
+  public String radioplaylisturl;
 
   private static GeneralSetting generalSetting;
 

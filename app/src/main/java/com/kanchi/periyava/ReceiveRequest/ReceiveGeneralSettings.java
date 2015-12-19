@@ -20,10 +20,25 @@ public class ReceiveGeneralSettings {
 
   public class Data {
     @SerializedName("version")
-    public int version;
+    public String version;
+
+    @SerializedName("forceupgrade")
+    public boolean forceupgrade;
+
+    @SerializedName("maintenancemode")
+    public boolean maintenancemode;
+
+    @SerializedName("playstoreurl")
+    public String playstoreurl;
 
     @SerializedName("feedbackemailid")
     public String feedbackemailid;
+
+    @SerializedName("radiourl")
+    public String radiourl;
+
+    @SerializedName("radioplaylisturl")
+    public String radioplaylisturl;
 
   }
 

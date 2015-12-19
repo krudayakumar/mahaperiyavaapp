@@ -17,6 +17,7 @@
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:gravity="center"
+
       android:orientation="vertical">
 
       <LinearLayout
@@ -33,26 +34,30 @@
           android:src="@drawable/perivaya_sitting" />-->
         <LinearLayout
           android:layout_width="match_parent"
-          android:layout_height="wrap_content"
+          android:layout_height="match_parent"
           android:layout_gravity="bottom"
+
+          android:padding="5dp"
           android:orientation="horizontal">
 
           <com.kanchi.periyava.Component.CircularImageView
+
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_gravity="center"
-
             android:src="@drawable/periyava" />
 
           <TextView
-            style="@style/saffron_small_text"
+            android:layout_marginLeft="5dp"
             android:layout_width="match_parent"
-
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/lbl_periyava_pootri"
             android:textColor="@color/safaron"
-            android:textStyle="bold" />
+            android:textSize="11dp"
+            android:textStyle="bold"
+
+            android:layout_marginRight="14sp" />
         </LinearLayout>
       </LinearLayout>
 
@@ -66,7 +71,6 @@
       <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
         android:layout_marginTop="10dp"
         android:orientation="vertical"
 
@@ -103,6 +107,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_marginLeft="10dp"
+
         android:layout_marginRight="10dp">
 
         <TextView
@@ -111,10 +116,12 @@
           android:layout_gravity="center_vertical"
           android:layout_marginBottom="10dp"
           android:text="Schedule List"
+
           android:textColor="@color/safaron"
           android:textStyle="bold" />
 
         <TextView
+          android:id="@+id/schedulelist"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_gravity="center_vertical"

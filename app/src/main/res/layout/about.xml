@@ -32,11 +32,16 @@
         android:gravity="center"
         android:textStyle="bold" />
 
-      <TextView
+      <WebView
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+      <!--<TextView
         android:id="@+id/content"
         style="@style/saffron_medium_text"
         android:autoLink="web"
-        android:text="@string/lbl_about_content" />
+        android:text="@string/lbl_about_content" />-->
     </LinearLayout>
   </ScrollView>
 

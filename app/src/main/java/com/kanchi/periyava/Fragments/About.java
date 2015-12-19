@@ -61,8 +61,14 @@ public class About extends AppBaseFragement {
     ((ImageView) rootView.findViewById(R.id.imgView))
         .setImageResource(imgView);
 
-    ((TextView) rootView.findViewById(R.id.content))
-        .setText(Html.fromHtml(strContent));
+    String strJustifyContent = " <html><body style=\"text-align:justify\"><font size=\"4\">" + strContent + "</font></body></Html>";
+    WebView webView = (WebView) rootView.findViewById(R.id.content);
+    webView.loadData(strJustifyContent, "text/html", "utf-8");
+
+    /*TextView txtContent = (TextView) rootView.findViewById(R.id.content);
+    txtContent.setText(Html.fromHtml(strJustifyContent));
+*/
+
   }
 
 }

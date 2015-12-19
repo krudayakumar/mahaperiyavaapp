@@ -121,6 +121,7 @@ public class ConstValues {
   public final static int RADIO_GET_PLAYLIST = RADIO + 2;
   public final static int RADIO_ALARAM_START = RADIO + 3;
   public final static int RADIO_ALARAM_CANCEL = RADIO + 4;
+  public final static int RADIO_SCHEDULE_LIST = RADIO + 4;
 
   public final static int ERROR = 1000;
   public final static int ERROR_DEFAULT = ERROR + 1;

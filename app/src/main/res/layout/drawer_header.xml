@@ -2,19 +2,16 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="match_parent"
   android:layout_height="150dp"
-  android:background="@color/white"
+  android:background="@color/safaron"
   android:orientation="vertical">
 
-  <!--<com.mahaperivaya.Component.CircularImageView
-    android:id="@+id/userimage"
-    style="@style/general_circular_pading"
-    android:src="@drawable/periyava" />-->
 
   <ImageView
     android:layout_width="match_parent"
     android:layout_height="150dp"
     android:scaleType="fitXY"
     android:alpha="0.8"
+
     android:src="@drawable/periva_blessing"/>
 
   <LinearLayout
@@ -29,7 +26,7 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_gravity="bottom|start"
-      android:text="@string/app_name"
+
       android:textAppearance="?android:attr/textAppearanceMedium"
       android:textColor="@color/white"
       android:textStyle="bold" />
@@ -39,7 +36,7 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_gravity="bottom|start"
-      android:text="krudayakumar@gmail.com"
+
       android:textAppearance="?android:attr/textAppearanceSmall"
       android:textColor="@color/white" />
 

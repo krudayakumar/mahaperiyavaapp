@@ -151,7 +151,7 @@
   </style>
 
   <style name="text_general_bold">
-    <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
+    <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
     <item name="android:textStyle">bold</item>
     <item name="android:textColor">@color/safaron</item>
   </style>

@@ -278,7 +278,7 @@ Sri Sankara Bhagavatpada settled down at Kancheepuram (Kanchi) at the end of his
   <string name="err_field_should_not_be_empty">Field should not be empty.</string>
   <string name="err_no_special_characters">No special characters.</string>
   <string name="err_enter_right_count">Enter right count.</string>
-  <string name="err_connect_to_internet">Connect to internet network</string>
+  <string name="err_connect_to_internet">Connect to network</string>
   <string name="err_password_not_same">Password and Confirm Password are not same.</string>
   <string name="err_not_joined">Join Satsang to enable this feature</string>
 
@@ -290,8 +290,10 @@ Sri Sankara Bhagavatpada settled down at Kancheepuram (Kanchi) at the end of his
   <string name="link_devithinkural">https://mahaperiyavaal.wordpress.com/</string>
   <!--<string name="link_radio">http://1651.live.streamtheworld.com/SAM09AAC202_SC</string>-->
   <string name="link_radio">http://streaming.radio.co/sfe8bb6b1e/listen</string>
+  <string name="link_radio_playlist">https://public.radio.co/stations/sfe8bb6b1e/status</string>
   <string name="link_about_peetham">http://www.kgpfoundation.org/Satsang1/about_matam.php</string>
   <string name="link_about_guru">http://www.kamakoti.org/peeth/origin.html</string>
+  <string name="link_playstore">https://play.google.com/store/apps/details?id=com.kanchi.periyava</string>
 
   <string name="feedback_emailid"></string>
   <string-array name="spinnerItems">
