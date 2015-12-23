@@ -19,19 +19,19 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.Button;
 
-import com.kanchi.periyava.Activity.MainActivity;
-import com.kanchi.periyava.Model.ConstValues;
+import com.kanchi.periyava.BuildConfig;
 import com.kanchi.periyava.Model.GeneralSetting;
 import com.kanchi.periyava.R;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class HelpFeedback extends AppBaseFragement {
   public static String TAG = "HelpFeedback";
@@ -50,7 +50,9 @@ public class HelpFeedback extends AppBaseFragement {
       @Override
       public void onClick(View view) {
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("mailto:" + GeneralSetting.getInstance().feedbackemailid));
-        intent.putExtra(Intent.EXTRA_SUBJECT, "Feedback ");
+        intent.putExtra(Intent.EXTRA_SUBJECT, "Feedback");
+
+        intent.putExtra(Intent.EXTRA_TEXT, (BuildConfig.DEBUG == true ? "Debug" : "Release") + " Ver " + BuildConfig.VERSION_NAME + "\nDate:" + new SimpleDateFormat("EEE, MMM dd yyyy hh:mm:ss").format(new Date(BuildConfig.TIMESTAMP)));
         startActivity(intent);
       }
     });

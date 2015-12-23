@@ -32,6 +32,9 @@ import com.kanchi.periyava.ReceiveRequest.ReceiveSatsangList;
 
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Created by m84098 on 9/3/15.
  */
@@ -46,7 +49,9 @@ public class Welcome extends AppBaseFragement {
     rootView = inflater.inflate(R.layout.welcome, container, false);
     context = container.getContext();
     final String versionName = BuildConfig.VERSION_NAME;
-    ((TextView) (rootView.findViewById(R.id.version))).setText("Ver " + versionName);
+    Date buildDate = new Date(BuildConfig.TIMESTAMP);
+    System.out.println(new SimpleDateFormat("yyyymmddhhmmss").format(new Date(BuildConfig.TIMESTAMP)));
+    ((TextView) (rootView.findViewById(R.id.version))).setText((BuildConfig.DEBUG == true ? "Debug" : "Release") + " Ver " + versionName + "\n" + new SimpleDateFormat("EEE, MMM dd yyyy hh:mm:ss").format(new Date(BuildConfig.TIMESTAMP)));
     final Thread splashThread = new Thread() {
       public void run() {
 

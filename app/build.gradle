@@ -4,19 +4,61 @@ android {
   compileSdkVersion 22
   buildToolsVersion '23.0.2'
 
-    defaultConfig {
-        applicationId 'com.kanchi.periyava'
-        minSdkVersion 18
-        targetSdkVersion 22
-        versionCode 1
-        versionName "1.0"
+  defaultConfig {
+    applicationId 'com.kanchi.periyava'
+    minSdkVersion 18
+    targetSdkVersion 22
+    versionCode 1
+    versionName "1.0"
+    buildConfigField "long", "TIMESTAMP", System.currentTimeMillis() + "L"
+  }
+  signingConfigs {
+
+    debug {
+      storeFile file("./keystore/kanchisankara.keystore")
+      storePassword "kanchisankara"
+      keyAlias "kanchisankara"
+      keyPassword "kanchisankara"
     }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
+
+    release {
+      storeFile file("./keystore/kanchisankara.keystore")
+      storePassword "kanchisankara"
+      keyAlias "kanchisankara"
+      keyPassword "kanchisankara"
     }
+  }
+
+  lintOptions {
+    checkReleaseBuilds false
+  }
+
+  buildTypes {
+    release {
+      debuggable false
+      minifyEnabled true
+      signingConfig signingConfigs.release
+      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+      zipAlignEnabled true
+      /* applicationVariants.all { variant ->
+         variant.outputs.each { output ->
+           def formattedDate = new Date().format('yyyyMMddHHmmss')
+           def newName = output.outputFile.name
+           newName = newName.replace("app-", "KanchiSankara-")
+           newName = newName.replace("-release", "-release-"+defaultConfig.versionName+"-" + formattedDate)
+           //noinspection GroovyAssignabilityCheck
+           output.outputFile = new File(output.outputFile.parent+"/build/outputs/apk/", newName)
+         }
+       }*/
+
+    }
+    debug {
+      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+      debuggable true
+
+    }
+  }
+
   productFlavors {
   }
 }
@@ -28,6 +70,5 @@ dependencies {
   compile 'com.android.support:recyclerview-v7:22.2.1'
   compile 'com.google.code.gson:gson:2.3.1'
   compile 'com.mcxiaoke.volley:library:1.0.19'
-  compile 'com.facebook.fresco:fresco:0.7.0'
   compile 'com.android.support:support-v4:22.2.1'
 }
