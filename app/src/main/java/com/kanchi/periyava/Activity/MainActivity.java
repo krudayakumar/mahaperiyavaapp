@@ -23,6 +23,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
+import android.media.AudioTrack;
+import android.media.MediaCodec;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
@@ -44,12 +46,24 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
+import android.view.Surface;
+import android.view.SurfaceHolder;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
+import com.google.android.exoplayer.ExoPlaybackException;
+import com.google.android.exoplayer.ExoPlayer;
+import com.google.android.exoplayer.FrameworkSampleSource;
+import com.google.android.exoplayer.MediaCodecAudioTrackRenderer;
+import com.google.android.exoplayer.MediaCodecTrackRenderer;
+import com.google.android.exoplayer.MediaCodecVideoTrackRenderer;
+import com.google.android.exoplayer.SampleSource;
+import com.google.android.exoplayer.TrackRenderer;
+import com.google.android.exoplayer.VideoSurfaceView;
 import com.google.gson.Gson;
+import com.kanchi.periyava.BuildConfig;
 import com.kanchi.periyava.Component.CircularImageView;
 import com.kanchi.periyava.Fragments.About;
 import com.kanchi.periyava.Fragments.AboutAcharayas;
@@ -89,6 +103,7 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
@@ -103,7 +118,12 @@ public class MainActivity extends MBaseActivity
   private final com.kanchi.periyava.Fragments.Dashboard mDashboard = new com.kanchi.periyava.Fragments.Dashboard();
   private final WebPage mWebPage = new WebPage();
   private final About mAbout = new About();
-  private MediaPlayer player;
+  private ExoPlayer player;
+  private final Handler mainHandler = new Handler();
+  private TrackRenderer videoRenderer;
+  private TrackRenderer audioRenderer;
+
+  private VideoSurfaceView surfaceView;
   private boolean isPlaying = false;
   private final Handler mDrawerActionHandler = new Handler();
   private DrawerLayout mDrawerLayout;
@@ -120,6 +140,10 @@ public class MainActivity extends MBaseActivity
   private NavigationView navigationView;
   private static Toolbar toolbar;
   private Menu menu;
+  private PendingIntent pendingIntent;
+
+
+
 
   public enum LANGUAGE {
     ENGLISH("en"),
@@ -185,8 +209,6 @@ public class MainActivity extends MBaseActivity
     Intent alarmIntent = new Intent(MainActivity.this, AlarmReceiver.class);
     pendingIntent = PendingIntent.getBroadcast(MainActivity.this, 0, alarmIntent, 0);
 
-
-    initializeMediaPlayer();
     UserProfile.getInstance();
     PreferenceData.getInstance(context);
     GeneralSetting.getInstance();
@@ -195,6 +217,9 @@ public class MainActivity extends MBaseActivity
     Message msg = Message.obtain();
     msg.what = ConstValues.WELCOME;
     getFlowHandler().sendMessage(msg);
+
+
+    //preparePlayer();
 
   }
 
@@ -373,9 +398,14 @@ public class MainActivity extends MBaseActivity
 
           case ConstValues.HELP_FEEDBACK: {
             setTitle(getResources().getString(R.string.lbl_feedback));
-            bundle = new Bundle();
+           /* bundle = new Bundle();
             bundle.putString(WEBURL, getResources().getString(R.string.base_url) + "general_help.php");
             showFragment(new HelpFeedback(), bundle, R.id.content, true, HelpFeedback.TAG);
+            */
+
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("mailto:" + GeneralSetting.getInstance().feedbackemailid));
+            intent.putExtra(Intent.EXTRA_SUBJECT, "Feedback" + "(" + (BuildConfig.DEBUG == true ? "Debug" : "Release") + " Ver " + BuildConfig.VERSION_NAME + ")");
+            startActivity(intent);
           }
           break;
           case ConstValues.RADIO: {
@@ -851,6 +881,7 @@ public class MainActivity extends MBaseActivity
             Message msgtmp = Message.obtain();
             msgtmp.what = ConstValues.DASHBOARD_WITHOUT_LOGIN;
             getFlowHandler().sendMessage(msgtmp);
+            radiostate = false;
             ShowSnackBar(context, getWindow().getDecorView(), getResources().getString(R.string.err_connect_to_internet), "Settings", new View.OnClickListener() {
               @Override
               public void onClick(View view) {
@@ -1038,28 +1069,27 @@ public class MainActivity extends MBaseActivity
   }
 
   public void RunRadio(MenuItem item) {
-    Radio frg = (Radio) getFragmentManager()
-        .findFragmentByTag(Radio.TAG);
+
     if (radiostate == false) {
       startPlaying();
-      radiostate = true;
       showProgressDialog();
       item.setIcon(R.drawable.ic_stop);
-      startAlaram();
-      android.os.Message msg = android.os.Message.obtain();
-      msg.what = ConstValues.RADIO_GET_PLAYLIST;
-      MainActivity.getFlowHandler().sendMessage(msg);
     } else {
       stopPlaying();
-      radiostate = false;
       item.setIcon(R.drawable.ic_play);
-      stopPlaying();
     }
+
+
+  }
+
+  private void setRadioScreenButtonState() {
+    Radio frg = (Radio) getFragmentManager()
+        .findFragmentByTag(Radio.TAG);
     if (frg != null) {
       frg.setRadioButtonState(radiostate);
     }
-
   }
+
 
   @Override
   public boolean onOptionsItemSelected(final MenuItem item) {
@@ -1073,20 +1103,19 @@ public class MainActivity extends MBaseActivity
 
         // TODO Auto-generated method stub
         takeScreenshot();
-
-        File F = new File(Environment.getExternalStorageDirectory() + "/screenshot.png");
-        Uri uri = Uri.fromFile(F);
+        Uri uri = null;
+        try {
+          File F = new File(Environment.getExternalStorageDirectory() + "/screenshot.png");
+          uri = Uri.fromFile(F);
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
         Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
         emailIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        emailIntent.setType("vnd.android.cursor.item/email");
-        emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL,
-            new String[]{GeneralSetting.getInstance().feedbackemailid});
-        emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,
-            getResources().getString(R.string.lbl_share));
-        emailIntent.putExtra(android.content.Intent.EXTRA_TEXT,
-            getResources().getString(R.string.lbl_share));
-        emailIntent.setType("image/png");
-        emailIntent.putExtra(Intent.EXTRA_STREAM, uri);
+        if (uri != null) {
+          emailIntent.setType("image/png");
+          emailIntent.putExtra(Intent.EXTRA_STREAM, uri);
+        }
         startActivity(Intent.createChooser(emailIntent, "Share Using..."));
         break;
       case android.R.id.home: {
@@ -1153,60 +1182,86 @@ public class MainActivity extends MBaseActivity
     }
   }
 
+  void startPlaying() {
+    Uri uri = Uri.parse(getResources().getString(R.string.link_radio));
+    final int numRenderers = 2;
 
-  private void startPlaying() {
-    player.prepareAsync();
+    // Build the sample source
+    SampleSource sampleSource =
+        new FrameworkSampleSource(context, uri, /* headers */ null, numRenderers);
+    FrameworkSampleSource frameworkSampleSource;
 
-    player.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-      public void onPrepared(MediaPlayer mp) {
-        player.start();
+
+    // Build the track renderers
+    TrackRenderer videoRenderer = new MediaCodecVideoTrackRenderer(sampleSource, MediaCodec.VIDEO_SCALING_MODE_SCALE_TO_FIT);
+    TrackRenderer audioRenderer = new MediaCodecAudioTrackRenderer(sampleSource);
+
+    // Build the ExoPlayer and start playback
+    player = ExoPlayer.Factory.newInstance(numRenderers);
+    player.prepare(audioRenderer);
+
+
+    // Pass the surface to the video renderer.
+    //exoPlayer.sendMessage(videoRenderer, MediaCodecVideoTrackRenderer.MSG_SET_SURFACE, surface);
+
+    player.setPlayWhenReady(true);
+
+    player.addListener(new ExoPlayer.Listener() {
+      @Override
+      public void onPlayerStateChanged(boolean playWhenReady, int playbackState) {
+        Log.d(TAG, "Player State:" + playbackState);
+        switch (player.getPlaybackState()) {
+          case ExoPlayer.STATE_READY:
+            radiostate = true;
+            startAlaram();
+            android.os.Message msg = android.os.Message.obtain();
+            msg.what = ConstValues.RADIO_GET_PLAYLIST;
+            MainActivity.getFlowHandler().sendMessage(msg);
+            hideProgressDialog();
+
+            break;
+          case ExoPlayer.STATE_ENDED:
+            radiostate = true;
+            cancelAlaram();
+            break;
+        }
+        setRadioScreenButtonState();
+      }
+
+      @Override
+      public void onPlayWhenReadyCommitted() {
+
+      }
+
+      @Override
+      public void onPlayerError(ExoPlaybackException error) {
+        ShowSnackBar(context, getWindow().getDecorView(), "Unable to Play Radio", null, null);
         hideProgressDialog();
+        radiostate = false;
+        cancelAlaram();
       }
     });
 
   }
 
-  private void stopPlaying() {
-    if (player.isPlaying()) {
-      player.stop();
-      player.release();
-      cancelAlaram();
-      MenuItem item = globalmenu.findItem(R.id.radio);
-      item.setIcon(R.drawable.ic_play);
-      initializeMediaPlayer();
-    }
-
+  void stopPlaying() {
+    // Don't forget to release when done!
+    player.release();
+    cancelAlaram();
+    radiostate = false;
+    setRadioScreenButtonState();
   }
 
-  private void initializeMediaPlayer() {
-    player = new MediaPlayer();
-    try {
-      String radiourl = "";
-      if (TextUtils.isEmpty(GeneralSetting.getInstance().radiourl)) {
-        radiourl = getResources().getString(R.string.link_radio);
-      } else {
-        radiourl = GeneralSetting.getGeneralSetting().radiourl;
-      }
-      Log.d(TAG, "radio url" + radiourl);
-      player.setDataSource(radiourl);
-    } catch (IllegalArgumentException e) {
-      e.printStackTrace();
-    } catch (IllegalStateException e) {
-      e.printStackTrace();
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
 
-    player.setOnBufferingUpdateListener(new MediaPlayer.OnBufferingUpdateListener() {
 
-      public void onBufferingUpdate(MediaPlayer mp, int percent) {
-        //playSeekBar.setSecondaryProgress(percent);
-        Log.i("Buffering", "" + percent);
 
-      }
-    });
+
+  public ServerRequest getServerRequestSend() {
+    return ServerRequest.getInstance(context, getWindow().getDecorView());
   }
 
+
+  //Progress Dialogbox
   private void showProgressDialog() {
     pDialog = new ProgressDialog(context);
     pDialog.setCancelable(false);
@@ -1224,73 +1279,7 @@ public class MainActivity extends MBaseActivity
   }
 
 
-  public ServerRequest getServerRequestSend() {
-    return ServerRequest.getInstance(context, getWindow().getDecorView());
-  }
-
-  public static Toast currentToast;
-
-  /**
-   * Use a custom display for Toasts.
-   *
-   * @param message
-   */
-  public static void customToast(Context context, String message) {
-    // Avoid creating a queue of toasts
-    if (currentToast != null) {
-      // Dismiss the current showing Toast
-      currentToast.cancel();
-    }
-    //Retrieve the layout Inflater
-    LayoutInflater inflater = (LayoutInflater)
-        context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-    //Assign the custom layout to view
-    View layout = inflater.inflate(R.layout.custom_toast, null);
-    //Return the application context
-    currentToast = new Toast(context.getApplicationContext());
-    //Set toast gravity to center
-    currentToast.setGravity(Gravity.BOTTOM | Gravity.LEFT | Gravity.FILL_HORIZONTAL, 0, 0);
-    //Set toast duration
-    currentToast.setDuration(Toast.LENGTH_LONG);
-    //Set the custom layout to Toast
-    currentToast.setView(layout);
-    //Get the TextView for the message of the Toast
-    TextView text = (TextView) layout.findViewById(R.id.text);
-    //Set the custom text for the message of the Toast
-    text.setText(message);
-    //Display toast
-    currentToast.show();
-    // Check if the layout is visible - just to be sure
-    if (layout != null) {
-      // Touch listener for the layout
-      // This will listen for any touch event on the screen
-      layout.setOnTouchListener(new View.OnTouchListener() {
-        @Override
-        public boolean onTouch(View v, MotionEvent event) {
-          // No need to check the event, just dismiss the toast if it is showing
-          if (currentToast != null) {
-            currentToast.cancel();
-            // we return True if the listener has consumed the event
-            return true;
-          }
-          return false;
-        }
-      });
-    }
-  }
-
-  private PendingIntent pendingIntent;
-
-
-  public void cancelAlaram() {
-    AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-    Intent intent = new Intent(context, AlarmReceiver.class);
-    PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
-    alarmManager.cancel(pendingIntent);
-
-    //Toast.makeText(this, "Alarm Canceled", Toast.LENGTH_SHORT).show();
-  }
-
+  //Alaram handling
   public void startAlaram() {
     AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
     Intent intent = new Intent(context, AlarmReceiver.class);
@@ -1298,6 +1287,20 @@ public class MainActivity extends MBaseActivity
     alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), 6000 * 5,
         pendingIntent);
     //Toast.makeText(this, "Alarm Started", Toast.LENGTH_SHORT).show();
+  }
+
+  public void cancelAlaram() {
+    AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+    Intent intent = new Intent(context, AlarmReceiver.class);
+    PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
+    alarmManager.cancel(pendingIntent);
+
+    Radio radio = (Radio) getFragmentManager()
+        .findFragmentByTag(Radio.TAG);
+    if (radio != null) {
+      radio.setPlaylist("");
+    }
+    //Toast.makeText(this, "Alarm Canceled", Toast.LENGTH_SHORT).show();
   }
 
 }

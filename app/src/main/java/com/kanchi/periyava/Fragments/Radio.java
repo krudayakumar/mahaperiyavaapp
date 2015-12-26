@@ -74,6 +74,7 @@ public class Radio extends AppBaseFragement {
           android.os.Message msg = android.os.Message.obtain();
           msg.what = ConstValues.ERROR_DEFAULT;
           msg.obj = (Object) response;
+
           getBaseActivity().getFlowHandler().sendMessage(msg);
           tvScheduleList.setText("");
         }
@@ -86,6 +87,7 @@ public class Radio extends AppBaseFragement {
         error.printStackTrace();
         android.os.Message msg = android.os.Message.obtain();
         msg.what = ConstValues.ERROR_DEFAULT;
+        getBaseActivity().radiostate = false;
         getBaseActivity().getFlowHandler().sendMessage(msg);
       }
     };
@@ -122,12 +124,22 @@ public class Radio extends AppBaseFragement {
 
 
   public void setRadioButtonState(boolean radiostate) {
-    if (radiostate == true) {
-      btnRadio.setBackground(getResources().getDrawable(R.drawable.ic_stop));
+    int sdk = android.os.Build.VERSION.SDK_INT;
+    if (sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+      if (radiostate == true) {
+        btnRadio.setBackgroundDrawable(getResources().getDrawable(R.drawable.ic_stop));
+      } else {
+        btnRadio.setBackgroundDrawable(getResources().getDrawable(R.drawable.ic_play));
+      }
     } else {
-      btnRadio.setBackground(getResources().getDrawable(R.drawable.ic_play));
+      if (radiostate == true) {
+        btnRadio.setBackground(getResources().getDrawable(R.drawable.ic_stop));
+      } else {
+        btnRadio.setBackground(getResources().getDrawable(R.drawable.ic_play));
+      }
     }
   }
+
 
   public void setRadioMenu() {
     if (MainActivity.radiostate == false) {

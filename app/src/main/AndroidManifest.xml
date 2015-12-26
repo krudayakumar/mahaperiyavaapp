@@ -21,6 +21,9 @@
     <receiver
       android:name=".Model.AlarmReceiver"
       android:exported="false" />
+    <meta-data
+      android:name="io.fabric.ApiKey"
+      android:value="179819484ea2577f5e3dc3a1bee0b5f32f3f5bc2" />
   </application>
 
 

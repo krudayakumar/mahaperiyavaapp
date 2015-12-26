@@ -49,9 +49,9 @@ public class Welcome extends AppBaseFragement {
     rootView = inflater.inflate(R.layout.welcome, container, false);
     context = container.getContext();
     final String versionName = BuildConfig.VERSION_NAME;
-    Date buildDate = new Date(BuildConfig.TIMESTAMP);
+    final String buildDate = new SimpleDateFormat("EEE, MMM dd yyyy hh:mm:ss").format(new Date(BuildConfig.TIMESTAMP));
     System.out.println(new SimpleDateFormat("yyyymmddhhmmss").format(new Date(BuildConfig.TIMESTAMP)));
-    ((TextView) (rootView.findViewById(R.id.version))).setText((BuildConfig.DEBUG == true ? "Debug" : "Release") + " Ver " + versionName + "\n" + new SimpleDateFormat("EEE, MMM dd yyyy hh:mm:ss").format(new Date(BuildConfig.TIMESTAMP)));
+    ((TextView) (rootView.findViewById(R.id.version))).setText((BuildConfig.DEBUG == true ? "Debug" : "Release") + " Ver " + versionName);
     final Thread splashThread = new Thread() {
       public void run() {
 
