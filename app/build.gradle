@@ -23,8 +23,8 @@ android {
     applicationId 'com.kanchi.periyava'
     minSdkVersion 16
     targetSdkVersion 22
-    versionCode 1
-    versionName "1.0"
+    versionCode 2
+    versionName "1.1"
     buildConfigField "long", "TIMESTAMP", System.currentTimeMillis() + "L"
   }
   signingConfigs {
@@ -91,4 +91,13 @@ dependencies {
   }
   compile fileTree(include: '*.jar', dir: 'libs')
   compile 'org.bitbucket.yahor_makouski:exoplayer:1.0.13.10'
+  compile('com.crashlytics.sdk.android:crashlytics-ndk:1.1.2@aar') {
+    transitive = true;
+  }
+}
+
+crashlytics {
+  enableNdk true
+  androidNdkOut 'src/main/obj'
+  androidNdkLibsOut 'src/main/libs'
 }

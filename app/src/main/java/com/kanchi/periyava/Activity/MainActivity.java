@@ -202,8 +202,8 @@ public class MainActivity extends MBaseActivity
     loadLanguage(LANGUAGE.ENGLISH);
     setContentView(R.layout.activity_main);
     context = this;
-    initComponents(savedInstanceState);
 
+    initComponents(savedInstanceState);
 
     /* Retrieve a PendingIntent that will perform a broadcast */
     Intent alarmIntent = new Intent(MainActivity.this, AlarmReceiver.class);
@@ -1209,7 +1209,8 @@ public class MainActivity extends MBaseActivity
     player.addListener(new ExoPlayer.Listener() {
       @Override
       public void onPlayerStateChanged(boolean playWhenReady, int playbackState) {
-        Log.d(TAG, "Player State:" + playbackState);
+
+
         switch (player.getPlaybackState()) {
           case ExoPlayer.STATE_READY:
             radiostate = true;
@@ -1239,6 +1240,7 @@ public class MainActivity extends MBaseActivity
         hideProgressDialog();
         radiostate = false;
         cancelAlaram();
+        error.getStackTrace();
       }
     });
 
