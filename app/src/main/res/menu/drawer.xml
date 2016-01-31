@@ -37,6 +37,10 @@
       android:id="@+id/videos"
       android:icon="@drawable/ic_videos"
       android:title="@string/lbl_videos" />
+    <item
+      android:id="@+id/japam"
+      android:icon="@drawable/ic_pooja"
+      android:title="@string/lbl_sahasra_gayathri_counter" />
 
   </group>
   <group
@@ -90,10 +94,7 @@
       android:id="@+id/satsang"
       android:icon="@drawable/ic_japam"
       android:title="@string/lbl_anusham_pooja_finder" />
-    <item
-      android:id="@+id/japam"
-      android:icon="@drawable/ic_pooja"
-      android:title="@string/lbl_sahasra_gayathri_counter" />
+
     </menu>
   </item>
 

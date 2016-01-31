@@ -117,6 +117,8 @@ public class ConstValues {
 
   public final static int HELP_FEEDBACK = 600;
   public final static int RADIO = 700;
+	public final static int RADIOSELECTOR = 700 + 5;
+	public final static int RADIO_PLAY = 700 + 6;
   public final static int RADIO_RUN_STOP = RADIO + 1;
   public final static int RADIO_GET_PLAYLIST = RADIO + 2;
   public final static int RADIO_ALARAM_START = RADIO + 3;

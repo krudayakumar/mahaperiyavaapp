@@ -16,9 +16,11 @@
 package com.kanchi.periyava.Fragments;
 
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
@@ -53,8 +55,9 @@ public class Radio extends AppBaseFragement {
   @Override
   public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                            Bundle savedInstanceState) {
-    Bundle bundle = getArguments();
-    rootView = inflater.inflate(R.layout.radio, container, false);
+		final Bundle bundle = getArguments();
+
+		rootView = inflater.inflate(R.layout.radio, container, false);
 
     btnRadio = ((ImageButton) rootView.findViewById(R.id.btnRadio));
     strPlaylist = "";
@@ -107,6 +110,8 @@ public class Radio extends AppBaseFragement {
       public void onClick(View view) {
         android.os.Message msg = android.os.Message.obtain();
         msg.what = ConstValues.RADIO_RUN_STOP;
+				msg.obj = bundle.getString("URL");
+				Log.d((String) msg.obj, "inside radio");
         MainActivity.getFlowHandler().sendMessage(msg);
       }
     });

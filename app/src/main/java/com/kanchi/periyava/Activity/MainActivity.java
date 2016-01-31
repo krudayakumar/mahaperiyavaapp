@@ -23,9 +23,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
-import android.media.AudioTrack;
-import android.media.MediaCodec;
-import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -49,19 +46,22 @@ import android.view.MotionEvent;
 import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.google.android.exoplayer.ExoPlaybackException;
 import com.google.android.exoplayer.ExoPlayer;
-import com.google.android.exoplayer.FrameworkSampleSource;
 import com.google.android.exoplayer.MediaCodecAudioTrackRenderer;
-import com.google.android.exoplayer.MediaCodecTrackRenderer;
-import com.google.android.exoplayer.MediaCodecVideoTrackRenderer;
-import com.google.android.exoplayer.SampleSource;
 import com.google.android.exoplayer.TrackRenderer;
-import com.google.android.exoplayer.VideoSurfaceView;
+import com.google.android.exoplayer.extractor.ExtractorSampleSource;
+import com.google.android.exoplayer.upstream.Allocator;
+import com.google.android.exoplayer.upstream.DataSource;
+import com.google.android.exoplayer.upstream.DefaultAllocator;
+import com.google.android.exoplayer.upstream.DefaultBandwidthMeter;
+import com.google.android.exoplayer.upstream.DefaultUriDataSource;
+import com.google.android.exoplayer.util.Util;
 import com.google.gson.Gson;
 import com.kanchi.periyava.BuildConfig;
 import com.kanchi.periyava.Component.CircularImageView;
@@ -74,6 +74,7 @@ import com.kanchi.periyava.Fragments.Login;
 import com.kanchi.periyava.Fragments.NewSatsang;
 import com.kanchi.periyava.Fragments.PhotoVideoBook;
 import com.kanchi.periyava.Fragments.Radio;
+import com.kanchi.periyava.Fragments.RadioSelector;
 import com.kanchi.periyava.Fragments.Registration;
 import com.kanchi.periyava.Fragments.SatsangList;
 import com.kanchi.periyava.Fragments.SetPassword;
@@ -102,8 +103,6 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
@@ -123,7 +122,7 @@ public class MainActivity extends MBaseActivity
   private TrackRenderer videoRenderer;
   private TrackRenderer audioRenderer;
 
-  private VideoSurfaceView surfaceView;
+
   private boolean isPlaying = false;
   private final Handler mDrawerActionHandler = new Handler();
   private DrawerLayout mDrawerLayout;
@@ -141,9 +140,8 @@ public class MainActivity extends MBaseActivity
   private static Toolbar toolbar;
   private Menu menu;
   private PendingIntent pendingIntent;
-
-
-
+	private Uri uri;
+	android.os.Message msg;
 
   public enum LANGUAGE {
     ENGLISH("en"),
@@ -266,7 +264,6 @@ public class MainActivity extends MBaseActivity
 
 
   public void loadLanguage(LANGUAGE language) {
-
     Locale locale = new Locale(language.getLanguage());
     Locale.setDefault(locale);
     Configuration config = new Configuration();
@@ -408,9 +405,27 @@ public class MainActivity extends MBaseActivity
             startActivity(intent);
           }
           break;
+				case ConstValues.RADIOSELECTOR: {
+
+					setTitle(getResources().getString(R.string.lbl_online_radio));
+					bundle = new Bundle();
+					bundle.putString("URL", String.valueOf(msg.obj));
+					showFragment(new Radio(), bundle, R.id.content, true, Radio.TAG);
+
+					/*
+					 * bundle = new Bundle(); bundle.putString(WEBURL,
+					 * getResources().getString(R.string.base_url)+"radio.php");
+					 * showFragment(new WebPage(), bundle, R.id.content, true,
+					 * WebPage.TAG);
+					 */
+
+					break;
+				}
           case ConstValues.RADIO: {
+
             setTitle(getResources().getString(R.string.lbl_online_radio));
-            showFragment(new Radio(), null, R.id.content, true, Radio.TAG);
+					Log.d("going to radio selector", "radio selector");
+					showFragment(new RadioSelector(), null, R.id.content, true, Radio.TAG);
 
             /*bundle = new Bundle();
             bundle.putString(WEBURL, getResources().getString(R.string.base_url)+"radio.php");
@@ -418,9 +433,19 @@ public class MainActivity extends MBaseActivity
 
             break;
           }
+				case ConstValues.RADIO_PLAY: {
+					Log.d("RADIOPLAY", "Trying to play the Radio");
+					startPlaying(null);
+					break;
+				}
           case ConstValues.RADIO_RUN_STOP: {
             MenuItem actionRestart = (MenuItem) menu.findItem(R.id.radio);
-            onOptionsItemSelected(actionRestart);
+
+					Log.d(String.valueOf(uri), "inside Radio-run-stop");
+					// original
+					// onOptionsItemSelected(actionRestart);
+					// adith
+					RunRadio(actionRestart, Uri.parse((String) msg.obj));
             break;
           }
           case ConstValues.RADIO_SCHEDULE_LIST: {
@@ -444,7 +469,9 @@ public class MainActivity extends MBaseActivity
                       Radio radio = (Radio) getFragmentManager()
                           .findFragmentByTag(Radio.TAG);
                       if (radio != null) {
-                        radio.setPlaylist(radioStatus.current_track.title);
+									radio.setPlaylist("");
+									// commented as no playlist available
+									// radio.setPlaylist(radioStatus.current_track.title);
                       }
                     }
 
@@ -1068,10 +1095,15 @@ public class MainActivity extends MBaseActivity
     mDrawerToggle.onConfigurationChanged(newConfig);
   }
 
-  public void RunRadio(MenuItem item) {
-
+	public void RunRadio(MenuItem item, Uri uri) {
+		Log.d(String.valueOf(item), "menuitem Runradio");
+		Log.d(String.valueOf(uri), "uriRunradio");
     if (radiostate == false) {
-      startPlaying();
+			// initialize buttons
+
+			Log.d("inside Runradio", "function");
+			Log.d(String.valueOf(uri), "URI parameter");
+			startPlaying(uri);
       showProgressDialog();
       item.setIcon(R.drawable.ic_stop);
     } else {
@@ -1096,7 +1128,7 @@ public class MainActivity extends MBaseActivity
 
     switch (item.getItemId()) {
       case R.id.radio:
-        RunRadio(item);
+			// RunRadio(item);
         break;
       case R.id.share:
       case R.id.feedback:
@@ -1182,18 +1214,37 @@ public class MainActivity extends MBaseActivity
     }
   }
 
-  void startPlaying() {
-    Uri uri = Uri.parse(getResources().getString(R.string.link_radio));
+	void startPlaying(Uri uri) {
+		Log.d(String.valueOf(uri), "uri");
+
+		// Uri uri = Uri.parse(getResources().getString(R.string.link_radio));
+		// Uri uri = Uri.parse(getResources().getString(R.string.link_radio));
+		// new
+		// String URL =
+		// "http://samcloud.spacial.com/api/listen?sid=71234&rid=122293&f=mp3,any&br=96000,any&m=m3u";
+		// String URL = "http://www.iheart.com/live/sports-radio-kjr-2565/";
+		uri = Uri.parse(String.valueOf(uri));
+		// Uri uri =
+		// Uri.parse(getResources().getString(R.string.link_radio_Rw));
+		Log.d(String.valueOf(uri), "uri last ref before play");
+
     final int numRenderers = 2;
 
-    // Build the sample source
-    SampleSource sampleSource =
-        new FrameworkSampleSource(context, uri, /* headers */ null, numRenderers);
-    FrameworkSampleSource frameworkSampleSource;
+		final int BUFFER_SEGMENT_SIZE = 64 * 1024;
+		final int BUFFER_SEGMENT_COUNT = 256;
+		Allocator allocator = new DefaultAllocator(BUFFER_SEGMENT_SIZE);
+
+		final Handler handler = new Handler();
+		String userAgent = Util.getUserAgent(this, "ExoPlayerDemo");
+
+		// Build the video and audio renderers.
+		DefaultBandwidthMeter bandwidthMeter = new DefaultBandwidthMeter(handler, null);
+		DataSource dataSource = new DefaultUriDataSource(context, bandwidthMeter, userAgent);
+		ExtractorSampleSource sampleSource = new ExtractorSampleSource(uri, dataSource, allocator,
+				BUFFER_SEGMENT_COUNT * BUFFER_SEGMENT_SIZE);
 
 
     // Build the track renderers
-    TrackRenderer videoRenderer = new MediaCodecVideoTrackRenderer(sampleSource, MediaCodec.VIDEO_SCALING_MODE_SCALE_TO_FIT);
     TrackRenderer audioRenderer = new MediaCodecAudioTrackRenderer(sampleSource);
 
     // Build the ExoPlayer and start playback
@@ -1214,7 +1265,7 @@ public class MainActivity extends MBaseActivity
         switch (player.getPlaybackState()) {
           case ExoPlayer.STATE_READY:
             radiostate = true;
-            startAlaram();
+					// startAlaram();
             android.os.Message msg = android.os.Message.obtain();
             msg.what = ConstValues.RADIO_GET_PLAYLIST;
             MainActivity.getFlowHandler().sendMessage(msg);
@@ -1223,7 +1274,7 @@ public class MainActivity extends MBaseActivity
             break;
           case ExoPlayer.STATE_ENDED:
             radiostate = true;
-            cancelAlaram();
+					// cancelAlaram();
             break;
         }
         setRadioScreenButtonState();
@@ -1248,14 +1299,13 @@ public class MainActivity extends MBaseActivity
 
   void stopPlaying() {
     // Don't forget to release when done!
-    player.release();
-    cancelAlaram();
-    radiostate = false;
-    setRadioScreenButtonState();
+		if (player != null) {
+			player.release();
+			cancelAlaram();
+			radiostate = false;
+			setRadioScreenButtonState();
+		}
   }
-
-
-
 
 
   public ServerRequest getServerRequestSend() {
