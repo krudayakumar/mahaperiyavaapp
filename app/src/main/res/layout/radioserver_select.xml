@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:orientation="vertical"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+
+  >
+
+  <LinearLayout
+    android:id="@+id/errImage"
+    android:layout_width="match_parent"
+    android:layout_height="534dp"
+    android:gravity="top"
+
+    android:orientation="vertical">
+
+    <LinearLayout
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+
+      android:orientation="horizontal"
+      android:weightSum="2">
+
+      <!--<com.kanchi.periyava.Component.CircularImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:src="@drawable/perivaya_sitting" />-->
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="bottom"
+        android:padding="5dp"
+        android:orientation="horizontal"
+        android:layout_marginBottom="50dp">
+
+        <com.kanchi.periyava.Component.CircularImageView
+
+          android:layout_width="100dp"
+          android:layout_height="100dp"
+          android:layout_gravity="center"
+          android:src="@drawable/periyava" />
+
+        <TextView
+          android:layout_marginLeft="5dp"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center"
+          android:text="@string/lbl_periyava_pootri"
+          android:textColor="@color/safaron"
+          android:textSize="11dp"
+          android:textStyle="bold"
+
+          android:layout_marginRight="14sp" />
+      </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center_horizontal"
+      android:orientation="horizontal">
+
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/text"
+        android:text="Please select one of the following Servers"
+
+        android:layout_marginBottom="50dp"
+        android:gravity="left"
+        android:textColor="@color/safaron"
+        android:textStyle="bold"
+        android:textSize="@dimen/abc_text_size_body_2_material" />
+    </LinearLayout>
+
+    <LinearLayout
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      android:gravity="center"
+      android:layout_gravity="center"
+      android:weightSum="2">
+
+      <Button
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/bIndia"
+        android:text="India Server"
+        android:backgroundTint="#f8bb6d"
+        android:capitalize="none"
+        android:clickable="true" />
+
+      <Button
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/bRw"
+        android:capitalize="none"
+        android:text="Rest of the World"
+        android:clickable="true"
+        android:backgroundTint="#f8bb6d" />
+    </LinearLayout>
+  </LinearLayout>
+</LinearLayout>

@@ -119,8 +119,6 @@ public class MainActivity extends MBaseActivity
   private final About mAbout = new About();
   private ExoPlayer player;
   private final Handler mainHandler = new Handler();
-  private TrackRenderer videoRenderer;
-  private TrackRenderer audioRenderer;
 
 
   private boolean isPlaying = false;
@@ -454,36 +452,30 @@ public class MainActivity extends MBaseActivity
 
           }
           case ConstValues.RADIO_GET_PLAYLIST: {
-
-            Radio radio = (Radio) ((Activity) (context)).getFragmentManager()
-                .findFragmentByTag(Radio.TAG);
-            if (MainActivity.radiostate && radio != null) {
-              //Sending the Message
-              getServerRequestSend().executeRequest(
-                  ServerRequest.SendServerRequest.RADIO_STATUS, null, new ServerCallback() {
-                    @Override
-                    public void onSuccess(JSONObject response) {
-                      RadioStatus radioStatus = new Gson().fromJson(response.toString(),
-                          RadioStatus.class);
-
-                      Radio radio = (Radio) getFragmentManager()
-                          .findFragmentByTag(Radio.TAG);
-                      if (radio != null) {
-									radio.setPlaylist("");
-									// commented as no playlist available
-									// radio.setPlaylist(radioStatus.current_track.title);
-                      }
-                    }
-
-                    @Override
-                    public void onError(VolleyError error) {
-                      error.printStackTrace();
-                      Message msg = Message.obtain();
-                      msg.what = ConstValues.ERROR_DEFAULT;
-                      getFlowHandler().sendMessage(msg);
-                    }
-                  }, false);
-            }
+					/*
+					 * Radio radio = (Radio) ((Activity)
+					 * (context)).getFragmentManager()
+					 * .findFragmentByTag(Radio.TAG); if
+					 * (MainActivity.radiostate && radio != null) { //Sending
+					 * the Message getServerRequestSend().executeRequest(
+					 * ServerRequest.SendServerRequest.RADIO_STATUS, null, new
+					 * ServerCallback() {
+					 *
+					 * @Override public void onSuccess(JSONObject response) {
+					 * RadioStatus radioStatus = new
+					 * Gson().fromJson(response.toString(), RadioStatus.class);
+					 *
+					 * Radio radio = (Radio) getFragmentManager()
+					 * .findFragmentByTag(Radio.TAG); if (radio != null) {
+					 * radio.setPlaylist(""); // commented as no playlist
+					 * available //
+					 * radio.setPlaylist(radioStatus.current_track.title); } }
+					 *
+					 * @Override public void onError(VolleyError error) {
+					 * error.printStackTrace(); Message msg = Message.obtain();
+					 * msg.what = ConstValues.ERROR_DEFAULT;
+					 * getFlowHandler().sendMessage(msg); } }, false); }
+					 */
             break;
           }
           case ConstValues.LOGIN:
@@ -891,12 +883,6 @@ public class MainActivity extends MBaseActivity
             context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse((String) msg.obj)));
           }
           break;
-
-
-
-
-          //Default Error
-
           //Default Error
           case ConstValues.ERROR_DEFAULT: {
             ShowSnackBar(context, getWindow().getDecorView(), getResources().getString(R.string.err_default), null, null);
@@ -1180,11 +1166,7 @@ public class MainActivity extends MBaseActivity
     }
   }
 
-  @Override
-  protected void onSaveInstanceState(final Bundle outState) {
-    super.onSaveInstanceState(outState);
-    outState.putInt(NAV_ITEM_ID, mNavItemId);
-  }
+
 
   private void takeScreenshot() {
     Date now = new Date();
@@ -1215,18 +1197,6 @@ public class MainActivity extends MBaseActivity
   }
 
 	void startPlaying(Uri uri) {
-		Log.d(String.valueOf(uri), "uri");
-
-		// Uri uri = Uri.parse(getResources().getString(R.string.link_radio));
-		// Uri uri = Uri.parse(getResources().getString(R.string.link_radio));
-		// new
-		// String URL =
-		// "http://samcloud.spacial.com/api/listen?sid=71234&rid=122293&f=mp3,any&br=96000,any&m=m3u";
-		// String URL = "http://www.iheart.com/live/sports-radio-kjr-2565/";
-		uri = Uri.parse(String.valueOf(uri));
-		// Uri uri =
-		// Uri.parse(getResources().getString(R.string.link_radio_Rw));
-		Log.d(String.valueOf(uri), "uri last ref before play");
 
     final int numRenderers = 2;
 
@@ -1240,7 +1210,8 @@ public class MainActivity extends MBaseActivity
 		// Build the video and audio renderers.
 		DefaultBandwidthMeter bandwidthMeter = new DefaultBandwidthMeter(handler, null);
 		DataSource dataSource = new DefaultUriDataSource(context, bandwidthMeter, userAgent);
-		ExtractorSampleSource sampleSource = new ExtractorSampleSource(uri, dataSource, allocator,
+		ExtractorSampleSource sampleSource = new ExtractorSampleSource(
+				Uri.parse(String.valueOf(uri)), dataSource, allocator,
 				BUFFER_SEGMENT_COUNT * BUFFER_SEGMENT_SIZE);
 
 
@@ -1265,7 +1236,7 @@ public class MainActivity extends MBaseActivity
         switch (player.getPlaybackState()) {
           case ExoPlayer.STATE_READY:
             radiostate = true;
-					// startAlaram();
+					startAlaram();
             android.os.Message msg = android.os.Message.obtain();
             msg.what = ConstValues.RADIO_GET_PLAYLIST;
             MainActivity.getFlowHandler().sendMessage(msg);
@@ -1274,7 +1245,7 @@ public class MainActivity extends MBaseActivity
             break;
           case ExoPlayer.STATE_ENDED:
             radiostate = true;
-					// cancelAlaram();
+					cancelAlaram();
             break;
         }
         setRadioScreenButtonState();
@@ -1325,34 +1296,39 @@ public class MainActivity extends MBaseActivity
   }
 
   private void hideProgressDialog() {
-
+		if (pDialog != null) {
     if (pDialog.isShowing())
       pDialog.dismiss();
+		}
   }
 
 
   //Alaram handling
   public void startAlaram() {
-    AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-    Intent intent = new Intent(context, AlarmReceiver.class);
-    PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
-    alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), 6000 * 5,
-        pendingIntent);
-    //Toast.makeText(this, "Alarm Started", Toast.LENGTH_SHORT).show();
+		/*
+		 * AlarmManager alarmManager = (AlarmManager)
+		 * context.getSystemService(Context.ALARM_SERVICE); Intent intent = new
+		 * Intent(context, AlarmReceiver.class); PendingIntent pendingIntent =
+		 * PendingIntent.getBroadcast(context, 0, intent, 0);
+		 * alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
+		 * System.currentTimeMillis(), 6000 * 5, pendingIntent);
+		 * //Toast.makeText(this, "Alarm Started", Toast.LENGTH_SHORT).show();
+		 */
   }
 
   public void cancelAlaram() {
-    AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-    Intent intent = new Intent(context, AlarmReceiver.class);
-    PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
-    alarmManager.cancel(pendingIntent);
-
-    Radio radio = (Radio) getFragmentManager()
-        .findFragmentByTag(Radio.TAG);
-    if (radio != null) {
-      radio.setPlaylist("");
-    }
-    //Toast.makeText(this, "Alarm Canceled", Toast.LENGTH_SHORT).show();
+		/*
+		 * AlarmManager alarmManager = (AlarmManager)
+		 * context.getSystemService(Context.ALARM_SERVICE); Intent intent = new
+		 * Intent(context, AlarmReceiver.class); PendingIntent pendingIntent =
+		 * PendingIntent.getBroadcast(context, 0, intent, 0);
+		 * alarmManager.cancel(pendingIntent);
+		 *
+		 * Radio radio = (Radio) getFragmentManager()
+		 * .findFragmentByTag(Radio.TAG); if (radio != null) {
+		 * radio.setPlaylist(""); } //Toast.makeText(this, "Alarm Canceled",
+		 * Toast.LENGTH_SHORT).show();
+		 */
   }
 
 }

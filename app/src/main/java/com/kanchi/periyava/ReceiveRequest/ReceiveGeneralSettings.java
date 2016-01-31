@@ -37,6 +37,12 @@ public class ReceiveGeneralSettings {
     @SerializedName("radiourl")
     public String radiourl;
 
+		@SerializedName("radiourl_india")
+		public String radiourl_india;
+
+		@SerializedName("radiourl_others")
+		public String radiourl_others;
+
     @SerializedName("radioplaylisturl")
     public String radioplaylisturl;
 

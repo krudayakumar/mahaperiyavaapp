@@ -287,18 +287,8 @@ Sri Sankara Bhagavatpada settled down at Kancheepuram (Kanchi) at the end of his
 
   <!--  <string name="link_devithinkural">https://mahaperiyavaa.wordpress.com/2013/09/10/deivathin-kural-corrected-version/</string> -->
   <string name="link_devithinkural">https://mahaperiyavaal.wordpress.com/</string>
-  <!--<string name="link_radio">http://1651.live.streamtheworld.com/SAM09AAC202_SC</string>-->
-  <!--<string name="link_radio">http://streaming.radio.co/sfe8bb6b1e/listen</string> -->
-
-  <!-- India Note Looks like this URL needs to be encoded before passing
-  http%3A%2F%2Fsamcloud.spacial.com%2Fapi%2Flisten%3Fsid%3D71234%26amp%3Brid%3D122293%26amp%3Bf%3Dmp3%2Cany%26amp%3Bbr%3D96000
-  http://samcloud.spacial.com/api/listen?sid=71234&amp;rid=122293&amp;f=mp3,any&amp;br=96000-->
-  <string name="link_radio_Ind">http://1531.live.streamtheworld.com:80/SAM06AAC081_SC</string>
-  <!-- RW Note Looks like this URL needs to be encoded before passing
-  http%3A%2F%2Fsamcloud.spacial.com%2Fapi%2Flisten%3Fsid%3D71526%26amp%3Brid%3D122395%26amp%3Bf%3Daac%2Cany%26amp%3Bbr%3D64000
-    http://samcloud.spacial.com/api/listen?sid=71526&amp;rid=122395&amp;f=aac,any&amp;br=64000-->
-  <string name="link_radio_Rw">http://8653.live.streamtheworld.com:80/SAM01AAC221_SC</string>
-
+  <string name="link_radio_india">http://1531.live.streamtheworld.com:80/SAM06AAC081_SC</string>
+  <string name="link_radio_others">http://8653.live.streamtheworld.com:80/SAM01AAC221_SC</string>
   <string name="link_radio_playlist">https://public.radio.co/stations/sfe8bb6b1e/status</string>
   <string name="link_about_peetham">http://www.kgpfoundation.org/Satsang1/about_matam.php</string>
   <string name="link_about_guru">http://www.kamakoti.org/peeth/origin.html</string>

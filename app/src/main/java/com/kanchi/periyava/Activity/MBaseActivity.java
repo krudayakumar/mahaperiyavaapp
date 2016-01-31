@@ -153,7 +153,7 @@ public abstract class MBaseActivity extends AppCompatActivity implements View.On
       transaction.addToBackStack(null);
 
     // Commit the transaction
-    transaction.commit();
+		transaction.commitAllowingStateLoss();
   }
 
   public void ShowMessage() {

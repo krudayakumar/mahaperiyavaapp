@@ -297,9 +297,14 @@ Sri Sankara Bhagavatpada settled down at Kancheepuram (Kanchi) at the end of his
   <!--New Link -->
   <string name="link_radio">http://samcloud.spacial.com/api/listen?sid=71234&amp;rid=122293&amp;f=mp3,any&amp;br=96000</string>
   -->
+
   <!-- <string name="link_radio">http://samcloud.spacial.com/api/listen?sid=71526&amp;rid=122395&amp;f=aac,any&amp;br=64000,any&amp;m=m3u</string>
 
    <string name="link_radio_playlist">https://public.radio.co/stations/sfe8bb6b1e/status</string>-->
+
+  <string name="link_radio_india">http://1531.live.streamtheworld.com:80/SAM06AAC081_SC</string>
+  <string name="link_radio_others">http://8653.live.streamtheworld.com:80/SAM01AAC221_SC</string>
+
   <string name="link_about_peetham">http://www.kgpfoundation.org/Satsang1/about_matam.php</string>
   <string name="link_about_guru">http://www.kamakoti.org/peeth/origin.html</string>
   <string name="link_playstore">https://play.google.com/store/apps/details?id=com.kanchi.periyava</string>

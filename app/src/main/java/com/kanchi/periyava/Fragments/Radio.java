@@ -104,7 +104,7 @@ public class Radio extends AppBaseFragement {
 
 
     setRadioButtonState(MainActivity.radiostate);
-    getBaseActivity().getMenuOption(MainActivity.MenuOptions.RADIO).setVisible(false);
+		// getBaseActivity().getMenuOption(MainActivity.MenuOptions.RADIO).setVisible(false);
     btnRadio.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
