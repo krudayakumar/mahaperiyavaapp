@@ -76,11 +76,9 @@ public class RadioSelector extends AppBaseFragement {
 			public void onClick(View v) {
 				android.os.Message msg = android.os.Message.obtain();
 				msg.what = ConstValues.RADIOSELECTOR;
-
 				Uri uri = Uri.parse(getResources().getString(R.string.link_radio_others));
 				msg.obj = uri;
 				Log.d(uri.toString(), "Radio URL");
-
 				getBaseActivity().getFlowHandler().sendMessage(msg);
 
 			}

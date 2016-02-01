@@ -84,22 +84,20 @@
       android:weightSum="2">
 
       <Button
-        android:layout_width="300dp"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:id="@+id/bIndia"
         android:text="India Server"
-        android:backgroundTint="#f8bb6d"
-        android:capitalize="none"
+        android:background="@color/safaron_light"
         android:clickable="true" />
 
       <Button
-        android:layout_width="300dp"
+        android:layout_marginTop="10dp"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:id="@+id/bRw"
-        android:capitalize="none"
         android:text="Rest of the World"
-        android:clickable="true"
-        android:backgroundTint="#f8bb6d" />
+        android:background="@color/safaron_light" />
     </LinearLayout>
   </LinearLayout>
 </LinearLayout>

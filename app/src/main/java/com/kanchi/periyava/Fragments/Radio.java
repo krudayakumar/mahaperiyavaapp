@@ -147,11 +147,13 @@ public class Radio extends AppBaseFragement {
 
 
   public void setRadioMenu() {
-    if (MainActivity.radiostate == false) {
-      getBaseActivity().getMenuOption(MainActivity.MenuOptions.RADIO).setVisible(false);
-    } else {
-      getBaseActivity().getMenuOption(MainActivity.MenuOptions.RADIO).setVisible(true);
-    }
+		/*
+		 * if (MainActivity.radiostate == false) {
+		 * getBaseActivity().getMenuOption(MainActivity.MenuOptions.RADIO).
+		 * setVisible(false); } else {
+		 * getBaseActivity().getMenuOption(MainActivity.MenuOptions.RADIO).
+		 * setVisible(true); }
+		 */
 
   }
 
