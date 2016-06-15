@@ -59,15 +59,7 @@ public class RadioSelector extends AppBaseFragement {
 				android.os.Message msg = android.os.Message.obtain();
 				Log.d("inside on click", "on Indbutton");
 				msg.what = ConstValues.RADIOSELECTOR;
-				Log.d(String.valueOf(msg.what), "on Indbutton");
-
-				Uri uri = Uri.parse(getResources().getString(R.string.link_radio_india));
-				msg.obj = uri;
-				Log.d(String.valueOf(uri), "uri in onclick IND");
-				Log.d(uri.toString(), "Radio URL");
-				// msg.obj = uri.toString();
-				// msg= (android.os.Message) msg.obj;
-				Log.d(String.valueOf(msg), "Radio URL 2");
+				msg.obj = (String) "INDIA";
 				getBaseActivity().getFlowHandler().sendMessage(msg);
 			}
 		});
@@ -76,9 +68,7 @@ public class RadioSelector extends AppBaseFragement {
 			public void onClick(View v) {
 				android.os.Message msg = android.os.Message.obtain();
 				msg.what = ConstValues.RADIOSELECTOR;
-				Uri uri = Uri.parse(getResources().getString(R.string.link_radio_others));
-				msg.obj = uri;
-				Log.d(uri.toString(), "Radio URL");
+        msg.obj = (String) "OTHERS";
 				getBaseActivity().getFlowHandler().sendMessage(msg);
 
 			}

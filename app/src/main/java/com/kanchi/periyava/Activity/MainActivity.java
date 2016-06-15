@@ -138,8 +138,8 @@ public class MainActivity extends MBaseActivity
   private static Toolbar toolbar;
   private Menu menu;
   private PendingIntent pendingIntent;
-	private Uri uri;
-	android.os.Message msg;
+  private Uri uri;
+  android.os.Message msg;
 
   public enum LANGUAGE {
     ENGLISH("en"),
@@ -393,57 +393,40 @@ public class MainActivity extends MBaseActivity
 
           case ConstValues.HELP_FEEDBACK: {
             setTitle(getResources().getString(R.string.lbl_feedback));
-           /* bundle = new Bundle();
-            bundle.putString(WEBURL, getResources().getString(R.string.base_url) + "general_help.php");
-            showFragment(new HelpFeedback(), bundle, R.id.content, true, HelpFeedback.TAG);
-            */
-
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("mailto:" + GeneralSetting.getInstance().feedbackemailid));
             intent.putExtra(Intent.EXTRA_SUBJECT, "Feedback" + "(" + (BuildConfig.DEBUG == true ? "Debug" : "Release") + " Ver " + BuildConfig.VERSION_NAME + ")");
             startActivity(intent);
           }
           break;
-				case ConstValues.RADIOSELECTOR: {
-
-					setTitle(getResources().getString(R.string.lbl_online_radio));
-					bundle = new Bundle();
-					bundle.putString("URL", String.valueOf(msg.obj));
-					showFragment(new Radio(), bundle, R.id.content, true, Radio.TAG);
-
-					/*
-					 * bundle = new Bundle(); bundle.putString(WEBURL,
-					 * getResources().getString(R.string.base_url)+"radio.php");
-					 * showFragment(new WebPage(), bundle, R.id.content, true,
-					 * WebPage.TAG);
-					 */
-
-					break;
-				}
-          case ConstValues.RADIO: {
+          case ConstValues.RADIOSELECTOR: {
 
             setTitle(getResources().getString(R.string.lbl_online_radio));
-					Log.d("going to radio selector", "radio selector");
-					showFragment(new RadioSelector(), null, R.id.content, true, Radio.TAG);
-
-            /*bundle = new Bundle();
-            bundle.putString(WEBURL, getResources().getString(R.string.base_url)+"radio.php");
-            showFragment(new WebPage(), bundle, R.id.content, true, WebPage.TAG);*/
-
+            bundle = new Bundle();
+            bundle.putString("SERVER_SELECTION", String.valueOf(msg.obj));
+            showFragment(new Radio(), bundle, R.id.content, true, Radio.TAG);
             break;
           }
-				case ConstValues.RADIO_PLAY: {
-					Log.d("RADIOPLAY", "Trying to play the Radio");
-					startPlaying(null);
-					break;
-				}
+          case ConstValues.RADIO: {
+            setTitle(getResources().getString(R.string.lbl_online_radio));
+            showFragment(new RadioSelector(), null, R.id.content, true, Radio.TAG);
+            break;
+          }
+          case ConstValues.RADIO_PLAY: {
+            startPlaying(null);
+            break;
+          }
           case ConstValues.RADIO_RUN_STOP: {
             MenuItem actionRestart = (MenuItem) menu.findItem(R.id.radio);
+            String URL = getResources().getString(R.string.link_radio_others);
+            String strOption = (String) msg.obj;
 
-					Log.d(String.valueOf(uri), "inside Radio-run-stop");
-					// original
-					// onOptionsItemSelected(actionRestart);
-					// adith
-					RunRadio(actionRestart, Uri.parse((String) msg.obj));
+            if (strOption.equalsIgnoreCase("INDIA")) {
+              URL = TextUtils.isEmpty(GeneralSetting.getGeneralSetting().radiourl_india) ? getResources().getString(R.string.link_radio_india) : GeneralSetting.getGeneralSetting().radiourl_india;
+            } else {
+              URL = TextUtils.isEmpty(GeneralSetting.getGeneralSetting().radiourl_others) ? getResources().getString(R.string.link_radio_others) : GeneralSetting.getGeneralSetting().radiourl_others;
+            }
+            Log.d(TAG,"URL="+URL);
+            RunRadio(actionRestart, Uri.parse(URL));
             break;
           }
           case ConstValues.RADIO_SCHEDULE_LIST: {
@@ -452,30 +435,6 @@ public class MainActivity extends MBaseActivity
 
           }
           case ConstValues.RADIO_GET_PLAYLIST: {
-					/*
-					 * Radio radio = (Radio) ((Activity)
-					 * (context)).getFragmentManager()
-					 * .findFragmentByTag(Radio.TAG); if
-					 * (MainActivity.radiostate && radio != null) { //Sending
-					 * the Message getServerRequestSend().executeRequest(
-					 * ServerRequest.SendServerRequest.RADIO_STATUS, null, new
-					 * ServerCallback() {
-					 *
-					 * @Override public void onSuccess(JSONObject response) {
-					 * RadioStatus radioStatus = new
-					 * Gson().fromJson(response.toString(), RadioStatus.class);
-					 *
-					 * Radio radio = (Radio) getFragmentManager()
-					 * .findFragmentByTag(Radio.TAG); if (radio != null) {
-					 * radio.setPlaylist(""); // commented as no playlist
-					 * available //
-					 * radio.setPlaylist(radioStatus.current_track.title); } }
-					 *
-					 * @Override public void onError(VolleyError error) {
-					 * error.printStackTrace(); Message msg = Message.obtain();
-					 * msg.what = ConstValues.ERROR_DEFAULT;
-					 * getFlowHandler().sendMessage(msg); } }, false); }
-					 */
             break;
           }
           case ConstValues.LOGIN:
@@ -905,6 +864,14 @@ public class MainActivity extends MBaseActivity
             });
             break;
           }
+          case ConstValues.SHOW_MSG: {
+            Message msgtmp = Message.obtain();
+            msgtmp.what = ConstValues.DASHBOARD_WITHOUT_LOGIN;
+            String strMessage = (String) msg.obj;
+            ShowSnackBar(context, getWindow().getDecorView(), strMessage, null, null);
+            break;
+          }
+
           default:
             break;
         }
@@ -1081,15 +1048,15 @@ public class MainActivity extends MBaseActivity
     mDrawerToggle.onConfigurationChanged(newConfig);
   }
 
-	public void RunRadio(MenuItem item, Uri uri) {
-		Log.d(String.valueOf(item), "menuitem Runradio");
-		Log.d(String.valueOf(uri), "uriRunradio");
+  public void RunRadio(MenuItem item, Uri uri) {
+    Log.d(String.valueOf(item), "menuitem Runradio");
+    Log.d(String.valueOf(uri), "uriRunradio");
     if (radiostate == false) {
-			// initialize buttons
+      // initialize buttons
 
-			Log.d("inside Runradio", "function");
-			Log.d(String.valueOf(uri), "URI parameter");
-			startPlaying(uri);
+      Log.d("inside Runradio", "function");
+      Log.d(String.valueOf(uri), "URI parameter");
+      startPlaying(uri);
       showProgressDialog();
       item.setIcon(R.drawable.ic_stop);
     } else {
@@ -1114,7 +1081,7 @@ public class MainActivity extends MBaseActivity
 
     switch (item.getItemId()) {
       case R.id.radio:
-			// RunRadio(item);
+        // RunRadio(item);
         break;
       case R.id.share:
       case R.id.feedback:
@@ -1167,7 +1134,6 @@ public class MainActivity extends MBaseActivity
   }
 
 
-
   private void takeScreenshot() {
     Date now = new Date();
 
@@ -1196,23 +1162,23 @@ public class MainActivity extends MBaseActivity
     }
   }
 
-	void startPlaying(Uri uri) {
+  void startPlaying(Uri uri) {
 
     final int numRenderers = 2;
 
-		final int BUFFER_SEGMENT_SIZE = 64 * 1024;
-		final int BUFFER_SEGMENT_COUNT = 256;
-		Allocator allocator = new DefaultAllocator(BUFFER_SEGMENT_SIZE);
+    final int BUFFER_SEGMENT_SIZE = 64 * 1024;
+    final int BUFFER_SEGMENT_COUNT = 256;
+    Allocator allocator = new DefaultAllocator(BUFFER_SEGMENT_SIZE);
 
-		final Handler handler = new Handler();
-		String userAgent = Util.getUserAgent(this, "ExoPlayerDemo");
+    final Handler handler = new Handler();
+    String userAgent = Util.getUserAgent(this, "ExoPlayerDemo");
 
-		// Build the video and audio renderers.
-		DefaultBandwidthMeter bandwidthMeter = new DefaultBandwidthMeter(handler, null);
-		DataSource dataSource = new DefaultUriDataSource(context, bandwidthMeter, userAgent);
-		ExtractorSampleSource sampleSource = new ExtractorSampleSource(
-				Uri.parse(String.valueOf(uri)), dataSource, allocator,
-				BUFFER_SEGMENT_COUNT * BUFFER_SEGMENT_SIZE);
+    // Build the video and audio renderers.
+    DefaultBandwidthMeter bandwidthMeter = new DefaultBandwidthMeter(handler, null);
+    DataSource dataSource = new DefaultUriDataSource(context, bandwidthMeter, userAgent);
+    ExtractorSampleSource sampleSource = new ExtractorSampleSource(
+        Uri.parse(String.valueOf(uri)), dataSource, allocator,
+        BUFFER_SEGMENT_COUNT * BUFFER_SEGMENT_SIZE);
 
 
     // Build the track renderers
@@ -1236,7 +1202,7 @@ public class MainActivity extends MBaseActivity
         switch (player.getPlaybackState()) {
           case ExoPlayer.STATE_READY:
             radiostate = true;
-					startAlaram();
+            startAlaram();
             android.os.Message msg = android.os.Message.obtain();
             msg.what = ConstValues.RADIO_GET_PLAYLIST;
             MainActivity.getFlowHandler().sendMessage(msg);
@@ -1245,7 +1211,7 @@ public class MainActivity extends MBaseActivity
             break;
           case ExoPlayer.STATE_ENDED:
             radiostate = true;
-					cancelAlaram();
+            cancelAlaram();
             break;
         }
         setRadioScreenButtonState();
@@ -1270,12 +1236,12 @@ public class MainActivity extends MBaseActivity
 
   void stopPlaying() {
     // Don't forget to release when done!
-		if (player != null) {
-			player.release();
-			cancelAlaram();
-			radiostate = false;
-			setRadioScreenButtonState();
-		}
+    if (player != null) {
+      player.release();
+      cancelAlaram();
+      radiostate = false;
+      setRadioScreenButtonState();
+    }
   }
 
 
@@ -1296,16 +1262,16 @@ public class MainActivity extends MBaseActivity
   }
 
   private void hideProgressDialog() {
-		if (pDialog != null) {
-    if (pDialog.isShowing())
-      pDialog.dismiss();
-		}
+    if (pDialog != null) {
+      if (pDialog.isShowing())
+        pDialog.dismiss();
+    }
   }
 
 
   //Alaram handling
   public void startAlaram() {
-		/*
+    /*
 		 * AlarmManager alarmManager = (AlarmManager)
 		 * context.getSystemService(Context.ALARM_SERVICE); Intent intent = new
 		 * Intent(context, AlarmReceiver.class); PendingIntent pendingIntent =

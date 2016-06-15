@@ -28,6 +28,12 @@ public class ReceiveGeneralSettings {
     @SerializedName("maintenancemode")
     public boolean maintenancemode;
 
+    @SerializedName("isappmsg")
+    public boolean isappmsg;
+
+    @SerializedName("message")
+    public String message;
+
     @SerializedName("playstoreurl")
     public String playstoreurl;
 

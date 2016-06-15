@@ -80,9 +80,14 @@ public class Welcome extends AppBaseFragement {
         if (generalReceiveRequest.isSuccess()) {
           GeneralSetting.getGeneralSetting().radioplaylisturl = generalReceiveRequest.data.radioplaylisturl;
           GeneralSetting.getGeneralSetting().radiourl = generalReceiveRequest.data.radiourl;
+          GeneralSetting.getGeneralSetting().radiourl_india = generalReceiveRequest.data.radiourl_india;
+          GeneralSetting.getGeneralSetting().radiourl_others = generalReceiveRequest.data.radiourl_others;
           GeneralSetting.getGeneralSetting().feedbackemailid = generalReceiveRequest.data.feedbackemailid;
           GeneralSetting.getGeneralSetting().version = generalReceiveRequest.data.version;
           GeneralSetting.getGeneralSetting().forceupgrade = generalReceiveRequest.data.forceupgrade;
+          GeneralSetting.getGeneralSetting().isappmsg = generalReceiveRequest.data.isappmsg;
+          GeneralSetting.getGeneralSetting().message = generalReceiveRequest.data.message;
+
           GeneralSetting.getGeneralSetting().maintenancemode = generalReceiveRequest.data.maintenancemode;
           GeneralSetting.getGeneralSetting().playstoreurl = generalReceiveRequest.data.playstoreurl;
           Log.d(TAG, "forceupgrade:" + GeneralSetting.getGeneralSetting().forceupgrade);
@@ -94,6 +99,12 @@ public class Welcome extends AppBaseFragement {
           } else if (GeneralSetting.getGeneralSetting().maintenancemode) {
             showUpgradeMaintanence(false);
           } else {
+              if(GeneralSetting.getGeneralSetting().isappmsg) {
+                Message msg = Message.obtain();
+                msg.what = ConstValues.SHOW_MSG;
+                msg.obj = TextUtils.isEmpty(GeneralSetting.getGeneralSetting().message) ? "":GeneralSetting.getGeneralSetting().message ;
+                getBaseActivity().getFlowHandler().sendMessage(msg);
+              }
             splashThread.start();
           }
 

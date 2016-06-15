@@ -25,8 +25,8 @@ android {
     applicationId 'com.kanchi.periyava'
     minSdkVersion 16
     targetSdkVersion 22
-    versionCode 5
-    versionName "1.6"
+    versionCode 6
+    versionName "1.7"
     buildConfigField "long", "TIMESTAMP", System.currentTimeMillis() + "L"
   }
   signingConfigs {
@@ -36,9 +36,8 @@ android {
       keyAlias "kanchisankara"
       keyPassword "kanchisankara"
     }
-
     release {
-      storeFile file("./keystore/kanchisankara.keystore")
+      storeFile file('C:/Users/krishna/AndroidStudioProjects/mahaperiyavaapp/app/keystore/kanchisankara.keystore')
       storePassword "kanchisankara"
       keyAlias "kanchisankara"
       keyPassword "kanchisankara"

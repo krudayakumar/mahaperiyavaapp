@@ -33,14 +33,10 @@ public class PhotoVideoViewHolder extends RecyclerView.ViewHolder implements Vie
   @Override
   public void onClick(View v) {
 
-    switch (type) {
-      case ConstValues.CONST_PHOTO:
+    if(type == ConstValues.CONST_PHOTO) {
+      context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(Data.link)));
+    }else if (type == ConstValues.CONST_VIDEO) {
         context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(Data.link)));
-        break;
-      case ConstValues.CONST_VIDEO:
-        context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(Data.link)));
-        break;
-
     }
 
   }

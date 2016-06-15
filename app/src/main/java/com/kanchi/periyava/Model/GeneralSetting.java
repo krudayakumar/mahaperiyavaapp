@@ -16,6 +16,12 @@ public class GeneralSetting {
   @SerializedName("maintenancemode")
   public boolean maintenancemode;
 
+  @SerializedName("isappmsg")
+  public boolean isappmsg;
+
+  @SerializedName("message")
+  public String message;
+
   @SerializedName("playstoreurl")
   public String playstoreurl;
 
@@ -25,6 +31,12 @@ public class GeneralSetting {
 
   @SerializedName("radiourl")
   public String radiourl;
+
+  @SerializedName("radiourl_india")
+  public String radiourl_india;
+
+  @SerializedName("radiourl_others")
+  public String radiourl_others;
 
   @SerializedName("radioplaylisturl")
   public String radioplaylisturl;

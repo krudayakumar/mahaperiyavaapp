@@ -110,7 +110,7 @@ public class Radio extends AppBaseFragement {
       public void onClick(View view) {
         android.os.Message msg = android.os.Message.obtain();
         msg.what = ConstValues.RADIO_RUN_STOP;
-				msg.obj = bundle.getString("URL");
+				msg.obj = bundle.getString("SERVER_SELECTION");
 				Log.d((String) msg.obj, "inside radio");
         MainActivity.getFlowHandler().sendMessage(msg);
       }

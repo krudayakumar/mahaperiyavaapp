@@ -84,15 +84,10 @@ public class PhotoVideoBook extends AppBaseFragement {
                 ReceivePhotoVideo.Category.Categories.SubCategories subCategories = (ReceivePhotoVideo.Category.Categories.SubCategories) v.getTag();
                 if (!TextUtils.isEmpty(subCategories.link)) {
                   android.os.Message msg = android.os.Message.obtain();
-                  switch (option) {
-                    case ConstValues.CONST_VIDEO:
+                    if(option == ConstValues.CONST_VIDEO)
                       msg.what = ConstValues.VIDEO_OPEN;
-                      break;
-                    default:
+                     else
                       msg.what = ConstValues.WEB_PAGE;
-                      break;
-                  }
-
                   msg.obj = (Object) subCategories.link;
                   getBaseActivity().getFlowHandler().sendMessage(msg);
                   //context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(subCategories.link)));
