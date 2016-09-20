@@ -28,6 +28,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.os.StrictMode;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -198,7 +199,10 @@ public class MainActivity extends MBaseActivity
     loadLanguage(LANGUAGE.ENGLISH);
     setContentView(R.layout.activity_main);
     context = this;
-
+    if (android.os.Build.VERSION.SDK_INT > 9) {
+      StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+      StrictMode.setThreadPolicy(policy);
+    }
     initComponents(savedInstanceState);
 
     /* Retrieve a PendingIntent that will perform a broadcast */
@@ -412,21 +416,33 @@ public class MainActivity extends MBaseActivity
             break;
           }
           case ConstValues.RADIO_PLAY: {
-            startPlaying(null);
+            startPlaying("INDIA", null);
             break;
           }
           case ConstValues.RADIO_RUN_STOP: {
             MenuItem actionRestart = (MenuItem) menu.findItem(R.id.radio);
             String URL = getResources().getString(R.string.link_radio_others);
             String strOption = (String) msg.obj;
-
+            int isAlternative = msg.arg1;
+            String tmpUrl = "";
             if (strOption.equalsIgnoreCase("INDIA")) {
-              URL = TextUtils.isEmpty(GeneralSetting.getGeneralSetting().radiourl_india) ? getResources().getString(R.string.link_radio_india) : GeneralSetting.getGeneralSetting().radiourl_india;
+              if (isAlternative == 1) {
+                tmpUrl = (String) PreferenceData.getInstance(context).getValue(PreferenceData.PREFVALUES.DIRECT_RADIOURL_INDIA_URL2.toString(), new String());
+              } else {
+                tmpUrl = (String) PreferenceData.getInstance(context).getValue(PreferenceData.PREFVALUES.DIRECT_RADIOURL_INDIA_URL1.toString(), new String());
+              }
+              URL = TextUtils.isEmpty(tmpUrl) ? getResources().getString(R.string.link_radio_india) : tmpUrl;
             } else {
-              URL = TextUtils.isEmpty(GeneralSetting.getGeneralSetting().radiourl_others) ? getResources().getString(R.string.link_radio_others) : GeneralSetting.getGeneralSetting().radiourl_others;
+
+              if (isAlternative == 1) {
+                tmpUrl = (String) PreferenceData.getInstance(context).getValue(PreferenceData.PREFVALUES.DIRECT_RADIOURL_OTHERS_URL1.toString(), new String());
+              } else {
+                tmpUrl = (String) PreferenceData.getInstance(context).getValue(PreferenceData.PREFVALUES.DIRECT_RADIOURL_OTHERS_URL1.toString(), new String());
+              }
+              URL = TextUtils.isEmpty(tmpUrl) ? getResources().getString(R.string.link_radio_others) : tmpUrl;
             }
-            Log.d(TAG,"URL="+URL);
-            RunRadio(actionRestart, Uri.parse(URL));
+            Log.d(TAG, "URL=" + URL);
+            RunRadio(strOption, actionRestart, Uri.parse(URL));
             break;
           }
           case ConstValues.RADIO_SCHEDULE_LIST: {
@@ -487,6 +503,21 @@ public class MainActivity extends MBaseActivity
           case ConstValues.GENERAL_SETTING_SERVER_REQUEST: {
             getServerRequestSend().executeRequest(
                 ServerRequest.SendServerRequest.GENERAL_SETTINGS, null, (ServerCallback) msg.obj, false);
+          }
+          break;
+          case ConstValues.GENERAL_SETTING_RADIO_SERVER_URL_REQUEST: {
+            getServerRequestSend().executeRequest(
+                ServerRequest.SendServerRequest.RADIO_SERVER_URL, null, new ServerCallback() {
+                  @Override
+                  public void onSuccess(JSONObject response) {
+                    Log.d(TAG, response.toString());
+                  }
+
+                  @Override
+                  public void onError(VolleyError error) {
+
+                  }
+                }, false);
           }
           break;
           case ConstValues.LOGIN_SUCCESSFUL: {
@@ -1048,7 +1079,7 @@ public class MainActivity extends MBaseActivity
     mDrawerToggle.onConfigurationChanged(newConfig);
   }
 
-  public void RunRadio(MenuItem item, Uri uri) {
+  public void RunRadio(String type, MenuItem item, Uri uri) {
     Log.d(String.valueOf(item), "menuitem Runradio");
     Log.d(String.valueOf(uri), "uriRunradio");
     if (radiostate == false) {
@@ -1056,7 +1087,7 @@ public class MainActivity extends MBaseActivity
 
       Log.d("inside Runradio", "function");
       Log.d(String.valueOf(uri), "URI parameter");
-      startPlaying(uri);
+      startPlaying(type, uri);
       showProgressDialog();
       item.setIcon(R.drawable.ic_stop);
     } else {
@@ -1162,7 +1193,7 @@ public class MainActivity extends MBaseActivity
     }
   }
 
-  void startPlaying(Uri uri) {
+  void startPlaying(final String  type, Uri uri) {
 
     final int numRenderers = 2;
 
@@ -1229,6 +1260,12 @@ public class MainActivity extends MBaseActivity
         radiostate = false;
         cancelAlaram();
         error.getStackTrace();
+
+        android.os.Message msg = android.os.Message.obtain();
+        msg.what = ConstValues.RADIOSELECTOR;
+        msg.obj = (String) type;
+        msg.arg1 = 1;
+        getFlowHandler().sendMessage(msg);
       }
     });
 
@@ -1272,7 +1309,7 @@ public class MainActivity extends MBaseActivity
   //Alaram handling
   public void startAlaram() {
     /*
-		 * AlarmManager alarmManager = (AlarmManager)
+     * AlarmManager alarmManager = (AlarmManager)
 		 * context.getSystemService(Context.ALARM_SERVICE); Intent intent = new
 		 * Intent(context, AlarmReceiver.class); PendingIntent pendingIntent =
 		 * PendingIntent.getBroadcast(context, 0, intent, 0);

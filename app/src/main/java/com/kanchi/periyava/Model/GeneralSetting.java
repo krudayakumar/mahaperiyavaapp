@@ -32,6 +32,12 @@ public class GeneralSetting {
   @SerializedName("radiourl")
   public String radiourl;
 
+  @SerializedName("direct_radiourl_india")
+  public String direct_radiourl_india;
+
+  @SerializedName("direct_radiourl_others")
+  public String direct_radiourl_others;
+
   @SerializedName("radiourl_india")
   public String radiourl_india;
 

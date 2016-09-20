@@ -60,6 +60,7 @@ public class RadioSelector extends AppBaseFragement {
 				Log.d("inside on click", "on Indbutton");
 				msg.what = ConstValues.RADIOSELECTOR;
 				msg.obj = (String) "INDIA";
+        msg.arg1 =1;
 				getBaseActivity().getFlowHandler().sendMessage(msg);
 			}
 		});
@@ -69,7 +70,8 @@ public class RadioSelector extends AppBaseFragement {
 				android.os.Message msg = android.os.Message.obtain();
 				msg.what = ConstValues.RADIOSELECTOR;
         msg.obj = (String) "OTHERS";
-				getBaseActivity().getFlowHandler().sendMessage(msg);
+        msg.arg1 =1;
+        getBaseActivity().getFlowHandler().sendMessage(msg);
 
 			}
 		});

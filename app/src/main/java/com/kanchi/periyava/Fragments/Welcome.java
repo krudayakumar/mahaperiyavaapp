@@ -1,10 +1,12 @@
 package com.kanchi.periyava.Fragments;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Message;
 import android.text.Html;
@@ -18,7 +20,6 @@ import android.widget.TextView;
 import com.android.volley.VolleyError;
 import com.google.gson.Gson;
 import com.kanchi.periyava.Activity.MainActivity;
-import com.kanchi.periyava.Adapters.SatsangListAdapter;
 import com.kanchi.periyava.BuildConfig;
 import com.kanchi.periyava.Interface.ServerCallback;
 import com.kanchi.periyava.Model.ConstValues;
@@ -26,13 +27,20 @@ import com.kanchi.periyava.Model.GeneralSetting;
 import com.kanchi.periyava.Model.PreferenceData;
 import com.kanchi.periyava.Model.UserProfile;
 import com.kanchi.periyava.R;
-import com.kanchi.periyava.ReceiveRequest.GeneralReceiveRequest;
 import com.kanchi.periyava.ReceiveRequest.ReceiveGeneralSettings;
-import com.kanchi.periyava.ReceiveRequest.ReceiveSatsangList;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.entity.BufferedHttpEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -82,6 +90,8 @@ public class Welcome extends AppBaseFragement {
           GeneralSetting.getGeneralSetting().radiourl = generalReceiveRequest.data.radiourl;
           GeneralSetting.getGeneralSetting().radiourl_india = generalReceiveRequest.data.radiourl_india;
           GeneralSetting.getGeneralSetting().radiourl_others = generalReceiveRequest.data.radiourl_others;
+          GeneralSetting.getGeneralSetting().direct_radiourl_india = generalReceiveRequest.data.direct_radiourl_india;
+          GeneralSetting.getGeneralSetting().direct_radiourl_others = generalReceiveRequest.data.direct_radiourl_others;
           GeneralSetting.getGeneralSetting().feedbackemailid = generalReceiveRequest.data.feedbackemailid;
           GeneralSetting.getGeneralSetting().version = generalReceiveRequest.data.version;
           GeneralSetting.getGeneralSetting().forceupgrade = generalReceiveRequest.data.forceupgrade;
@@ -94,17 +104,29 @@ public class Welcome extends AppBaseFragement {
           Log.d(TAG, "maintenancemode:" + GeneralSetting.getGeneralSetting().maintenancemode);
 
 
+          if (TextUtils.isEmpty((String) PreferenceData.getInstance(context).getValue(PreferenceData.PREFVALUES.DIRECT_RADIOURL_INDIA.toString(), new String()))) {
+            PreferenceData.getInstance(context).setValue(
+                PreferenceData.PREFVALUES.DIRECT_RADIOURL_INDIA.toString(), generalReceiveRequest.data.direct_radiourl_india);
+
+          }
+          if (TextUtils.isEmpty((String) PreferenceData.getInstance(context).getValue(PreferenceData.PREFVALUES.DIRECT_RADIOURL_OTHERS.toString(), new String()))) {
+            PreferenceData.getInstance(context).setValue(
+                PreferenceData.PREFVALUES.DIRECT_RADIOURL_OTHERS.toString(), generalReceiveRequest.data.direct_radiourl_others);
+
+          }
+
+
           if (GeneralSetting.getGeneralSetting().forceupgrade && GeneralSetting.getGeneralSetting().version.equalsIgnoreCase(versionName) == false) {
             showUpgradeMaintanence(true);
           } else if (GeneralSetting.getGeneralSetting().maintenancemode) {
             showUpgradeMaintanence(false);
           } else {
-              if(GeneralSetting.getGeneralSetting().isappmsg) {
-                Message msg = Message.obtain();
-                msg.what = ConstValues.SHOW_MSG;
-                msg.obj = TextUtils.isEmpty(GeneralSetting.getGeneralSetting().message) ? "":GeneralSetting.getGeneralSetting().message ;
-                getBaseActivity().getFlowHandler().sendMessage(msg);
-              }
+            if (GeneralSetting.getGeneralSetting().isappmsg) {
+              Message msg = Message.obtain();
+              msg.what = ConstValues.SHOW_MSG;
+              msg.obj = TextUtils.isEmpty(GeneralSetting.getGeneralSetting().message) ? "" : GeneralSetting.getGeneralSetting().message;
+              getBaseActivity().getFlowHandler().sendMessage(msg);
+            }
             splashThread.start();
           }
 
@@ -142,10 +164,6 @@ public class Welcome extends AppBaseFragement {
     msg.what = ConstValues.GENERAL_SETTING_SERVER_REQUEST;
     msg.obj = (Object) serverCallback;
     getBaseActivity().getFlowHandler().sendMessage(msg);
-
-
-
-
 
 
     initCompontents();
@@ -227,4 +245,7 @@ public class Welcome extends AppBaseFragement {
     MainActivity.getFlowHandler().sendMessage(msg);
 
   }
+
+
+
 }

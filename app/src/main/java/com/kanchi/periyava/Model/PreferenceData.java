@@ -13,15 +13,20 @@ public class PreferenceData {
 
   public enum PREFVALUES {
     EMAILID("emailid"),
-    GENERAL_SETTINGS("GENERAL_SETTINGS");
+    GENERAL_SETTINGS("GENERAL_SETTINGS"),
+    DIRECT_RADIOURL_OTHERS("DIRECT_RADIOURL_OTHERS"),
+    DIRECT_RADIOURL_OTHERS_URL1("DIRECT_RADIOURL_OTHERS_URL1"),
+    DIRECT_RADIOURL_OTHERS_URL2("DIRECT_RADIOURL_OTHERS_URL2"),
+    DIRECT_RADIOURL_INDIA("DIRECT_RADIOURL_INDIA"),
+    DIRECT_RADIOURL_INDIA_URL1("DIRECT_RADIOURL_INDIA_URL1"),
+    DIRECT_RADIOURL_INDIA_URL2("DIRECT_RADIOURL_INDIA_URL2");
+
     private String value;
 
     PREFVALUES(String value) {
       this.value = value;
     }
   }
-
-  ;
 
 
   public static PreferenceData getInstance(Context context) {
@@ -56,6 +61,7 @@ public class PreferenceData {
       o = settings.getBoolean(strTag, (Boolean) obj);
     if (obj instanceof Long)
       o = settings.getLong(strTag, (Long) obj);
+
 
     return o;
   }

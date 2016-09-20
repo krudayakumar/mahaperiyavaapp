@@ -17,6 +17,7 @@ package com.kanchi.periyava.Fragments;
 
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -34,12 +35,23 @@ import com.google.gson.Gson;
 import com.kanchi.periyava.Activity.MainActivity;
 import com.kanchi.periyava.Interface.ServerCallback;
 import com.kanchi.periyava.Model.ConstValues;
+import com.kanchi.periyava.Model.GeneralSetting;
+import com.kanchi.periyava.Model.PreferenceData;
 import com.kanchi.periyava.R;
 import com.kanchi.periyava.ReceiveRequest.GeneralReceiveRequest;
 import com.kanchi.periyava.ReceiveRequest.ReceiveScheduleList;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.entity.BufferedHttpEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Radio extends AppBaseFragement {
@@ -63,6 +75,9 @@ public class Radio extends AppBaseFragement {
     strPlaylist = "";
     tvPlayList = ((TextView) rootView.findViewById(R.id.playlist));
     tvScheduleList = ((TextView) rootView.findViewById(R.id.schedulelist));
+
+
+
     ServerCallback serverCallback = new ServerCallback() {
       @Override
       public void onSuccess(JSONObject response) {
@@ -183,5 +198,6 @@ public class Radio extends AppBaseFragement {
     int color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
     tvPlayList.setTextColor(color);
   }
+
 
 }

@@ -15,7 +15,10 @@
  */
 package com.kanchi.periyava.Fragments;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -25,11 +28,23 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.kanchi.periyava.Activity.MainActivity;
+import com.kanchi.periyava.Model.GeneralSetting;
+import com.kanchi.periyava.Model.PreferenceData;
 import com.kanchi.periyava.Model.UserProfile;
 import com.kanchi.periyava.R;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.entity.BufferedHttpEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
+
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Dashboard extends AppBaseFragement {
@@ -42,6 +57,13 @@ public class Dashboard extends AppBaseFragement {
     rootView = inflater.inflate(R.layout.dashboard_main, container, false);
     getActivity().setTitle(getResources().getString(R.string.app_name));
     setHasOptionsMenu(true);
+    if(!TextUtils.isEmpty(GeneralSetting.getGeneralSetting().direct_radiourl_india)) {
+      new GetAsyncRadioURL("INDIA").execute(GeneralSetting.getGeneralSetting().direct_radiourl_india);
+    }
+    if(!TextUtils.isEmpty(GeneralSetting.getGeneralSetting().direct_radiourl_others)) {
+      new GetAsyncRadioURL("OTHERS").execute(GeneralSetting.getGeneralSetting().direct_radiourl_others);
+    }
+
     //init();
     return rootView;
   }
@@ -98,4 +120,73 @@ public class Dashboard extends AppBaseFragement {
 
     return false;
   }
+
+  private class GetAsyncRadioURL extends AsyncTask<String, Void, String> {
+    String URLType = "";
+    ArrayList<String> strURLList = new ArrayList<>();
+
+    public GetAsyncRadioURL(String type) {
+      this.URLType = type;
+    }
+
+
+    @Override
+    protected void onPreExecute() {
+      super.onPreExecute();
+
+
+    }
+
+    @Override
+    protected String doInBackground(String... params) {
+
+      // @BadSkillz codes with same changes
+      try {
+        DefaultHttpClient httpClient = new DefaultHttpClient();
+        HttpGet httpGet = new HttpGet(params[0]);
+        HttpResponse response = httpClient.execute(httpGet);
+        HttpEntity entity = response.getEntity();
+
+        BufferedHttpEntity buf = new BufferedHttpEntity(entity);
+
+        InputStream is = buf.getContent();
+
+        BufferedReader r = new BufferedReader(new InputStreamReader(is));
+
+        StringBuilder total = new StringBuilder();
+        String line;
+        while ((line = r.readLine()) != null) {
+          strURLList.add(line);
+          total.append(line + "\n");
+        }
+        String result = total.toString();
+        Log.i("Get URL", "Downloaded string: " + result);
+        return result;
+      } catch (Exception e) {
+        Log.e("Get Url", "Error in downloading: " + e.toString());
+      }
+      return null;
+    }
+
+    @Override
+    protected void onPostExecute(String result) {
+      super.onPostExecute(result);
+      if (URLType.compareToIgnoreCase("INDIA") == 0) {
+        PreferenceData.getInstance(getActivity()).setValue(
+            PreferenceData.PREFVALUES.DIRECT_RADIOURL_INDIA_URL1.toString(), strURLList.get(0));
+        PreferenceData.getInstance(getActivity()).setValue(
+            PreferenceData.PREFVALUES.DIRECT_RADIOURL_INDIA_URL2.toString(), strURLList.get(1));
+      }
+
+      if (URLType.compareToIgnoreCase("OTHERS") == 0) {
+        PreferenceData.getInstance(getActivity()).setValue(
+            PreferenceData.PREFVALUES.DIRECT_RADIOURL_OTHERS_URL1.toString(), strURLList.get(0));
+        PreferenceData.getInstance(getActivity()).setValue(
+            PreferenceData.PREFVALUES.DIRECT_RADIOURL_OTHERS_URL2.toString(), strURLList.get(1));
+
+      }
+
+    }
+  }
+
 }

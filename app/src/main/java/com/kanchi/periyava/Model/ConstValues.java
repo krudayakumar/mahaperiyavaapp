@@ -105,6 +105,7 @@ public class ConstValues {
 
   public final static int GENERAL_SETTING = 270;
   public final static int GENERAL_SETTING_SERVER_REQUEST = GENERAL_SETTING + 1;
+  public final static int GENERAL_SETTING_RADIO_SERVER_URL_REQUEST = GENERAL_SETTING + 2;
 
   public final static int ABOUT_PEETHAM = 300;
 

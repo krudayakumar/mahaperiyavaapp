@@ -20,6 +20,7 @@ import com.kanchi.periyava.Activity.MainActivity;
 import com.kanchi.periyava.Interface.ServerCallback;
 import com.kanchi.periyava.Model.ConstValues;
 import com.kanchi.periyava.Model.NetworkConnection;
+import com.kanchi.periyava.Model.PreferenceData;
 import com.kanchi.periyava.R;
 
 import org.json.JSONException;
@@ -60,7 +61,10 @@ public class ServerRequest<T> {
     ABOUT_US("about_us.php", "about_us.json", Request.Method.POST),
     GENERAL_SETTINGS("general_settings.php", "general_setting.json", Request.Method.POST),
     RADIO_SCHEDULE_LIST("schedule_list.php", "schedule_list.json", Request.Method.POST),
-    RADIO_STATUS("", "", Request.Method.GET);
+    RADIO_STATUS("", "", Request.Method.GET),
+    RADIO_SERVER_URL("", "", Request.Method.GET),
+    OTHER_RADIO_SERVER_URL("", "", Request.Method.GET),
+    INDIA_RADIO_SERVER_URL("", "", Request.Method.GET);;
 
     private String functionname = null;
     private int requesttype;
@@ -161,6 +165,15 @@ public class ServerRequest<T> {
         break;
       case RADIO_STATUS:
         strURL = "https://public.radio.co/stations/sfe8bb6b1e/status";
+        break;
+      case RADIO_SERVER_URL:
+        strURL = "http://samcloud.spacial.com/api/listen?sid=71526&rid=122395&f=aac,any&br=64000,any&m=txt";
+        break;
+      case OTHER_RADIO_SERVER_URL:
+        strURL = (String)PreferenceData.getInstance(context).getValue(PreferenceData.PREFVALUES.DIRECT_RADIOURL_OTHERS.toString(), new String());
+        break;
+      case INDIA_RADIO_SERVER_URL:
+        strURL = (String)PreferenceData.getInstance(context).getValue(PreferenceData.PREFVALUES.DIRECT_RADIOURL_INDIA.toString(), new String());
         break;
     }
     Log.d(TAG, "URL:" + strURL);
