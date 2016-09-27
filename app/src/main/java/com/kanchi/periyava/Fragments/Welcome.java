@@ -1,12 +1,10 @@
 package com.kanchi.periyava.Fragments;
 
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Message;
 import android.text.Html;
@@ -29,18 +27,9 @@ import com.kanchi.periyava.Model.UserProfile;
 import com.kanchi.periyava.R;
 import com.kanchi.periyava.ReceiveRequest.ReceiveGeneralSettings;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.entity.BufferedHttpEntity;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -109,6 +98,7 @@ public class Welcome extends AppBaseFragement {
                 PreferenceData.PREFVALUES.DIRECT_RADIOURL_INDIA.toString(), generalReceiveRequest.data.direct_radiourl_india);
 
           }
+
           if (TextUtils.isEmpty((String) PreferenceData.getInstance(context).getValue(PreferenceData.PREFVALUES.DIRECT_RADIOURL_OTHERS.toString(), new String()))) {
             PreferenceData.getInstance(context).setValue(
                 PreferenceData.PREFVALUES.DIRECT_RADIOURL_OTHERS.toString(), generalReceiveRequest.data.direct_radiourl_others);

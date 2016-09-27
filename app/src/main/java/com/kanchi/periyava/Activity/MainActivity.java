@@ -15,8 +15,6 @@
  */
 package com.kanchi.periyava.Activity;
 
-import android.app.Activity;
-import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -35,21 +33,13 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
-import android.view.Surface;
-import android.view.SurfaceHolder;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.google.android.exoplayer.ExoPlaybackException;
@@ -69,7 +59,6 @@ import com.kanchi.periyava.Component.CircularImageView;
 import com.kanchi.periyava.Fragments.About;
 import com.kanchi.periyava.Fragments.AboutAcharayas;
 import com.kanchi.periyava.Fragments.Dashboard;
-import com.kanchi.periyava.Fragments.HelpFeedback;
 import com.kanchi.periyava.Fragments.Japam;
 import com.kanchi.periyava.Fragments.Login;
 import com.kanchi.periyava.Fragments.NewSatsang;
@@ -88,11 +77,9 @@ import com.kanchi.periyava.Model.ConstValues;
 import com.kanchi.periyava.Model.GeneralSetting;
 import com.kanchi.periyava.Model.NetworkConnection;
 import com.kanchi.periyava.Model.PreferenceData;
-import com.kanchi.periyava.Model.RadioStatus;
 import com.kanchi.periyava.Model.UserProfile;
 import com.kanchi.periyava.R;
 import com.kanchi.periyava.ReceiveRequest.GeneralReceiveRequest;
-import com.kanchi.periyava.ReceiveRequest.ReceiveGeneralSettings;
 import com.kanchi.periyava.ReceiveRequest.ReceiveJapamDetails;
 import com.kanchi.periyava.ReceiveRequest.ReceiveJoinSatsang;
 import com.kanchi.periyava.ReceiveRequest.ReceiveLogin;
@@ -431,7 +418,8 @@ public class MainActivity extends MBaseActivity
               } else {
                 tmpUrl = (String) PreferenceData.getInstance(context).getValue(PreferenceData.PREFVALUES.DIRECT_RADIOURL_INDIA_URL1.toString(), new String());
               }
-              URL = TextUtils.isEmpty(tmpUrl) ? getResources().getString(R.string.link_radio_india) : tmpUrl;
+              URL = tmpUrl;
+              //URL = TextUtils.isEmpty(tmpUrl) ? getResources().getString(R.string.link_radio_india) : tmpUrl;
             } else {
 
               if (isAlternative == 1) {
@@ -439,7 +427,8 @@ public class MainActivity extends MBaseActivity
               } else {
                 tmpUrl = (String) PreferenceData.getInstance(context).getValue(PreferenceData.PREFVALUES.DIRECT_RADIOURL_OTHERS_URL1.toString(), new String());
               }
-              URL = TextUtils.isEmpty(tmpUrl) ? getResources().getString(R.string.link_radio_others) : tmpUrl;
+              URL = tmpUrl;
+              //URL = TextUtils.isEmpty(tmpUrl) ? getResources().getString(R.string.link_radio_others) : tmpUrl;
             }
             Log.d(TAG, "URL=" + URL);
             RunRadio(strOption, actionRestart, Uri.parse(URL));

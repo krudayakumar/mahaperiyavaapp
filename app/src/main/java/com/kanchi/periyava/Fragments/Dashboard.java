@@ -17,7 +17,6 @@ package com.kanchi.periyava.Fragments;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -57,12 +56,10 @@ public class Dashboard extends AppBaseFragement {
     rootView = inflater.inflate(R.layout.dashboard_main, container, false);
     getActivity().setTitle(getResources().getString(R.string.app_name));
     setHasOptionsMenu(true);
-    if(!TextUtils.isEmpty(GeneralSetting.getGeneralSetting().direct_radiourl_india)) {
-      new GetAsyncRadioURL("INDIA").execute(GeneralSetting.getGeneralSetting().direct_radiourl_india);
-    }
-    if(!TextUtils.isEmpty(GeneralSetting.getGeneralSetting().direct_radiourl_others)) {
-      new GetAsyncRadioURL("OTHERS").execute(GeneralSetting.getGeneralSetting().direct_radiourl_others);
-    }
+
+    new GetAsyncRadioURL("INDIA").execute(GeneralSetting.getGeneralSetting().direct_radiourl_india);
+
+    new GetAsyncRadioURL("OTHERS").execute(GeneralSetting.getGeneralSetting().direct_radiourl_others);
 
     //init();
     return rootView;
