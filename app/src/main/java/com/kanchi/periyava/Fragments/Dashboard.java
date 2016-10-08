@@ -168,19 +168,29 @@ public class Dashboard extends AppBaseFragement {
     @Override
     protected void onPostExecute(String result) {
       super.onPostExecute(result);
-      if (URLType.compareToIgnoreCase("INDIA") == 0) {
-        PreferenceData.getInstance(getActivity()).setValue(
-            PreferenceData.PREFVALUES.DIRECT_RADIOURL_INDIA_URL1.toString(), strURLList.get(0));
-        PreferenceData.getInstance(getActivity()).setValue(
-            PreferenceData.PREFVALUES.DIRECT_RADIOURL_INDIA_URL2.toString(), strURLList.get(1));
-      }
 
-      if (URLType.compareToIgnoreCase("OTHERS") == 0) {
-        PreferenceData.getInstance(getActivity()).setValue(
-            PreferenceData.PREFVALUES.DIRECT_RADIOURL_OTHERS_URL1.toString(), strURLList.get(0));
-        PreferenceData.getInstance(getActivity()).setValue(
-            PreferenceData.PREFVALUES.DIRECT_RADIOURL_OTHERS_URL2.toString(), strURLList.get(1));
+      if(strURLList!=null) {
+        //India - URL
+        if (URLType.compareToIgnoreCase("INDIA") == 0 && strURLList.size() > 0) {
+          PreferenceData.getInstance(getActivity()).setValue(
+              PreferenceData.PREFVALUES.DIRECT_RADIOURL_INDIA_URL1.toString(), strURLList.get(0));
 
+          if (strURLList.size() > 1)
+            PreferenceData.getInstance(getActivity()).setValue(
+                PreferenceData.PREFVALUES.DIRECT_RADIOURL_INDIA_URL2.toString(), strURLList.get(1));
+        }
+
+        //Others - URL
+        if (URLType.compareToIgnoreCase("OTHERS") == 0 && strURLList.size() > 0) {
+
+          PreferenceData.getInstance(getActivity()).setValue(
+              PreferenceData.PREFVALUES.DIRECT_RADIOURL_OTHERS_URL1.toString(), strURLList.get(0));
+
+          if (strURLList.size() > 1)
+            PreferenceData.getInstance(getActivity()).setValue(
+                PreferenceData.PREFVALUES.DIRECT_RADIOURL_OTHERS_URL2.toString(), strURLList.get(1));
+
+        }
       }
 
     }

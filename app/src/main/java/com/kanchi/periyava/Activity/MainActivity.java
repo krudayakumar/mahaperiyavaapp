@@ -33,6 +33,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -413,22 +414,22 @@ public class MainActivity extends MBaseActivity
             int isAlternative = msg.arg1;
             String tmpUrl = "";
             if (strOption.equalsIgnoreCase("INDIA")) {
-              if (isAlternative == 1) {
+
+              tmpUrl = (String) PreferenceData.getInstance(context).getValue(PreferenceData.PREFVALUES.DIRECT_RADIOURL_INDIA_URL1.toString(), new String());
+              if (TextUtils.isEmpty(tmpUrl)) {
                 tmpUrl = (String) PreferenceData.getInstance(context).getValue(PreferenceData.PREFVALUES.DIRECT_RADIOURL_INDIA_URL2.toString(), new String());
-              } else {
-                tmpUrl = (String) PreferenceData.getInstance(context).getValue(PreferenceData.PREFVALUES.DIRECT_RADIOURL_INDIA_URL1.toString(), new String());
               }
               URL = tmpUrl;
-              //URL = TextUtils.isEmpty(tmpUrl) ? getResources().getString(R.string.link_radio_india) : tmpUrl;
+
             } else {
 
-              if (isAlternative == 1) {
-                tmpUrl = (String) PreferenceData.getInstance(context).getValue(PreferenceData.PREFVALUES.DIRECT_RADIOURL_OTHERS_URL1.toString(), new String());
-              } else {
-                tmpUrl = (String) PreferenceData.getInstance(context).getValue(PreferenceData.PREFVALUES.DIRECT_RADIOURL_OTHERS_URL1.toString(), new String());
+              tmpUrl = (String) PreferenceData.getInstance(context).getValue(PreferenceData.PREFVALUES.DIRECT_RADIOURL_OTHERS_URL1.toString(), new String());
+              if (TextUtils.isEmpty(tmpUrl)) {
+                tmpUrl = (String) PreferenceData.getInstance(context).getValue(PreferenceData.PREFVALUES.DIRECT_RADIOURL_OTHERS_URL2.toString(), new String());
               }
+
               URL = tmpUrl;
-              //URL = TextUtils.isEmpty(tmpUrl) ? getResources().getString(R.string.link_radio_others) : tmpUrl;
+
             }
             Log.d(TAG, "URL=" + URL);
             RunRadio(strOption, actionRestart, Uri.parse(URL));
@@ -1182,7 +1183,7 @@ public class MainActivity extends MBaseActivity
     }
   }
 
-  void startPlaying(final String  type, Uri uri) {
+  void startPlaying(final String type, Uri uri) {
 
     final int numRenderers = 2;
 
@@ -1309,7 +1310,7 @@ public class MainActivity extends MBaseActivity
   }
 
   public void cancelAlaram() {
-		/*
+    /*
 		 * AlarmManager alarmManager = (AlarmManager)
 		 * context.getSystemService(Context.ALARM_SERVICE); Intent intent = new
 		 * Intent(context, AlarmReceiver.class); PendingIntent pendingIntent =
