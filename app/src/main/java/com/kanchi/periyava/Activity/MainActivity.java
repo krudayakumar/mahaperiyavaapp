@@ -893,6 +893,14 @@ public class MainActivity extends MBaseActivity
             break;
           }
 
+          case ConstValues.PRIVACY_POLICY: {
+            setTitle(getResources().getString(R.string.lbl_privacy_policy));
+            bundle = new Bundle();
+            bundle.putString(WEBURL, getResources().getString(R.string.link_privacy_policy));
+            showFragment(new WebPage(), bundle, R.id.content, true, WebPage.TAG);
+          }
+          break;
+
           default:
             break;
         }
@@ -918,7 +926,6 @@ public class MainActivity extends MBaseActivity
     inflater.inflate(R.menu.settting_menu, menu);
     //setMenuVisibile();
     return super.onCreateOptionsMenu(menu);
-
   }
 
   /**
@@ -940,6 +947,11 @@ public class MainActivity extends MBaseActivity
 
       case R.id.aboutus:
         msg.what = ConstValues.ABOUT_US;
+        getFlowHandler().sendMessage(msg);
+        break;
+
+      case R.id.privacy:
+        msg.what = ConstValues.PRIVACY_POLICY;
         getFlowHandler().sendMessage(msg);
         break;
 

@@ -126,10 +126,14 @@ public class ConstValues {
   public final static int RADIO_ALARAM_CANCEL = RADIO + 4;
   public final static int RADIO_SCHEDULE_LIST = RADIO + 4;
 
+  public final static int PRIVACY_POLICY = 800;
+
   public final static int ERROR = 1000;
   public final static int ERROR_DEFAULT = ERROR + 1;
   public final static int ERROR_INTERNET_CONNECTION = ERROR + 2;
   public final static int SHOW_MSG = ERROR + 3;
+
+
 
   public final static String SATSANG_DATA = "SATSANG_DATA";
   public final static String SATSANG_OPTION = "SATSANG_OPTION";

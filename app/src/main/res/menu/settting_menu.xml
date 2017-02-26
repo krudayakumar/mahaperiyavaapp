@@ -47,7 +47,7 @@
     android:title="@string/lbl_feedback" />
   <item
     android:id="@+id/share"
-    android:visible="true"
+    android:visible="false"
     android:icon="@android:drawable/ic_menu_share"
     app:showAsAction="always"
     android:title="@string/lbl_share" />

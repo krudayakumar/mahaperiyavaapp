@@ -1,6 +1,6 @@
 <resources>
 
-  <string name="app_name">Kanchi Sankara</string>
+  <string name="app_name">Periyava Radio</string>
   <string name="item_1">First Item</string>
   <string name="item_2">Second Item</string>
   <string name="cd_logo">logo</string>
@@ -67,8 +67,8 @@
 \n\n10. Jnana is the only solvent of our troubles and sufferings.  </string>
   <string name="lbl_about_title">About</string>
     <string name="lbl_about_content">
-      &lt;p&gt;Kanchi Guruparampara Foundation, a non-profit organization registered in USA, is founded to spread the teachings of acharyas of Sri Kanchi Kamakoti Peetam, Kanchipuram. The foundation’s primary objectives are to support vedic education, gho rakshanam and temple renovations. This mobile portal has been designed to host several useful applications related to the teachings of Sanatana dharma that helps devotees to progress in their spiritual journey.
-      &lt;/p&gt;&lt;p&gt;We hope that this app will help you build bakthi towards Kanchi acharayaas and their teachings. We hope you enjoy this application. Please feel free to share this with your friends and family. And also please send us your feedback and suggestions by using the “Feedback” menu available in this app.
+      &lt;p&gt;Kanchi Guruparampara Foundation, a non-profit organization registered in USA, is founded to spread the teachings of acharyas of Sri Kanchi Kamakoti Peetam, Kanchipuram. The foundation\’s primary objectives are to support vedic education, gho rakshanam and temple renovations. This mobile portal has been designed to host several useful applications related to the teachings of Sanatana dharma that helps devotees to progress in their spiritual journey.
+      &lt;/p&gt;&lt;p&gt;We hope that this app will help you build bakthi towards Kanchi acharayaas and their teachings. We hope you enjoy this application. Please feel free to share this with your friends and family. And also please send us your feedback and suggestions by using the \"Feedback\" menu available in this app.
       &lt;/p&gt;&lt;p&gt;For more informations, please visit &lt;a href=\"http://kgpfoundation.org\"&gt; kgpfoundation.org &lt;/a&gt;
       &lt;/p&gt;&lt;p&gt;Hara Hara Sankara Jaya Jaya Sankara!
       &lt;/p&gt;
@@ -210,6 +210,7 @@ Sri Sankara Bhagavatpada settled down at Kancheepuram (Kanchi) at the end of his
   <string name="lbl_about_about_matam">About Matam</string>
   <string name="lbl_about_guru_parampara">Guru Parampara</string>
   <string name="lbl_about_us">About us</string>
+  <string name="lbl_privacy_policy">Privacy Policy</string>
   <string name="lbl_already_login">Already have an account? &lt;u&gt;&lt;b&gt;Log in&lt;/b&gt;&lt;/u&gt;</string>
   <string name="lbl_do_you_want_register">Do you want to &lt;u&gt;&lt;b&gt;Register&lt;/b&gt;&lt;/u&gt; ?</string>
   <string name="lbl_forgot_password">&lt;u&gt;&lt;b&gt;Forgot Password&lt;/b&gt;&lt;/u&gt;</string>
@@ -287,6 +288,7 @@ Sri Sankara Bhagavatpada settled down at Kancheepuram (Kanchi) at the end of his
 
   <!--  <string name="link_devithinkural">https://mahaperiyavaa.wordpress.com/2013/09/10/deivathin-kural-corrected-version/</string> -->
   <string name="link_devithinkural">https://mahaperiyavaal.wordpress.com/</string>
+  <string name="link_privacy_policy">http://www.kgpfoundation.org/mobile-privacy-policy.html</string>
   <string name="link_radio_india">http://5473.live.streamtheworld.com:80/SAM06AAC081_SC</string>
   <string name="link_radio_others">http://8653.live.streamtheworld.com:80/SAM01AAC221_SC</string>
   <string name="link_radio_playlist">https://public.radio.co/stations/sfe8bb6b1e/status</string>

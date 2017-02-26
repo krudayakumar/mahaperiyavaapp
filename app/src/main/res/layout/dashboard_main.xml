@@ -7,4 +7,10 @@
 
   <include layout="@layout/simple_dashboard" />
 
+  <TextView
+    android:layout_alignParentBottom="true"
+    android:layout_centerHorizontal="true"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="© 2017 KGF. All rights reserved"/>
 </RelativeLayout>

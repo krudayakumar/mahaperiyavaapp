@@ -22,6 +22,7 @@
   >
     <item
       android:id="@+id/books"
+      android:visible="false"
       android:icon="@drawable/ic_books"
       android:title="@string/lbl_devithin_kural" />
     <item
@@ -31,14 +32,17 @@
       android:visible="true" />
     <item
       android:id="@+id/gallery"
+      android:visible="false"
       android:icon="@drawable/ic_gallery"
       android:title="@string/lbl_gallery" />
     <item
       android:id="@+id/videos"
+      android:visible="false"
       android:icon="@drawable/ic_videos"
       android:title="@string/lbl_videos" />
     <item
       android:id="@+id/japam"
+      android:visible="false"
       android:icon="@drawable/ic_pooja"
       android:title="@string/lbl_sahasra_gayathri_counter" />
 
@@ -54,10 +58,16 @@
       android:id="@+id/aboutus"
       android:icon="@drawable/ic_aboutus"
       android:title="@string/lbl_about_us" />
+
+    <item
+      android:id="@+id/privacy"
+      android:icon="@drawable/ic_privacy_policy"
+      android:title="@string/lbl_privacy_policy" />
+
     <item
       android:id="@+id/exit"
       android:icon="@drawable/ic_logout"
-      android:visible="true"
+      android:visible="false"
       android:title="@string/lbl_exit" />
 
   </group>
