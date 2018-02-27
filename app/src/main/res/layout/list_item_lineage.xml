@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:card_view="http://schemas.android.com/apk/res-auto">
+
+  <data>
+
+    <variable
+      name="lineage"
+      type="com.kanchi.periyava.model.Lineage" />
+
+    <import type="android.view.View" />
+  </data>
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="10dp"
+    android:orientation="horizontal">
+
+    <RelativeLayout
+      android:layout_width="wrap_content"
+      android:layout_height="80dp"
+      android:layout_marginLeft="@dimen/default_pading">
+
+      <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:background="@android:color/black" />
+
+      <TextView
+        android:background="@drawable/circle"
+        android:id="@+id/sno"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/default_pading"
+        android:text="@{lineage.sno}"
+        android:textColor="@color/white"
+        android:textSize="12dp" />
+
+
+      <!--
+
+        android:text="@{lineage.sno}"
+        android:text="@{lineage.sno}"
+        var birth_place: String,
+          var duration: String,
+          var name: String,
+          var samadhi_place: String,
+          var year: String,
+    -->
+    </RelativeLayout>
+
+    <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_marginLeft="@dimen/default_pading">
+
+      <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:text="@{lineage.name}"
+        android:textSize="14dp"
+        android:textStyle="bold" />
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/name"
+        android:orientation="vertical">
+
+        <LinearLayout
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal">
+
+          <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Born in "
+            android:textSize="12dp" />
+
+          <TextView
+
+            android:id="@+id/birth_place"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{lineage.birth_place}"
+            android:textSize="12dp"
+            android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal">
+
+          <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text='@{lineage.year!=null ? "Attained Samadhi in the year of " :""}'
+            android:textSize="12dp" />
+
+          <TextView
+            android:id="@+id/year"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{lineage.year}"
+            android:textSize="12dp"
+            android:textStyle="bold" />
+
+          <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text='@{lineage.samadhi_place!=null ?  "at " : ""}'
+            android:textSize="12dp" />
+
+          <TextView
+            android:id="@+id/samadhi_place"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:text="@{lineage.samadhi_place}"
+            android:textSize="12dp"
+            android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal">
+
+          <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text='@{lineage.duration!=null ?  "Duration of Pontificate " : ""}'
+            android:textSize="12dp" />
+
+          <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:text="@{lineage.duration}"
+            android:textSize="12dp"
+            android:textStyle="bold" />
+        </LinearLayout>
+      </LinearLayout>
+    </RelativeLayout>
+  </LinearLayout>
+</layout>

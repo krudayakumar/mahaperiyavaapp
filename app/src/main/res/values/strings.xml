@@ -1,6 +1,50 @@
 <resources>
 
+  <!-- Facebook application ID and custom URL scheme (app ID prefixed by 'fb'). -->
+  <string name="facebook_application_id" translatable="false">YOUR_APP_ID</string>
+  <string name="facebook_login_protocol_scheme" translatable="false">fbYOUR_APP_ID</string>
+  <!-- Twitter consumer key and secret -->
+  <string name="twitter_consumer_key" translatable="false">YOUR_CONSUMER_KEY</string>
+  <string name="twitter_consumer_secret" translatable="false">YOUR_CONSUMER_SECRET</string>
+
+  <string name="sign_in_success"> Welcome %s \nto Maha Periyava App</string>
+  <string name="sign_out_success"> %s has successful sign out</string>
+  <string name="sign_in_error">SignIn Failed</string>
+  <string name="sign_in_already">You have already signin with </string>
+
+
+  <!--Features-->
   <string name="app_name">Periyava Radio</string>
+  <string name="peetam">Peetam</string>
+  <string name="acharayas">Acharayas</string>
+  <string name="lineage">Lineage</string>
+  <string name="apps">Apps</string>
+  <string name="radio">Radio</string>
+  <string name="audio">Audio</string>
+  <string name="videos">Videos</string>
+  <string name="photos">Photos</string>
+  <string name="tv">Tv</string>
+  <string name="books">Books</string>
+  <string name="blog">Blog</string>
+  <string name="centers">Centers</string>
+  <string name="log">Anusham Log</string>
+  <string name="others">Others</string>
+  <string name="about_us">About Us</string>
+  <string name="feedback">Feedback</string>
+  <string name="rateus">Rate Us</string>
+  <string name="contact_us">Contact Us</string>
+  <string name="share">Share</string>
+  <string name="sign_in">Sign In</string>
+  <string name="sign_out">Sign Out</string>
+  <string name="privacy">Privacy</string>
+
+  <string name="acharaya68_name">Sri Chandrasekharendra Saraswati Swamigal</string>
+  <string name="acharaya69_name">Sri Jayendra Saraswati Swamigal</string>
+  <string name="acharaya70_name">Sri Sankara Vijayendra Saraswati Swamigal</string>
+
+
+
+
   <string name="item_1">First Item</string>
   <string name="item_2">Second Item</string>
   <string name="cd_logo">logo</string>
@@ -75,6 +119,7 @@
 </string>
 
   <string name="lbl_about_peetam_content">
+   &lt;img src="about_peetham" alt="alt text" style="float: left"&gt;
  &lt;p&gt;
 More than 2500 years ago, an avalanche of heretic and non-Vedic sects, with horrible religious practices threatened to wipe away the ancient Veda-Dharma. In the Bhagavad Geeta, Lord Krishna has told Arjuna that, whenever there arises danger to Dharma, He (Krishna) will incarnate in this world to eradicate adharma and re-establish Dharma. In consonance with his words, the Lord has made partial incarnations during the course of the present Kali Age. And such an incarnation is the partial incarnation of Siva as Sankara Bhagavatpada, which happened some twenty-five centuries ago, on the prayer of celestials to Lord Siva to redeem Bharata-desa from the clutches of non-Vedic heretic sects. Several sources of authentic information lead to the conclusion that Sri Adi Sankara was born at Kaladi on the fifth day of the bright fortnight of the Vaisaka month of the cyclic year Nandana in cyclic year Nandana - Kali 2593 corresponding to 509 B.C.
 &lt;/p&gt;
@@ -140,7 +185,7 @@ Sri Sankara Bhagavatpada settled down at Kancheepuram (Kanchi) at the end of his
   <string name="drawer_close">Close navigation drawer</string>
 
 
-  <!--Features  -->
+  Featureures  -->
   <string name="ic_signin">&#xf090;</string>
   <string name="ic_register">&#xf090;</string>
   <string name="ic_signout">&#xf08b;</string>
@@ -260,6 +305,7 @@ Sri Sankara Bhagavatpada settled down at Kancheepuram (Kanchi) at the end of his
   <string name="action_join">Join</string>
 
   <!-- Message-->
+  <string name="empty"></string>
   <string name="msg_already_registred">Account already registered</string>
   <string name="msg_successfully_password_saved">Successfully password saved.</string>
 

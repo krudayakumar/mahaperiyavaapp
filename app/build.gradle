@@ -1,33 +1,22 @@
-buildscript {
-  repositories {
-    maven { url 'https://maven.fabric.io/public' }
-  }
-
-  dependencies {
-    classpath 'io.fabric.tools:gradle:1.+'
-
-  }
-}
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 apply plugin: 'io.fabric'
 
-
-repositories {
-  maven { url 'https://maven.fabric.io/public' }
-}
-
-
 android {
-  compileSdkVersion 22
-  buildToolsVersion '23.0.2'
 
+  compileSdkVersion 27
+  buildToolsVersion '27.0.2'
+  useLibrary 'org.apache.http.legacy'
   defaultConfig {
     applicationId 'com.kanchi.periyava'
     minSdkVersion 16
-    targetSdkVersion 22
+    targetSdkVersion 27
     versionCode 10
     versionName "1.9"
     buildConfigField "long", "TIMESTAMP", System.currentTimeMillis() + "L"
+    multiDexEnabled true
   }
   signingConfigs {
     debug {
@@ -37,7 +26,7 @@ android {
       keyPassword "kanchisankara"
     }
     release {
-      storeFile file('C:/Users/krishna/AndroidStudioProjects/mahaperiyavaapp/app/keystore/kanchisankara.keystore')
+      storeFile file('./keystore/kanchisankara.keystore')
       storePassword "kanchisankara"
       keyAlias "kanchisankara"
       keyPassword "kanchisankara"
@@ -47,6 +36,7 @@ android {
   lintOptions {
     checkReleaseBuilds false
   }
+
 
   buildTypes {
     release {
@@ -73,31 +63,147 @@ android {
 
     }
   }
-
-  productFlavors {
+  dataBinding {
+    enabled = true
   }
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
+  }
+  kapt {
+    generateStubs = true
+  }
+}
+
+
+configurations.all {
+  resolutionStrategy.force "com.android.support:support-annotations:$supportLibraryVersion"
 }
 
 dependencies {
-  compile 'com.android.support:appcompat-v7:22.2.1'
-  compile 'com.android.support:design:22.2.1'
-    compile 'com.android.support:cardview-v7:22.2.1'
-    compile 'com.android.support:recyclerview-v7:22.2.1'
-    compile 'com.google.code.gson:gson:2.3.1'
-    compile 'com.mcxiaoke.volley:library:1.0.19'
-  compile 'com.android.support:support-v4:22.2.1'
-  compile('com.crashlytics.sdk.android:crashlytics:2.5.5@aar') {
-    transitive = true;
+
+  compile('com.crashlytics.sdk.android:crashlytics:2.9.0@aar') {
+    transitive = true
   }
-  compile fileTree(include: '*.jar', dir: 'libs')
-  compile('com.crashlytics.sdk.android:crashlytics-ndk:1.1.2@aar') {
-    transitive = true;
-  }
-  compile project(':library-release')
+
+
+  kapt "com.android.databinding:compiler:$android_plugin_version"
+
+  compile("com.android.support:appcompat-v7:$rootProject.supportLibraryVersion",
+      "com.android.support:recyclerview-v7:$rootProject.supportLibraryVersion",
+      "com.android.support:cardview-v7:$rootProject.supportLibraryVersion",
+      "com.android.support:design:$rootProject.supportLibraryVersion",
+      //Firebase db
+      'com.firebaseui:firebase-ui-database:3.2.1',
+
+      "com.google.firebase:firebase-auth:$firebaseVersion",
+      "com.google.firebase:firebase-database:$firebaseVersion",
+      //Firebase
+      "com.google.firebase:firebase-core:$firebaseVersion",
+      "com.google.firebase:firebase-messaging:$firebaseVersion",
+      "com.google.firebase:firebase-crash:$firebaseVersion",
+      "com.google.firebase:firebase-storage:$firebaseVersion",
+
+      'com.firebaseui:firebase-ui-auth:3.2.1',
+
+      // Required only if Facebook login support is required
+      'com.facebook.android:facebook-android-sdk:4.27.0',
+
+      'com.firebase:firebase-jobdispatcher:0.8.5',
+
+      'com.mcxiaoke.volley:library:1.0.19',
+      'com.google.code.gson:gson:2.3.1',
+      'com.squareup.picasso:picasso:2.5.2'
+  )
+
+  // Required only if Twitter login support is required
+    compile("com.twitter.sdk.android:twitter-core:3.0.0@aar"){ transitive = true }
+
+  //Kotlin
+  implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+
+  /*
+  compile 'org.apache.httpcomponents:httpclient-android:4.3.5.1'
+  compile 'com.google.code.gson:gson:2.3.1'
+  compile 'com.mcxiaoke.volley:library:1.0.19'
+  compile "com.android.support:support-v4:$supportLibraryVersion"
+  compile "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
+  compile "com.android.support:design:$rootProject.supportLibraryVersion"
+  compile "com.android.support:cardview-v7:$rootProject.supportLibraryVersion"
+  compile "com.android.support:recyclerview-v7:$rootProject.supportLibraryVersion"
+  implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+  implementation "io.reactivex.rxjava2:rxjava:$rootProject.rxjavaVersion"
+  implementation "io.reactivex.rxjava2:rxandroid:$rootProject.rxandroidVersion"
+  implementation "io.reactivex.rxjava2:rxkotlin:$rootProject.rxkotlinVersion"
+  implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"
+  implementation "com.squareup.retrofit2:converter-gson:$rootProject.retrofitVersion"
+  implementation 'com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0'
+  implementation "com.squareup.okhttp3:okhttp:$rootProject.okhttpVersion"
+  implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.okhttpVersion"
+  implementation 'com.google.code.gson:gson:2.8.0'
+
+  //Firebase
+  compile "com.google.firebase:firebase-core:$firebaseVersion"
+  compile "com.google.firebase:firebase-messaging:$firebaseVersion"
+  compile "com.google.firebase:firebase-crash:$firebaseVersion"
+  compile 'com.firebase:firebase-jobdispatcher:0.8.5'
+
+  //Firebase - database
+  compile "com.google.firebase:firebase-database:$firebaseDatabaseVersion"
+
+
+  compile 'org.gradle:gradle-tooling-api:2.13'
+  kapt "com.android.databinding:compiler:$android_plugin_version"
+  implementation fileTree(include: ['*.jar'], dir: 'libs')
+  implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+  implementation 'com.android.support:design:26.0.0-alpha1'
+  implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+  testImplementation 'junit:junit:4.12'
+  androidTestImplementation 'com.android.support.test:runner:0.5'
+  androidTestImplementation 'com.android.support.test.espresso:espresso-core:2.2.2'
+
+  implementation "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
+  implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+  implementation "android.arch.persistence.room:runtime:$rootProject.architectureComponentsVersion"
+  kapt "android.arch.persistence.room:compiler:$rootProject.architectureComponentsVersion"
+  implementation "android.arch.persistence.room:rxjava2:$rootProject.architectureComponentsVersion"
+  implementation "io.reactivex.rxjava2:rxjava:$rootProject.rxjavaVersion"
+  implementation "io.reactivex.rxjava2:rxandroid:$rootProject.rxandroidVersion"
+  implementation "io.reactivex.rxjava2:rxkotlin:$rootProject.rxkotlinVersion"
+  implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"
+  implementation "com.squareup.retrofit2:converter-gson:$rootProject.retrofitVersion"
+  implementation 'com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0'
+  implementation "com.squareup.okhttp3:okhttp:$rootProject.okhttpVersion"
+  implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.okhttpVersion"
+  implementation 'com.google.code.gson:gson:2.8.0'
+  implementation "com.google.dagger:dagger:$rootProject.daggerVersion"
+  kapt "com.google.dagger:dagger-compiler:$rootProject.daggerVersion"
+  implementation "com.google.dagger:dagger-android:$rootProject.daggerVersion"
+  kapt "com.google.dagger:dagger-android-processor:$rootProject.daggerVersion"
+  implementation "com.google.dagger:dagger-android-support:$rootProject.daggerVersion"
+  provided 'org.glassfish:javax.annotation:10.0-b28'
+  implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+  testImplementation 'junit:junit:4.12'
+  testImplementation 'org.mockito:mockito-inline:2.11.0'
+
+  // Room
+  kapt "android.arch.persistence.room:compiler:$archRoomVersion"
+  compile "android.arch.persistence.room:runtime:$archRoomVersion"
+  implementation "android.arch.persistence.room:runtime:$archRoomVersion"
+  annotationProcessor "android.arch.persistence.room:compiler:$archRoomVersion"
+
+  // Paging
+  implementation "android.arch.paging:runtime:$architectureComponentsVersion-alpha4-1"
+
+  // Test helpers for LiveData
+  testImplementation "android.arch.core:core-testing:$architectureComponentsVersion"
+
+  // Test helpers for Room
+  testImplementation "android.arch.persistence.room:testing:$architectureComponentsVersion"
+  */
+
 }
 
-crashlytics {
-  enableNdk true
-  androidNdkOut 'src/main/obj'
-  androidNdkLibsOut 'src/main/libs'
-}
+apply plugin: 'com.google.gms.google-services'
+
+

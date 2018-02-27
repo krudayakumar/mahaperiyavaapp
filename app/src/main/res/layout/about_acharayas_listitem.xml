@@ -17,7 +17,7 @@
     android:padding="10dp"
     android:weightSum="2">
 
-    <!--<com.kanchi.periyava.Component.CircularImageView
+    <com.kanchi.periyava.old.Componentnent.CircularImageView
       android:layout_width="100dp"
       android:layout_height="100dp"
       android:layout_gravity="center"

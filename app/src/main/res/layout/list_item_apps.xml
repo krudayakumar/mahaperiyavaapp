@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:card_view="http://schemas.android.com/apk/res-auto">
+  <data>
+
+    <variable
+      name="feature"
+      type="com.kanchi.periyava.model.Feature" />
+
+    <import type="android.view.View" />
+  </data>
+
+
+<LinearLayout
+  android:orientation="vertical"
+  android:layout_width="wrap_content"
+  android:background="?attr/selectableItemBackground"
+  android:layout_height="wrap_content">
+  <android.support.v7.widget.CardView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    card_view:cardPreventCornerOverlap="true"
+    card_view:cardUseCompatPadding="true"
+    android:padding="6dp">
+
+    <LinearLayout
+      android:orientation="vertical"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content">
+      <ImageView
+        android:id="@+id/image"
+        android:layout_width="125dp"
+        android:layout_height="75dp"
+        android:elevation="8dp"
+        android:gravity="center_vertical|center_horizontal"
+        android:scaleType="fitXY"
+        image_res_name="@{feature.image}" />
+
+    </LinearLayout>
+  </android.support.v7.widget.CardView>
+  <TextView
+    android:id="@+id/title"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:singleLine="false"
+    android:text="@{feature.title}"
+    android:lines="1"
+    android:layout_gravity="center"
+    android:textColor="@color/black"
+    android:textSize="12sp" />
+</LinearLayout>
+</layout>

@@ -1,16 +1,173 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
+  android:background="@drawable/periyava_radio_background"
+  android:backgroundTint="#80FFFFFF"
+  android:backgroundTintMode="src_over">
 
-  android:background="@color/white">
+  <!--<include layout="@layout/simple_dashboard" />-->
 
-  <include layout="@layout/simple_dashboard" />
 
-  <TextView
-    android:layout_alignParentBottom="true"
-    android:layout_centerHorizontal="true"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="© 2017 KGF. All rights reserved"/>
-</RelativeLayout>
+  <FrameLayout
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentStart="true"
+    android:layout_alignParentTop="true">
+
+    <ScrollView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:padding="@dimen/activity_vertical_margin">
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!--Recent Items -->
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="@dimen/top_layout_spacing"
+          android:orientation="vertical">
+
+          <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Recents"
+            android:textColor="@color/black"
+            android:textSize="18dp" />
+
+          <android.support.v7.widget.RecyclerView
+            android:id="@+id/list_recents"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+
+
+        </LinearLayout>
+
+        <!--Acharayas -->
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="@dimen/top_layout_spacing"
+          android:orientation="vertical">
+
+          <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Acharayas"
+            android:textColor="@color/black"
+            android:textSize="18dp" />
+
+          <com.kanchi.periyava.component.AutofitRecyclerView
+            android:numColumns="auto_fit"
+            android:id="@+id/list_acharayas"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        </LinearLayout>
+
+
+        <!--Apps -->
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="@dimen/top_layout_spacing"
+          android:orientation="vertical">
+
+          <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Apps"
+            android:textColor="@color/black"
+            android:textSize="18dp" />
+
+          <android.support.v7.widget.RecyclerView
+            android:id="@+id/list_apps"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+          </android.support.v7.widget.RecyclerView>
+
+        </LinearLayout>
+
+
+        <!--Others -->
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="@dimen/top_layout_spacing"
+          android:orientation="vertical">
+
+          <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Others"
+            android:textColor="@color/black"
+            android:textSize="18dp" />
+
+          <com.kanchi.periyava.component.AutofitRecyclerView
+            android:numColumns="auto_fit"
+            android:id="@+id/list_others"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+
+        </LinearLayout>
+      </LinearLayout>
+
+
+
+  </ScrollView>
+
+
+</FrameLayout>
+
+
+<FrameLayout
+android:id="@+id/cnt"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:layout_above="@+id/features"
+android:layout_centerInParent="true"
+android:layout_marginBottom="@dimen/default_pading"
+android:layout_marginLeft="@dimen/default_pading"
+android:layout_marginRight="@dimen/default_pading"
+android:layout_marginTop="@dimen/top_layout_spacing"
+android:background="@drawable/outerline"
+android:visibility="gone" />
+
+
+<LinearLayout
+android:id="@+id/features"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:layout_alignParentBottom="true"
+android:layout_centerHorizontal="true"
+android:orientation="vertical"
+android:visibility="gone">
+
+<android.support.v7.widget.RecyclerView
+  android:id="@+id/features_list"
+  android:layout_width="wrap_content"
+  android:layout_height="wrap_content" />
+
+<TextView
+  android:layout_width="wrap_content"
+  android:layout_height="wrap_content"
+  android:layout_alignParentBottom="true"
+  android:layout_centerHorizontal="true"
+  android:text="© 2017 KGF. All rights reserved"
+  android:visibility="gone" />
+</LinearLayout>
+
+
+  </RelativeLayout>
+

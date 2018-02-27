@@ -1,5 +1,9 @@
 <resources>
+  <dimen name="default_pading">6dp</dimen>
   <dimen name="activity_horizontal_margin">10dp</dimen>
   <dimen name="activity_vertical_margin">10dp</dimen>
+
   <dimen name="text_margin">16dp</dimen>
+  <dimen name="top_layout_spacing">30dp</dimen>
+
 </resources>

@@ -13,7 +13,7 @@
     android:orientation="horizontal"
     android:padding="5dp">
 
-    <com.kanchi.periyava.Component.CircularImageView
+    <com.kanchi.periyava.old.Component.CircularImageView
       android:layout_width="100dp"
       android:layout_height="100dp"
       android:src="@drawable/perivaya1"

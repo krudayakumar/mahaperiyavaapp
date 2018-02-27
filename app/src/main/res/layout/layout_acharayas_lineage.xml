@@ -1,0 +1,55 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:layout_gravity="center_vertical|center_horizontal"
+  android:orientation="vertical">
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="right"
+    android:layout_marginTop="@dimen/default_pading"
+    android:orientation="horizontal">
+
+    <com.kanchi.periyava.old.Component.CircularImageView
+      android:visibility="gone"
+      android:id="@+id/icon"
+      android:layout_width="32dp"
+      android:layout_height="32dp"
+      android:layout_marginLeft="@dimen/default_pading"
+      android:src="@drawable/periva_blessing" />
+
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentLeft="true"
+      android:padding="@dimen/default_pading"
+      android:singleLine="true"
+      android:text="Acharayas &amp; Linage"
+      android:textColor="@color/black"
+      android:textSize="18dp"
+       />
+  </LinearLayout>
+
+  <LinearLayout
+    android:orientation="horizontal"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <include layout="@layout/list_item_acharayas"/>
+    <include layout="@layout/list_item_acharayas"/>
+    <include layout="@layout/list_item_acharayas"/>
+    <include layout="@layout/list_item_acharayas"/>
+  </LinearLayout>
+
+
+  <android.support.v7.widget.RecyclerView
+    android:id="@+id/list_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"/>
+
+
+
+
+</LinearLayout>
+
